@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ board }} - tomochan</title>
+</head>
+<body>
+    <h1>hi welcome to {{ board }} how can i help you</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.name.label }} {{ form.name(size=32) }}
+        </p>
+        <p>
+            {{ form.subject.label }} {{ form.subject(size=50) }}
+        </p>
+        <p>
+            {{ form.post.label }}<br>
+            {{ form.post(cols="35", rows="28") }}
+        </p>
+        <p>
+            {{ form.submit() }}
+        </p>
+    </form>
+
+    {% if posts %}
+    {% for post in posts %}
+
+    <div class="post">
+        <p class="header">
+            <span class="subject">{{ post['subject'] }} </span>
+            <span class="name">{{ post['name'] }} </span>
+            <span class="timestamp">{{ post['timestamp'] }}</span>
+        </p>
+        <div class="content">
+            {% for paragraph in post['content'] -%}
+                {{ paragraph }}<br>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>sorry no posts :(</p>
+    {% endif %}
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>
