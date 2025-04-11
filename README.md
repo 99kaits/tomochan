@@ -1,10 +1,10 @@
-![](static/banners/placeholderbanner.png)
+![silly mario banner that says "i am a placeholder: SUPER MARIO BANNER" and the picture is a bunch of fucked up marios in gm_construct](static/banners/placeholderbanner.png)
 # tomochan
 
 some type of imageboard (images not implemented yet) using python/flask, and sqlite
 
 TODO:
-- file uploads
+- file uploads, 3 images by default maybe? also multiple images in the form, also videso and audio probably
 - post formatting of some variety (im thinking markdown, and maybe a selector for classical formatting)
 - aesthetics
 - board page showing last 5 threads
@@ -14,7 +14,12 @@ TODO:
 - other pages, maybe an /ukko/ or homepage or rules/faq or whatever
 - funny 404 pages
 - board specific banners
-- maybe an eventual rewrite with kotlin/postgres??????
+- oekaki would be so epic just imagine
+- caching rendered templates for extra performance maybe?
+- config file
+- init scripts
+- mod view/tools
+- maybe an eventual rewrite with kotlin/postgres?????? idk?????????
 
 DONE:
 - posting
@@ -27,3 +32,9 @@ DONE:
 - replies
 - post ids
 - sage and nonoko (im going for modern 4ch behavior there its just actually better defaulting to noko)
+
+
+markdown things:
+- discord style newlines, its just better esp for this kinda thing
+- no embedding images sorry you got the file uploader for that
+- fancy links will DEFINITELY be toggleable for sure just imagine the abuse cases

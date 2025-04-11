@@ -11,10 +11,12 @@ import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '7f4bc5403ecbc99f2b10dc1c582be3f9632369dea8d6e45d'
+app.config['UPLOAD_FOLDER'] = 'uploads'
 
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'avif'}
 boards = ['b', 'tomo', 'nottomo']
-sql = ("INSERT INTO posts(post_id, board_id, thread_id, op, last_bump, time, name, email, subject, content, filename, spoiler) "
-       "values(:post_id, :board_id, :thread_id, :op, :last_bump, :time, :name, :email, :subject, :content, :filename, :spoiler)")
+sql = ("INSERT INTO posts(post_id, board_id, thread_id, op, last_bump, time, name, email, subject, content, filename, file_actual, spoiler) "
+       "values(:post_id, :board_id, :thread_id, :op, :last_bump, :time, :name, :email, :subject, :content, :filename, :file_actual, :spoiler)")
 
 
 con = sqlite3.connect("tomochan.db")
@@ -32,6 +34,7 @@ cur.execute("CREATE TABLE IF NOT EXISTS posts("
                 "subject TEXT, "
                 "content TEXT NOT NULL, "
                 "filename TEXT, "
+                "file_actual TEXT "
                 "spoiler INTEGER NOT NULL)")
 
 con.close()
@@ -50,6 +53,8 @@ def dict_factory(cursor, row):
     return d
 
 def post(new_post):
+    # TODO: ACTUAL FILE CODE
+    new_post['file_actual'] = None
     con = sqlite3.connect("tomochan.db")
     cur = con.cursor()
     largest_post_id = cur.execute('SELECT max(post_id) from posts').fetchone()[0]
