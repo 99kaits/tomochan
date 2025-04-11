@@ -5,49 +5,29 @@
     <title>/{{ board }}/ - tomochan</title>
 </head>
 <body>
-<header>
-    <img src="{{ banner }}">
-    <h1>/{{ board }}/ - placeholder</h1>
-</header>
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <table>
-            <tr>
-                <th>{{ form.name.label }}</th>
-                <td>{{ form.name(size=25, placeholder="Anonymous") }}</td>
-            </tr>
-            <tr>
-                <th>{{ form.email.label }}</th>
-                <td>{{ form.email(size=25) }}</td>
-            </tr>
-            <tr>
-                <th>{{ form.subject.label }}</th>
-                <td>{{ form.subject(size=25) }}{{ form.submit() }}</td>
-            </tr>
-            <tr>
-                <th>{{ form.post.label }}</th>
-                <td>{{ form.post(cols="35", rows="10") }}</td>
-            </tr>
-            <tr>
-                <th>{{ form.file.label }}</th>
-                <td>{{ form.file }} {{ form.spoiler.label }} {{ form.spoiler }}</td>
-            </tr>
-        </table>
-    </form>
+    {% include 'header.html' %}
 
     {% if threads %}
     {% for post in threads %}
-    <div class="post" id="post_{{ post['id'] }}">
+    <div class="post op" id="post_{{ post[0] }}">
         <p class="header">
-            <span class="subject">{{ post['subject'] }} </span>
-            <span class="name">{{ post['name'] }} </span>
-            <!-- <span class="timestamp">{{ post['timestamp'] }} @{{ post['swatch'] }}</span> -->
-            <span class="id">No. {{ post['id'] }}</span>
+            <span class="subject">{{ post[8] }} </span>
+            <span class="name">
+                {% if post[7] %}
+                <a href="mailto:{{ post[7] }}">{{ post[6] }}</a>
+                {% else %}
+                {{ post[6] }}
+                {% endif %}
+            </span>
+            <span class="timestamp">{{ get_strftime(post[5]) }} @{{ get_swatch(post[5]) }}</span>
+            <span class="id">No. {{ post[0] }}</span>
         </p>
         <div class="content">
+            <!--
             {% for paragraph in post['content'] %}
                 {{ paragraph }}<br>
-            {% endfor %}
+            {% endfor %} -->
+            {{ post[9] }}
         </div>
     </div>
     {% endfor %}

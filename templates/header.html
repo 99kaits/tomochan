@@ -1,0 +1,38 @@
+<div class="boardlist">
+    <span>
+        <a href="/b/">/b/</a>
+        <a href="/tomo/">/tomo/</a>
+        <a href="/nottomo/">/nottomo/</a>
+    </span>
+</div>
+
+<header>
+    <img src="{{ banner }}">
+    <h1>/{{ board }}/ - placeholder</h1>
+</header>
+
+<form action="" method="post" target="" novalidate>
+        {{ form.hidden_tag() }}
+        <table>
+            <tr>
+                <th>{{ form.name.label }}</th>
+                <td>{{ form.name(size=25, placeholder="Anonymous") }}</td>
+            </tr>
+            <tr>
+                <th>{{ form.email.label }}</th>
+                <td>{{ form.email(size=25) }}</td>
+            </tr>
+            <tr>
+                <th>{{ form.subject.label }}</th>
+                <td>{{ form.subject(size=25) }}{{ form.submit() }}</td>
+            </tr>
+            <tr>
+                <th>{{ form.post.label }}</th>
+                <td>{{ form.post(cols="35", rows="10") }}</td>
+            </tr>
+            <tr>
+                <th>{{ form.file.label }}</th>
+                <td>{{ form.file }} {{ form.spoiler.label }} {{ form.spoiler }}</td>
+            </tr>
+        </table>
+    </form>
