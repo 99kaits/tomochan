@@ -19,6 +19,8 @@ TODO:
 - config file
 - init scripts
 - mod view/tools
+- mobile, just mobile
+- qol javascript stuff?
 - maybe an eventual rewrite with kotlin/postgres?????? idk?????????
 
 DONE:
