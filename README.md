@@ -21,6 +21,7 @@ TODO:
 - mod view/tools
 - mobile, just mobile
 - qol javascript stuff?
+- boardlist/info in db maybe? maybe not?
 - maybe an eventual rewrite with kotlin/postgres?????? idk?????????
 
 DONE:
