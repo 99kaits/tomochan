@@ -2,38 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ board }} - tomochan</title>
+    <title>/{{ board }}/ - tomochan</title>
 </head>
 <body>
-    <h1>hi welcome to {{ board }} how can i help you</h1>
+<header>
+    <img src="{{ banner }}">
+    <h1>/{{ board }}/ - placeholder</h1>
+</header>
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
-        <p>
-            {{ form.name.label }} {{ form.name(size=32) }}
-        </p>
-        <p>
-            {{ form.subject.label }} {{ form.subject(size=50) }}
-        </p>
-        <p>
-            {{ form.post.label }}<br>
-            {{ form.post(cols="35", rows="28") }}
-        </p>
-        <p>
-            {{ form.submit() }}
-        </p>
+        <table>
+            <tr>
+                <th>{{ form.name.label }}</th>
+                <td>{{ form.name(size=25, placeholder="Anonymous") }}</td>
+            </tr>
+            <tr>
+                <th>{{ form.email.label }}</th>
+                <td>{{ form.email(size=25) }}</td>
+            </tr>
+            <tr>
+                <th>{{ form.subject.label }}</th>
+                <td>{{ form.subject(size=25) }}{{ form.submit() }}</td>
+            </tr>
+            <tr>
+                <th>{{ form.post.label }}</th>
+                <td>{{ form.post(cols="35", rows="10") }}</td>
+            </tr>
+            <tr>
+                <th>{{ form.file.label }}</th>
+                <td>{{ form.file }} {{ form.spoiler.label }} {{ form.spoiler }}</td>
+            </tr>
+        </table>
     </form>
 
-    {% if posts %}
-    {% for post in posts %}
-
-    <div class="post">
+    {% if threads %}
+    {% for post in threads %}
+    <div class="post" id="post_{{ post['id'] }}">
         <p class="header">
             <span class="subject">{{ post['subject'] }} </span>
             <span class="name">{{ post['name'] }} </span>
-            <span class="timestamp">{{ post['timestamp'] }}</span>
+            <!-- <span class="timestamp">{{ post['timestamp'] }} @{{ post['swatch'] }}</span> -->
+            <span class="id">No. {{ post['id'] }}</span>
         </p>
         <div class="content">
-            {% for paragraph in post['content'] -%}
+            {% for paragraph in post['content'] %}
                 {{ paragraph }}<br>
             {% endfor %}
         </div>
