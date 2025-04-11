@@ -7,8 +7,7 @@
 <body>
     {% include 'header.html' %}
 
-    {% if threads %}
-    {% for post in threads %}
+    {% for post in posts %}
     {% if post['op'] == 1 %}
     <div class="post op" id="post_{{ post['id'] }}">
     {% else %}
@@ -17,9 +16,6 @@
         {% include 'post.html' %}
     </div>
     {% endfor %}
-    {% else %}
-    <p>sorry no posts :(</p>
-    {% endif %}
 
     {% with messages = get_flashed_messages() %}
         {% if messages %}

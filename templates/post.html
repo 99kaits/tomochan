@@ -1,0 +1,27 @@
+        <p class="header">
+            {% if post['subject'] %}
+            <span class="subject">{{ post['subject'] }} </span>
+            {% endif %}
+            <span class="name">
+                {% if post['email'] %}
+                <a href="mailto:{{ post['email'] }}">{{ post['name'] }}</a>
+                {% else %}
+                {{ post['name'] }}
+                {% endif %}
+            </span>
+            <span class="timestamp">{{ get_strftime(post['time']) }} @{{ get_swatch(post['time']) }}</span>
+            <span class="id">No.
+                {% if post['op'] == 1 %}
+                <a href="/{{ post['board_id']}}/{{ post['thread_id'] }}">
+                {% else %}
+                <a href="/{{ post['board_id']}}/{{ post['thread_id'] }}#{{ post['post_id'] }}">
+                {% endif %}
+                    {{ post['post_id'] }}</a></span>
+        </p>
+        <div class="content">
+            <!--
+            {% for paragraph in post['content'] %}
+                {{ paragraph }}<br>
+            {% endfor %} -->
+            {{ post['content'] }}
+        </div>
