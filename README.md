@@ -4,7 +4,7 @@
 some type of imageboard (images not implemented yet) using python/flask, and sqlite
 
 TODO:
-- file uploads, 3 images by default maybe? also multiple images in the form, also videso and audio probably
+- file uploads, maybe a configurable default? also multiple images in the form, also videso and audio probably
 - post formatting of some variety (im thinking markdown, and maybe a selector for classical formatting which apparently is bbcode), also greentext
 - aesthetics
 - \>\>1 replying
