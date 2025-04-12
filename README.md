@@ -26,6 +26,7 @@ TODO:
 - post archival
 - stickies
 - blotter
+- localizations? at least the architecture for them
 - flags
 - flood detection, ill need it sooner or later
 - proxy detection? Even if i dont use it
