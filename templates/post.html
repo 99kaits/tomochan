@@ -10,13 +10,13 @@
                 {% endif %}
             </span>
             <span class="timestamp">{{ get_strftime(post['time']) }} @{{ get_swatch(post['time']) }}</span>
-            <span class="id">No.
-                {% if post['op'] == 1 %}
-                <a href="/{{ post['board_id']}}/{{ post['thread_id'] }}">
-                {% else %}
-                <a href="/{{ post['board_id']}}/{{ post['thread_id'] }}#{{ post['post_id'] }}">
-                {% endif %}
-                    {{ post['post_id'] }}</a></span>
+            <span class="id">
+                <a href="/{{ post['board_id']}}/{{ post['thread_id'] }}#{{ post['post_id'] }}">No.</a>
+                <a href="/{{ post['board_id']}}/{{ post['thread_id'] }}#q{{ post['post_id'] }}">{{ post['post_id'] }}</a>
+            </span>
+            {% if post['op'] == 1 and not posts %}
+            <span>[<a href="/{{ post['board_id']}}/{{ post['thread_id'] }}#{{ post['post_id'] }}">Reply</a>]</span>
+            {% endif %}
         </p>
         <div class="content">
             <!--

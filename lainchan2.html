@@ -1,0 +1,1558 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <script type="text/javascript">
+      var active_page = "index",
+        board_name = "Δ";
+    </script>
+    <link rel="stylesheet" media="screen" href="/stylesheets/style.css">
+    <link rel="shortcut icon" href="/favicon.png">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+    <link rel="stylesheet" type="text/css" id="stylesheet" href="/stylesheets/dark.css">
+    <link rel="stylesheet" type="text/css" id="code_stylesheet" href="/stylesheets/code/gruvbox-dark.css">
+    <link rel="stylesheet" href="/stylesheets/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/flags/flags.css">
+    <link rel="stylesheet" href="/stylesheets/sceditor/themes/transparent.min.css" media="all" />
+    <script type="text/javascript">
+      var configRoot = "/";
+      var inMod = false;
+      var modRoot = "/" + (inMod ? "mod.php?/" : "");
+    </script>
+    <script type="text/javascript" src="/main.js"></script>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.custom.min.js"></script>
+    <script type="text/javascript" src="/js/options.js"></script>
+    <script type="text/javascript" src="/js/style-select.js"></script>
+    <script type="text/javascript" src="/js/options/general.js"></script>
+    <script type="text/javascript" src="/js/options/user-js.js"></script>
+    <script type="text/javascript" src="/js/options/user-css.js"></script>
+    <script type="text/javascript" src="/js/webm-settings.js"></script>
+    <script type="text/javascript" src="/js/image-hover.js"></script>
+    <script type="text/javascript" src="/js/upload-selection.js"></script>
+    <script type="text/javascript" src="/js/gallery-view.js"></script>
+    <script type="text/javascript" src="/js/mobile-style.js"></script>
+    <script type="text/javascript" src="/js/compact-boardlist.js"></script>
+    <script type="text/javascript" src="/js/smartphone-spoiler.js"></script>
+    <script type="text/javascript" src="/js/inline-expanding.js"></script>
+    <script type="text/javascript" src="/js/thread-stats.js"></script>
+    <script type="text/javascript" src="/js/expand-all-images.js"></script>
+    <script type="text/javascript" src="/js/expand-video.js"></script>
+    <script type="text/javascript" src="/js/expand.js"></script>
+    <script type="text/javascript" src="/js/auto-reload.js"></script>
+    <script type="text/javascript" src="/js/auto-scroll.js"></script>
+    <script type="text/javascript" src="/js/quick-reply.js"></script>
+    <script type="text/javascript" src="/js/show-op.js"></script>
+    <script type="text/javascript" src="/js/post-hover.js"></script>
+    <script type="text/javascript" src="/js/show-backlinks.js"></script>
+    <script type="text/javascript" src="/js/hide-threads.js"></script>
+    <script type="text/javascript" src="/js/quick-post-controls.js"></script>
+    <script type="text/javascript" src="/js/treeview.js"></script>
+    <script type="text/javascript" src="/js/catalog-search.js"></script>
+    <script type="text/javascript" src="/js/catalog.js"></script>
+    <script type="text/javascript" src="/js/ajax.js"></script>
+    <script type="text/javascript" src="/js/wPaint/lib/wColorPicker.min.js"></script>
+    <script type="text/javascript" src="/js/wPaint/wPaint.min.js"></script>
+    <script type="text/javascript" src="/js/wPaint/plugins/main/wPaint.menu.main.min.js"></script>
+    <script type="text/javascript" src="/js/wPaint/plugins/text/wPaint.menu.text.min.js"></script>
+    <script type="text/javascript" src="/js/wPaint/plugins/shapes/wPaint.menu.main.shapes.min.js"></script>
+    <script type="text/javascript" src="/js/wPaint/plugins/file/wPaint.menu.main.file.min.js"></script>
+    <script type="text/javascript" src="/js/wpaint.js"></script>
+    <script type="text/javascript" src="/js/mute-images.js"></script>
+    <script type="text/javascript" src="/js/comment-toolbar.js"></script>
+    <script type="text/javascript" src="/js/download-original.js"></script>
+    <script type="text/javascript" src="/js/boardlist-alias.js"></script>
+    <script type="text/javascript" src="/js/twemoji/twemoji.js"></script>
+    <script type="text/javascript" src="/js/mobile-default.js"></script>
+    <script type="text/javascript" src="/js/thread-watcher.js"></script>
+    <script type="text/javascript" src="/js/keyboard-shortcuts.js"></script>
+    <script type="text/javascript" src="/js/sceditor/minified/jquery.sceditor.bbcode.min.js"></script>
+    <script type="text/javascript" src="/js/loadsceditor.js"></script>
+    <script type="text/javascript" src="/js/boardlist-catalog-links.js"></script>
+    <script type="text/javascript" src="/js/snowstorm.js"></script>
+    <script type="text/javascript" src="/js/loadsnow.js"></script>
+    <title>/Δ/ - Do It Yourself</title>
+  </head>
+  <body class="8chan vichan is-not-moderator active-index" data-stylesheet="dark.css">
+    <div class="bar top">
+      <div class="boardlist"><span class="sub" data-description="Notices">[ <a href="/donate.html">$$$</a> / <a href="/rules.html">rules</a> / <a href="/faq.html">faq</a> / <a href="/news.html">news</a> ]</span><span class="sub" data-description="STEM">[ <a href="/λ/index.html" title="Programming">λ</a> / <a href="/Δ/index.html" title="Do It Yourself">diy</a> / <a href="/sec/index.html" title="Security">sec</a> / <a href="/Ω/index.html" title="Technology">tech</a> ]</span><span class="sub" data-description="People">[ <a href="/inter/index.html" title="Games and Interactive Media">inter</a> / <a href="/lit/index.html" title="Literature">lit</a> / <a href="/music/index.html" title="Musical and Audible Media">music</a> / <a href="/vis/index.html" title="Visual Media">vis</a> / <a href="/hum/index.html" title="Humanity">hum</a> / <a href="/drug/index.html" title="Drugs 3.0">drg</a> / <a href="/zzz/index.html" title="Consciousness and Dreams">zzz</a> ]</span><span class="sub" data-description="Misc">[ <a href="/layer/index.html" title="layer">layer</a> / <a href="/q/index.html" title="Questions and Complaints">q</a> / <a href="/r/index.html" title="Random">r</a> ]</span><span class="sub" data-description="Overboards 1">[ <a href="/culture/index.html">cult</a> / <a href="/psy/index.html">psy</a> ]</span><span class="sub" data-description="Overboards 2">[ <a href="/mega/index.html">mega</a> / <a href="/random/index.html">random</a> ]</span><span class="sub" data-description="Elsewhere">[ <a href="https://github.com/lainchan/lainchan"><i class="fa">&#xf09b;</i></a> / <a href="https://twitter.com/_lainchan"><i class="fa">&#xf099;</i></a> ]</span><span class="sub" data-description="Services">[ <a href="/calendar.html">cal</a> / <a href="/irc.html">irc</a> / <a href="/radio.html">radio</a> / <a href="/stream.html">stream</a> / <a href="/zine/">zine</a> ]</span></div>
+      <script type='text/javascript'>
+        if (typeof do_boardlist != 'undefined') do_boardlist();
+      </script>
+    </div><img class="board_image" src="/b.php" style="width:384px;height:128px" alt="" />
+    <div id="pagewrap">
+      <header>
+        <h1 class="glitch" data-text="/Δ/ - Do It Yourself">/Δ/ - Do It Yourself</h1>
+        <div class="subtitle">It takes half your life before you discover life is a do-it-yourself project</div>
+      </header>
+      <form name="post" onsubmit="return dopost(this);" enctype="multipart/form-data" action="/post.php" method="post"><textarea name="user" style="display:none">4&#55;33&#49;</textarea><span style="display:none"><input type="text" name="message" value=""></span><input type="hidden" name="board" value="Δ">
+        <div style="display:none"><input type="text" name="zo2⛹⛃dy6gc0r9s1k" value=""></div><input type="hidden" name="page" value="1">
+        <table>
+          <tr>
+            <th>Name<input name="url" value="B)Ay/" type="hidden"></th>
+            <td><input type="text" name="name" size="25" maxlength="35" autocomplete="off"><input name="firstname" value="" type="hidden"></td>
+          </tr>
+          <tr>
+            <th>Email<input type="hidden" name="r♫37smd6⚘l4o⚥h9qkvbn8jz♙i" value="98887"></th>
+            <td><input type="text" name="email" size="25" maxlength="40" autocomplete="off"></td>
+          </tr>
+          <tr>
+            <th>Subject</th>
+            <td><input style="float:left;" type="text" name="subject" size="25" maxlength="100" autocomplete="off"><input accesskey="s" style="margin-left:2px;" type="submit" name="post" value="Post" /><input id="spoiler" name="spoiler" type="checkbox"><label for="spoiler">Spoiler Image</label></td>
+          </tr>
+          <tr>
+            <th>Comment</th>
+            <td><textarea name="body" id="body" rows="5" cols="35"></textarea></td>
+          </tr>
+          <tr id="upload">
+            <th>File</th>
+            <td><input type="file" name="file1" id="upload_file1" style="display:block"><input type="file" name="file2" id="upload_file2" style="display:block"><input type="file" name="file3" id="upload_file3" style="display:block">
+              <script type="text/javascript">
+                if (typeof init_file_selector !== 'undefined') init_file_selector(3);
+              </script>
+              <div style="float:none;text-align:left" id="upload_url"><label for="file_url">Or URL</label>: <input style="display:inline" type="text" id="file_url1" name="file_url1" size="35"></br><input style="display:inline" type="text" id="file_url2" name="file_url2" size="35"></br><input style="display:inline" type="text" id="file_url3" name="file_url3" size="35"></br></div>
+            </td>
+          </tr>
+          <tr>
+            <th>Password</th>
+            <td><input type="text" name="password" value="" size="12" maxlength="18" autocomplete="off"><span class="unimportant">(For file deletion.)</span></td>
+          </tr>
+        </table><input type="hidden" name="hash" value="ce45b94321f1a21e63c5d145bd2493d371f34069">
+      </form>
+      <script type="text/javascript">
+        rememberStuff();
+      </script>
+      <!--<div class="pages top"> [<a class="selected">1</a>] [<a href="/Δ/2.html">2</a>] [<a href="/Δ/3.html">3</a>] [<a href="/Δ/4.html">4</a>] [<a href="/Δ/5.html">5</a>] [<a href="/Δ/6.html">6</a>] [<a href="/Δ/7.html">7</a>] [<a href="/Δ/8.html">8</a>] [<a href="/Δ/9.html">9</a>] <form action="/Δ/2.html" method="get"><input type="submit" value="Next" /></form></div>-->
+      <hr />
+      <div class="blotter">
+        <p>The mumble server is lainchan.org : default port <br>
+        </p>
+        <h2>Lainchan has upgraded to PHP 8.1. If after the upgrade you spot any issues you believe are caused by the upgrade, please report them either via posting on /q/, IRC, Mumble or email.</h2>
+      </div>
+      <hr /> | <a href="/Δ/catalog.html">Catalog</a> | <a href="/">Home</a>
+      <hr />
+      <form name="postcontrols" action="/post.php" method="post">
+        <input type="hidden" name="board" value="Δ" />
+        <div class="thread" id="thread_1" data-board="Δ">
+          <div class="files">
+            <div class="file">
+              <p class="fileinfo">File: <a href="/Δ/src/1492678838479-0.jpg" target="_blank">1492678838479-0.jpg</a>
+                <span class="details">(775.54 KB, 2880x2160, 4:3, <span class="postfilename">1464476147143.jpg</span>) <span class='unimportant image_id'>
+                    <a href="http://imgops.com/lainchan.org/Δ/src/1492678838479-0.jpg" target="_blank">ImgOps</a>
+                    <a href="http://exif.regex.info/exif.cgi?url=lainchan.org/Δ/src/1492678838479-0.jpg" target="_blank">Exif</a>
+                    <a href="http://iqdb.org/?url=lainchan.org/Δ/src/1492678838479-0.jpg" target="_blank">iqdb</a>
+                  </span>
+                </span>
+              </p>
+              <a href="/Δ/src/1492678838479-0.jpg" target="_blank">
+                <img class="post-image" src="/Δ/thumb/1492678838479-0.png" style="width:300px;height:225px" alt="" />
+              </a>
+            </div>
+          </div>
+          <div class="post op" id="op_1">
+            <p class="intro">
+              <input type="checkbox" class="delete" name="delete_1" id="delete_1" />
+              <label for="delete_1">
+                <span class="subject">The Sticky: /Δ/ 2.0</span>
+                <span style="color:white" class="name">Δ</span>
+                <span class="capcode" style="color:white"> ## Mod</span>
+                <time datetime="2017-04-20T02:00:38Z">2017-04-20 02:00:38</time>
+              </label>&nbsp; <a class="post_no" id="post_no_1" onclick="highlightReply(1)" href="/Δ/res/1.html#1">No.</a>
+              <a class="post_no" onclick="citeReply(1)" href="/Δ/res/1.html#q1">1</a>
+              <i class="fa fa-thumb-tack" title="Sticky"></i>
+              <i class="fa fa-lock" title="Locked"></i>
+              <a href="/Δ/res/1.html">[Reply]</a>
+            </p>
+            <div class="body">This is new /Δ/, also addressable as /diy/, the projects board. The intent is that this board will be used to share and discuss physical building projects and other creations not suitable on other boards, such as cooking, automobile work, structural modifications to buildings, metal working, and circuitry design. <br />
+              <br />Discussion of computer working or electrical design and modification may be considered more appropriate on /Ω/ or /λ/; a thread in each or any of these boards for this is reasonable and allowed. <br />
+              <br />Creation of artwork, including music, games, visuals, and literature will belong in the /culture/ overboard, rather than this board. It's important to make certain no other board commands a subset of a project type before starting a thread here. <br />
+              <br />Do not give advice that is misleadingly dangerous or otherwise purposefully misleadingly harmful on this board. Failure to comply will result in a public ban indicating such or deletion. <br />
+              <br />If a large topic, such as cooking specific categories of food, already has a thread, try to use that rather than starting a new thread, if reasonable; starting a long-term project is an example of a topic that reasonably warrants its own thread. In particular, it's not reasonable for a particular medium to overwhelm the others across the board.
+            </div>
+          </div>
+          <br class="clear" />
+          <hr />
+        </div>
+        <div class="thread" id="thread_12631" data-board="Δ">
+          <div class="files">
+            <div class="file">
+              <p class="fileinfo">File: <a href="/Δ/src/1742847801947-0.jpg" target="_blank">1742847801947-0.jpg</a>
+                <span class="details">(31.72 KB, 640x704, 10:11, <span class="postfilename" title="1511f57b0092ba9fbc920ac5bf19ccd4.jpg">1511f57b0092ba9fbc920ac5bf….jpg</span>) <span class='unimportant image_id'>
+                    <a href="http://imgops.com/lainchan.org/Δ/src/1742847801947-0.jpg" target="_blank">ImgOps</a>
+                    <a href="http://exif.regex.info/exif.cgi?url=lainchan.org/Δ/src/1742847801947-0.jpg" target="_blank">Exif</a>
+                    <a href="http://iqdb.org/?url=lainchan.org/Δ/src/1742847801947-0.jpg" target="_blank">iqdb</a>
+                  </span>
+                </span>
+              </p>
+              <a href="/Δ/src/1742847801947-0.jpg" target="_blank">
+                <img class="post-image" src="/Δ/thumb/1742847801947-0.png" style="width:273px;height:300px" alt="" />
+              </a>
+            </div>
+          </div>
+          <div class="post op" id="op_12631">
+            <p class="intro">
+              <input type="checkbox" class="delete" name="delete_12631" id="delete_12631" />
+              <label for="delete_12631">
+                <span class="subject">/chem/ - Chemistry</span>
+                <span class="name">HELIOS</span>
+                <time datetime="2025-03-24T13:23:22Z">2025-03-24 13:23:22</time>
+              </label>&nbsp; <a class="post_no" id="post_no_12631" onclick="highlightReply(12631)" href="/Δ/res/12631.html#12631">No.</a>
+              <a class="post_no" onclick="citeReply(12631)" href="/Δ/res/12631.html#q12631">12631</a>
+              <a href="/Δ/res/12631.html">[Reply]</a>
+            </p>
+            <div class="body">Let&#039;s have a thread about chemistry. I can&#039;t be the only amateur chemist on here. To please the mods, everything in here is purely academic. Check local laws before you embark on your projects. And before you do anything, make sure you have appropriate safety equipment. Think about the worst thing that could happen to your reaction, because chances are it will. Don&#039;t be stupid. <br />
+              <br />Resources <br />
+              <a href="https://www.sciencemadness.org/" rel="nofollow" target="_blank">https://www.sciencemadness.org/</a> The go-to site for amateur chemists <br />Wiki: <a href="http://www.sciencemadness.org/smwiki/index.php/Main_Page" rel="nofollow" target="_blank">http://www.sciencemadness.org/smwiki/index.php/Main_Page</a>
+              <br />Forums, require email registration: <a href="https://www.sciencemadness.org/whisper/" rel="nofollow" target="_blank">https://www.sciencemadness.org/whisper/</a>
+              <br />
+              <br />Archive.org has plenty of old chemistry textbooks. The most useful ones for me are those meant to teach youngsters from the early 1900&#039;s. <br />
+              <br />YouTube <br />NurdRage, the OG channel: <a href="https://www.youtube.com/user/NurdRage" rel="nofollow" target="_blank">https://www.youtube.com/user/NurdRage</a>
+              <br />NileRed, the internet&#039;s premier piss chemist: <a href="https://www.youtube.com/user/TheRedNile" rel="nofollow" target="_blank">https://www.youtube.com/user/TheRedNile</a>
+              <br />NileBlue, secondary channel: <a href="https://www.youtube.com/channel/UC1D3yD4wlPMico0dss264XA" rel="nofollow" target="_blank">https://www.youtube.com/channel/UC1D3yD4wlPMico0dss264XA</a>
+              <br />Explosions&amp;Fire, energetic materials: <a href="https://www.youtube.com/channel/UCVovvq34gd0ps5cVYNZrc7A" rel="nofollow" target="_blank">https://www.youtube.com/channel/UCVovvq34gd0ps5cVYNZrc7A</a>
+              <br />Extractions&amp;Ire, secondary channel: <a href="https://www.youtube.com/channel/UCvFApMFo_AafXbHRyEJefjA" rel="nofollow" target="_blank">https://www.youtube.com/channel/UCvFApMFo_AafXbHRyEJefjA</a>
+              <br />Cody&#039;sLab, chemistry and physics: <a href="https://www.youtube.com/user/theCodyReeder" rel="nofollow" target="_blank">https://www.youtube.com/user/theCodyReeder</a>
+              <br />ChemistNATE, educational: <a href="https://www.youtube.com/user/chemistNA" rel="nofollow" target="_blank">https://www.youtube.com/user/chemistNA</a>
+            </div>
+          </div>
+          <div class="postcontainer" id="pc12634" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12634">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12634" id="delete_12634" />
+                <label for="delete_12634">
+                  <span class="name">Crash Override</span>
+                  <time datetime="2025-03-24T20:11:47Z">2025-03-24 20:11:47</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12634" onclick="highlightReply(12634)" href="/Δ/res/12631.html#12634">No.</a>
+                <a class="post_no" onclick="citeReply(12634)" href="/Δ/res/12631.html#q12634">12634</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">Of the modern, widely used, good introductory chemistry textbooks, Tro is the easiest, then Zumdahl. Brown is harder.</div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12710" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12710">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12710" id="delete_12710" />
+                <label for="delete_12710">
+                  <span class="name">Mario Rossi</span>
+                  <time datetime="2025-04-10T09:41:10Z">2025-04-10 09:41:10</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12710" onclick="highlightReply(12710)" href="/Δ/res/12631.html#12710">No.</a>
+                <a class="post_no" onclick="citeReply(12710)" href="/Δ/res/12631.html#q12710">12710</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">When etching copper clad boards in ferric chloride, is it important to keep the vessel with it open to air? In every guide I&#039;ve seen the process is done in open vessel, but it would be more convenient to me to close it.</div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12711" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12711">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12711" id="delete_12711" />
+                <label for="delete_12711">
+                  <span class="name">Netrunner</span>
+                  <time datetime="2025-04-11T05:08:08Z">2025-04-11 05:08:08</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12711" onclick="highlightReply(12711)" href="/Δ/res/12631.html#12711">No.</a>
+                <a class="post_no" onclick="citeReply(12711)" href="/Δ/res/12631.html#q12711">12711</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">Is there anything you want to discuss?</div>
+            </div>
+          </div>
+          <br />
+          <br class="clear" />
+          <hr />
+        </div>
+        <div class="thread" id="thread_12611" data-board="Δ">
+          <div class="files">
+            <div class="file">
+              <p class="fileinfo">File: <a href="/Δ/src/1742705267284-0.jpg" target="_blank">1742705267284-0.jpg</a>
+                <span class="details">(257.09 KB, 1002x1280, 501:640, <span class="postfilename">8.jpg</span>) <span class='unimportant image_id'>
+                    <a href="http://imgops.com/lainchan.org/Δ/src/1742705267284-0.jpg" target="_blank">ImgOps</a>
+                    <a href="http://exif.regex.info/exif.cgi?url=lainchan.org/Δ/src/1742705267284-0.jpg" target="_blank">Exif</a>
+                    <a href="http://iqdb.org/?url=lainchan.org/Δ/src/1742705267284-0.jpg" target="_blank">iqdb</a>
+                  </span>
+                </span>
+              </p>
+              <a href="/Δ/src/1742705267284-0.jpg" target="_blank">
+                <img class="post-image" src="/Δ/thumb/1742705267284-0.png" style="width:235px;height:300px" alt="" />
+              </a>
+            </div>
+          </div>
+          <div class="post op" id="op_12611">
+            <p class="intro">
+              <input type="checkbox" class="delete" name="delete_12611" id="delete_12611" />
+              <label for="delete_12611">
+                <span class="subject">Survival/Prepper General</span>
+                <span class="name">Junichi Fujiwara</span>
+                <time datetime="2025-03-22T21:47:47Z">2025-03-22 21:47:47</time>
+              </label>&nbsp; <a class="post_no" id="post_no_12611" onclick="highlightReply(12611)" href="/Δ/res/12611.html#12611">No.</a>
+              <a class="post_no" onclick="citeReply(12611)" href="/Δ/res/12611.html#q12611">12611</a>
+              <a href="/Δ/res/12611.html">[Reply]</a>
+            </p>
+            <div class="body">Discuss how to survive inevitable capitalist crisis and collapse. <br />
+              <span class="quote">
+                <br />&gt;How to form a communist tribe or gang to protect yourself </span>
+              <br />
+              <span class="quote">&gt;Mutual aid and where to get it</span>
+              <br />
+              <span class="quote">&gt;What to put in a bug out bag</span>
+              <br />
+              <span class="quote">&gt;What essentials to actually stockpile</span>
+              <br />
+              <span class="quote">&gt;Skills needed to gather food and water</span>
+              <br />
+              <span class="quote">&gt;What food to grow</span>
+              <br />
+              <span class="quote">&gt;What to do if you dont have a home or your own personal albanian bunker</span>
+              <br />
+              <span class="quote">&gt;Makeshift shelters/squatting</span>
+              <br />
+              <span class="quote">&gt;Where to go/stay</span>
+            </div>
+            <span class="omitted">24 posts and 3 image replies omitted. Click reply to view.</span>
+          </div>
+          <div class="postcontainer" id="pc12675" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12675">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12675" id="delete_12675" />
+                <label for="delete_12675">
+                  <span class="name">BloodCat</span>
+                  <time datetime="2025-03-31T17:26:19Z">2025-03-31 17:26:19</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12675" onclick="highlightReply(12675)" href="/Δ/res/12611.html#12675">No.</a>
+                <a class="post_no" onclick="citeReply(12675)" href="/Δ/res/12611.html#q12675">12675</a>
+              </p>
+              <div class="files">
+                <div class="file">
+                  <p class="fileinfo">File: <a href="/Δ/src/1743467179483-0.png" target="_blank">1743467179483-0.png</a>
+                    <span class="details">(186.61 KB, 476x426, 238:213, <span class="postfilename">1.png</span>) <span class='unimportant image_id'>
+                        <a href="http://imgops.com/lainchan.org/Δ/src/1743467179483-0.png" target="_blank">ImgOps</a>
+                        <a href="http://iqdb.org/?url=lainchan.org/Δ/src/1743467179483-0.png" target="_blank">iqdb</a>
+                      </span>
+                    </span>
+                  </p>
+                  <a href="/Δ/src/1743467179483-0.png" target="_blank">
+                    <img class="post-image" src="/Δ/thumb/1743467179483-0.png" style="width:200px;height:179px" alt="" />
+                  </a>
+                </div>
+              </div>
+              <div class="body">
+                <a onclick="highlightReply('12656', event);" href="/Δ/res/12611.html#12656">&gt;&gt;12656</a>
+                <br />
+                <span class="quote">&gt;bootlicker bitches out</span>
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12683" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12683">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12683" id="delete_12683" />
+                <label for="delete_12683">
+                  <span class="name">Motoko Kusanagi</span>
+                  <time datetime="2025-04-01T16:11:39Z">2025-04-01 16:11:39</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12683" onclick="highlightReply(12683)" href="/Δ/res/12611.html#12683">No.</a>
+                <a class="post_no" onclick="citeReply(12683)" href="/Δ/res/12611.html#q12683">12683</a>
+              </p>
+              <div class="files">
+                <div class="file">
+                  <p class="fileinfo">File: <a href="/Δ/src/1743549098775-0.jpg" target="_blank">1743549098775-0.jpg</a>
+                    <span class="details">(870.62 KB, 1920x744, 80:31, <span class="postfilename">Stalin-composite.jpg</span>) <span class='unimportant image_id'>
+                        <a href="http://imgops.com/lainchan.org/Δ/src/1743549098775-0.jpg" target="_blank">ImgOps</a>
+                        <a href="http://exif.regex.info/exif.cgi?url=lainchan.org/Δ/src/1743549098775-0.jpg" target="_blank">Exif</a>
+                        <a href="http://iqdb.org/?url=lainchan.org/Δ/src/1743549098775-0.jpg" target="_blank">iqdb</a>
+                      </span>
+                    </span>
+                  </p>
+                  <a href="/Δ/src/1743549098775-0.jpg" target="_blank">
+                    <img class="post-image" src="/Δ/thumb/1743549098775-0.png" style="width:200px;height:78px" alt="" />
+                  </a>
+                </div>
+              </div>
+              <div class="body">
+                <a onclick="highlightReply('12675', event);" href="/Δ/res/12611.html#12675">&gt;&gt;12675</a>
+                <br />
+                <span class="quote">&gt;not wanting to lick your particular brand of boot makes others somehow the boot licker</span>
+                <br />Once they put me up against the wall, I will find some solace in knowing you&#039;re next in line.
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12698" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12698">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12698" id="delete_12698" />
+                <label for="delete_12698">
+                  <span class="name">Incognito</span>
+                  <time datetime="2025-04-06T19:18:34Z">2025-04-06 19:18:34</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12698" onclick="highlightReply(12698)" href="/Δ/res/12611.html#12698">No.</a>
+                <a class="post_no" onclick="citeReply(12698)" href="/Δ/res/12611.html#q12698">12698</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">
+                <a onclick="highlightReply('12627', event);" href="/Δ/res/12611.html#12627">&gt;&gt;12627</a>
+                <br />
+                <span class="quote">&gt;There&#039;s no surviving a direct hit, not even military bunkers. They don&#039;t take VIPs to bunkers but evacuate them by chopper if a nuke is inbound. If you survive it will be pic related but worse.</span>
+                <br />
+                <br />Depending on where the nuke lands in my city and what kind of nuke it is I&#039;d be in fireball radius or moderate blast damage radius. So I think there would be hope for me but I don&#039;t know where to start.
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12703" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12703">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12703" id="delete_12703" />
+                <label for="delete_12703">
+                  <span class="name">Jet Black</span>
+                  <time datetime="2025-04-07T23:09:43Z">2025-04-07 23:09:43</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12703" onclick="highlightReply(12703)" href="/Δ/res/12611.html#12703">No.</a>
+                <a class="post_no" onclick="citeReply(12703)" href="/Δ/res/12611.html#q12703">12703</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">
+                <a onclick="highlightReply('12698', event);" href="/Δ/res/12611.html#12698">&gt;&gt;12698</a>
+                <br />
+                <span class="quote">&gt;dont know where to start</span>
+                <br />If you actually care, if you&#039;re in that situation, the best bet is probably to move someplace better. <br />
+                <br />Short of that you want to spend the bulk of your time away from the probable targets. If you have to work close to a target maybe you can&#039;t change that, but hopefully your house can be a relatively safe location. If you can move in town, consider a place that is shielded by terrain from probable targets. Even if you&#039;re not sure where a bomb will blow, its better to be close to a hill that might block a considerable fraction of line of site to possible detonation points. There are a lot of points to consider, police stations often are good to live by because the buildings in their vicinity often get on the same special power grid which means you&#039;ll be first to get power restored and receive other special infrastructure attention, for instance. <br />
+                <br />You&#039;ll want to harden your house. Windows are bad for a lot of reasons. I imagine installing plastic windows might be better for anti shatter reasons, but you could also likely install plastic screens on the inside. <br />
+                <br />Another point to be concerned about is the immediate aftermath. You&#039;ll want food, water, supplies to last at least a few weeks. A lot of the danger of fallout is escapeable if you avoid contact with dust. Get air filters, plastic sheeting, and a staple gun so you can cover windows (which may have shattered) and doors during this critical time. <br />
+                <br />You want to keep a respirator in your car, and if possible a secondary mode of transport like a folding bike that you can pull out if either your car is disabled, or roads are impassible. Get robust tires ( I have good experience with kevlar tires), spare inner tubes, and a pump. When you get home be prepared to discard your clothes and thoroughly clean yourself even without power or running water, and you will want this cleaning solution accessible near your house&#039;s entrance at all times. Make sure you know how to get around even with landmarks altered. <br />
+                <br />After that typical prepper plans apply.
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12704" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12704">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12704" id="delete_12704" />
+                <label for="delete_12704">
+                  <span class="name">Sipho Nkosi</span>
+                  <time datetime="2025-04-08T03:06:51Z">2025-04-08 03:06:51</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12704" onclick="highlightReply(12704)" href="/Δ/res/12611.html#12704">No.</a>
+                <a class="post_no" onclick="citeReply(12704)" href="/Δ/res/12611.html#q12704">12704</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">
+                <a onclick="highlightReply('12698', event);" href="/Δ/res/12611.html#12698">&gt;&gt;12698</a>
+                <br />
+                <br />Have you looked up what &quot;moderate blast damage&quot; means? It isn&#039;t a tornado lol
+              </div>
+            </div>
+          </div>
+          <br />
+          <br class="clear" />
+          <hr />
+        </div>
+        <div class="thread" id="thread_10385" data-board="Δ">
+          <div class="files">
+            <div class="file">
+              <p class="fileinfo">File: <a href="/Δ/src/1685554042219-0.png" target="_blank">1685554042219-0.png</a>
+                <span class="details">(20.85 KB, 602x462, 43:33, <span class="postfilename">Capture.PNG</span>) <span class='unimportant image_id'>
+                    <a href="http://imgops.com/lainchan.org/Δ/src/1685554042219-0.png" target="_blank">ImgOps</a>
+                    <a href="http://iqdb.org/?url=lainchan.org/Δ/src/1685554042219-0.png" target="_blank">iqdb</a>
+                  </span>
+                </span>
+              </p>
+              <a href="/Δ/src/1685554042219-0.png" target="_blank">
+                <img class="post-image" src="/Δ/thumb/1685554042219-0.png" style="width:300px;height:230px" alt="" />
+              </a>
+            </div>
+          </div>
+          <div class="post op" id="op_10385">
+            <p class="intro">
+              <input type="checkbox" class="delete" name="delete_10385" id="delete_10385" />
+              <label for="delete_10385">
+                <span class="subject">Lainchan Language?</span>
+                <span class="name">Umemoto</span>
+                <time datetime="2023-05-31T10:27:24Z">2023-05-31 10:27:24</time>
+              </label>&nbsp; <a class="post_no" id="post_no_10385" onclick="highlightReply(10385)" href="/Δ/res/10385.html#10385">No.</a>
+              <a class="post_no" onclick="citeReply(10385)" href="/Δ/res/10385.html#q10385">10385</a>
+              <a href="/Δ/res/10385.html">[Reply]</a>
+            </p>
+            <div class="body">We should create a secret language, like how some of us used to do when we were kids. <br />
+              <br />Just something fun to communicate on other places on the internet in our own way. It might also add a new unique aspect to our little lainchan internet community. <br />
+              <br />I think it should be made up of English words or some other language, but arranged differently, like this example. <br />&lt;----------------------- <br />
+              <br />What do you guys think? Should we make ourselves a new &quot;lainguage&quot;? <span class="spoiler">sorry</span>
+            </div>
+            <span class="omitted">88 posts and 10 image replies omitted. Click reply to view.</span>
+          </div>
+          <div class="postcontainer" id="pc12690" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12690">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12690" id="delete_12690" />
+                <label for="delete_12690">
+                  <span class="name">Unidentified</span>
+                  <time datetime="2025-04-05T07:11:22Z">2025-04-05 07:11:22</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12690" onclick="highlightReply(12690)" href="/Δ/res/10385.html#12690">No.</a>
+                <a class="post_no" onclick="citeReply(12690)" href="/Δ/res/10385.html#q12690">12690</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">
+                <a onclick="highlightReply('10434', event);" href="/Δ/res/10385.html#10434">&gt;&gt;10434</a>
+                <br />
+                <span class="quote">&gt;esperanto</span>
+                <br />
+                <br />we should make a chat for that on matrix/simplex/session/something else. lots of esperanto groups are full of soykafheads and a comfy cyb chat would make it more fun and engaging
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12692" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12692">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12692" id="delete_12692" />
+                <label for="delete_12692">
+                  <span class="name">Shogun</span>
+                  <time datetime="2025-04-05T09:32:05Z">2025-04-05 09:32:05</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12692" onclick="highlightReply(12692)" href="/Δ/res/10385.html#12692">No.</a>
+                <a class="post_no" onclick="citeReply(12692)" href="/Δ/res/10385.html#q12692">12692</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">I still think any Lainchan language should be one that it&#039;s sole purpose is either to poison LLMs or at least evade their analysis from understanding what is being said. Though the later you dont even need a new language just use of clever word play <br />or vague references so long as the person responding doesn&#039;t overly clarify what was said. <br />
+                <br />
+                <a onclick="highlightReply('11621', event);" href="/Δ/res/10385.html#11621">&gt;&gt;11621</a>
+                <br />
+                <span class="quote">&gt;I love this mechanic. Esperanto, and really I guess basically all languages, have it to some degree. But it doesn&#039;t justwerk in my experience even with my esperanto friends. It can be fun to try and guess, and talki powna&#039; is a fun language, but the practicality of making wordglobs that are readily and immediately understood is imho proven false. One needs a large and relatively rigid vocabulary (which can be populated by such wordglobs if thats what you want).</span>
+                <br />This is why I was suggesting something toki pona like rather than toki poma as is. It is an ever evolving language. Basically you could take words if overly long descriptions turn them into single words composed of main parts of these longer words so it flows together better. Make it follow a specific structure on description order to make it so certain words become a common word instead of near endless variations. These rigid rules with flexibility mean a whole vocabulary can be made fairly naturally. Kind of like how if you know Greek and Latin root words you can understand technical terminology in English. There just has to be a set order to things. Also not everything inherently needs a word I can see why in toki pona no distinction is given between reptiles and amphibians seeing many mix them up anyway.
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12699" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12699">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12699" id="delete_12699" />
+                <label for="delete_12699">
+                  <span class="name">Terzibashjian</span>
+                  <time datetime="2025-04-06T19:38:19Z">2025-04-06 19:38:19</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12699" onclick="highlightReply(12699)" href="/Δ/res/10385.html#12699">No.</a>
+                <a class="post_no" onclick="citeReply(12699)" href="/Δ/res/10385.html#q12699">12699</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">
+                <a onclick="highlightReply('12692', event);" href="/Δ/res/10385.html#12692">&gt;&gt;12692</a>
+                <br />
+                <span class="quote">&gt;I still think any Lainchan language should be one that it&#039;s sole purpose is either to poison LLMs or at least evade their analysis from understanding what is being said.</span>
+                <br />This can&#039;t possibly work unless you keep them from ever accessing the grammars and dictionaries for the new language, and even then, they&#039;ll figure it out sooner or later unless everyone using the language has strict &quot;pic unrelated&quot; discipline
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12700" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12700">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12700" id="delete_12700" />
+                <label for="delete_12700">
+                  <span class="name">John Titor</span>
+                  <time datetime="2025-04-07T01:04:50Z">2025-04-07 01:04:50</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12700" onclick="highlightReply(12700)" href="/Δ/res/10385.html#12700">No.</a>
+                <a class="post_no" onclick="citeReply(12700)" href="/Δ/res/10385.html#q12700">12700</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">While a conlang is really cool, my impression is that it would be demanding to learn, so few people would bother. <br />
+                <br />I think one way to avoid that is simply to have the language be a superset of english. So, all english sentences are valid sentences in our language. Then we can add stuff. An example that already exists is &quot;/s&quot; used to indicate sarcasm or even emojis. Ideally it would have to be something useful but specific/fitting to lainchan. <br />
+                <br />We could also simply follow OP&#039;s idea and come up with something like &quot;invert the order of the vocals&quot;, althuogh I geuss it&#039;s not vyre defferint from inglesh most of the temi.
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12702" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12702">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12702" id="delete_12702" />
+                <label for="delete_12702">
+                  <span class="name">Lunch</span>
+                  <time datetime="2025-04-07T14:33:55Z">2025-04-07 14:33:55</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12702" onclick="highlightReply(12702)" href="/Δ/res/10385.html#12702">No.</a>
+                <a class="post_no" onclick="citeReply(12702)" href="/Δ/res/10385.html#q12702">12702</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">
+                <a onclick="highlightReply('12700', event);" href="/Δ/res/10385.html#12700">&gt;&gt;12700</a>
+                <br />
+                <span class="quote">&gt;While a conlang is really cool, my impression is that it would be demanding to learn, so few people would bother.</span>
+                <br />I have to agree here. They&#039;re great for sci fi and fantasy, but not useful for much else.
+              </div>
+            </div>
+          </div>
+          <br />
+          <br class="clear" />
+          <hr />
+        </div>
+        <div class="thread" id="thread_7549" data-board="Δ">
+          <div class="files">
+            <div class="file multifile" style="width:340px">
+              <p class="fileinfo">File: <a href="/Δ/src/1635401565763-0.jpg" target="_blank">1635401565763-0.jpg</a>
+                <span class="details">(63.54 KB, 650x487, 650:487, <span class="postfilename">run-away-gear.jpg</span>) <span class='unimportant image_id'>
+                    <a href="http://imgops.com/lainchan.org/Δ/src/1635401565763-0.jpg" target="_blank">ImgOps</a>
+                    <a href="http://exif.regex.info/exif.cgi?url=lainchan.org/Δ/src/1635401565763-0.jpg" target="_blank">Exif</a>
+                    <a href="http://iqdb.org/?url=lainchan.org/Δ/src/1635401565763-0.jpg" target="_blank">iqdb</a>
+                  </span>
+                </span>
+              </p>
+              <a href="/Δ/src/1635401565763-0.jpg" target="_blank">
+                <img class="post-image" src="/Δ/thumb/1635401565763-0.png" style="width:300px;height:225px" alt="" />
+              </a>
+            </div>
+            <div class="file multifile" style="width:340px">
+              <p class="fileinfo">File: <a href="/Δ/src/1635401565763-1.jpg" target="_blank">1635401565763-1.jpg</a>
+                <span class="details">(63.19 KB, 650x650, 1:1, <span class="postfilename">talbot-negra.jpg</span>) <span class='unimportant image_id'>
+                    <a href="http://imgops.com/lainchan.org/Δ/src/1635401565763-1.jpg" target="_blank">ImgOps</a>
+                    <a href="http://exif.regex.info/exif.cgi?url=lainchan.org/Δ/src/1635401565763-1.jpg" target="_blank">Exif</a>
+                    <a href="http://iqdb.org/?url=lainchan.org/Δ/src/1635401565763-1.jpg" target="_blank">iqdb</a>
+                  </span>
+                </span>
+              </p>
+              <a href="/Δ/src/1635401565763-1.jpg" target="_blank">
+                <img class="post-image" src="/Δ/thumb/1635401565763-1.png" style="width:300px;height:300px" alt="" />
+              </a>
+            </div>
+          </div>
+          <div class="post op" id="op_7549" style='clear:both'>
+            <p class="intro">
+              <input type="checkbox" class="delete" name="delete_7549" id="delete_7549" />
+              <label for="delete_7549">
+                <span class="subject">Runaway Backpack</span>
+                <span class="name">Noodle Soup -1/7</span>
+                <time datetime="2021-10-27T23:12:46Z">2021-10-27 23:12:46</time>
+              </label>&nbsp; <a class="post_no" id="post_no_7549" onclick="highlightReply(7549)" href="/Δ/res/7549.html#7549">No.</a>
+              <a class="post_no" onclick="citeReply(7549)" href="/Δ/res/7549.html#q7549">7549</a>
+              <a href="/Δ/res/7549.html">[Reply]</a>
+              <a href="/Δ/res/7549+50.html">[Last 50 Posts]</a>
+            </p>
+            <div class="body">I'm sure there are a lot of Lainons, myself included, that fantasize on running away from home; show me what would you take with you! <br />Mine would be something like: <br />*25L backpack (similar to pic related n° 2. It's what i have) <br />* 4 basic t-shirts(two gray, two black), 2 graphic t-shirts, one long-sleeve t-shirt <br />* two jeans, two cargo shorts <br />* 4 pairs of socks, 4 changes of underwear <br />* canvas sneakers <br />* the newest laptop i own, charger, mouse, laptop sleeve, wired earbuds, two usb HDD, portable charger <br />* Thermos, tea <br />* important documents like birth cert. <br />* Toothbrush <br />* facemasks, glasses <br />* pepper spray, folding knife <br />* sewing kit <br />* as much canned food as i can </div>
+            <span class="omitted">119 posts and 29 image replies omitted. Click reply to view.</span>
+          </div>
+          <div class="postcontainer" id="pc11779" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_11779">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_11779" id="delete_11779" />
+                <label for="delete_11779">
+                  <span class="name">Joey</span>
+                  <time datetime="2024-07-10T20:43:56Z">2024-07-10 20:43:56</time>
+                </label>&nbsp; <a class="post_no" id="post_no_11779" onclick="highlightReply(11779)" href="/Δ/res/7549.html#11779">No.</a>
+                <a class="post_no" onclick="citeReply(11779)" href="/Δ/res/7549.html#q11779">11779</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">
+                <a onclick="highlightReply('11428', event);" href="/Δ/res/7549.html#11428">&gt;&gt;11428</a>
+                <br />personally I don&#039;t think theres anything wrong with burning through soykafty pocket knives like a spaceshuttle through o-rings but its good to have a spare or two. Knives naturally are essential but they don&#039;t need to always be great. You can buy big packs sometimes on i.e. govdeals from airport confiscation and stuff, pretty reasonable prices and sometimes goodies included. <br />
+                <br />(my pocket knife was just found on the ground for free, but pretty gud) <br />
+                <br />
+                <a onclick="highlightReply('11777', event);" href="/Δ/res/7549.html#11777">&gt;&gt;11777</a>
+                <br />nice number
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc11790" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_11790">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_11790" id="delete_11790" />
+                <label for="delete_11790">
+                  <span class="name">Joey</span>
+                  <time datetime="2024-07-12T02:11:38Z">2024-07-12 02:11:38</time>
+                </label>&nbsp; <a class="post_no" id="post_no_11790" onclick="highlightReply(11790)" href="/Δ/res/7549.html#11790">No.</a>
+                <a class="post_no" onclick="citeReply(11790)" href="/Δ/res/7549.html#q11790">11790</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">Having lived homeless for extended periods a couple of times, I can spell out what you need: <br />
+                <br />
+                <br />wear: socks, underwear, long pants, longsleeve shirt, boots, sun hat, sunglasses, watch <br />pockets: lighter, money, keyring w/penlight/multitool, pocket knife, wallet, id, bandana <br />
+                <br />external frame backpack with... <br />change of socks/underwear/long pants/longsleeve shirt <br />rainshell, puffy jacket, wool gloves, wool cap, wool socks <br />water bottle, water filter, bleach <br />no-cook food, gi can-opener, spork <br />stick stove, pot, candle-lantern/candles <br />soap, bar-towel, comb, toothbrush, razor, scissors <br />toilet paper, plastic garbage bags, alcohol wipes <br />bandaids, neosporin, alcohol swabs, naproxen, sunscreen, off <br />map, compass, notepad, pencil, local resources list <br />paracord, tape, glue, needle/thread <br />tarp, tent, bivy <br />optional: cellphone, glock 29, solar charger/battery
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc11791" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_11791">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_11791" id="delete_11791" />
+                <label for="delete_11791">
+                  <span class="name">Hiro Protagonist</span>
+                  <time datetime="2024-07-12T07:13:39Z">2024-07-12 07:13:39</time>
+                </label>&nbsp; <a class="post_no" id="post_no_11791" onclick="highlightReply(11791)" href="/Δ/res/7549.html#11791">No.</a>
+                <a class="post_no" onclick="citeReply(11791)" href="/Δ/res/7549.html#q11791">11791</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">
+                <a onclick="highlightReply('11790', event);" href="/Δ/res/7549.html#11790">&gt;&gt;11790</a>
+                <br />I&#039;m curious what type/s of glue you recommend
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc11793" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_11793">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_11793" id="delete_11793" />
+                <label for="delete_11793">
+                  <span class="name">Dujour</span>
+                  <time datetime="2024-07-12T19:06:42Z">2024-07-12 19:06:42</time>
+                </label>&nbsp; <a class="post_no" id="post_no_11793" onclick="highlightReply(11793)" href="/Δ/res/7549.html#11793">No.</a>
+                <a class="post_no" onclick="citeReply(11793)" href="/Δ/res/7549.html#q11793">11793</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">
+                <a onclick="highlightReply('11791', event);" href="/Δ/res/7549.html#11791">&gt;&gt;11791</a>
+                <br />several very small tubes of superglue (rather that one big tube that you use once and it dries up). Also, those clear plastic food bags you can buy at a grocery store are good for keeping your stuff separated into &quot;kits&quot;. The double-zipper ones are better than the slider ones, which pop open. And a cheap cotton laundry bag to keep your clothes in. If you spend any time way out in the woods, the Glock 29 10mm with penetrating rounds will take out a grizzly bear if need be. If you stay in a city, find out where the best food/clothing/meal give-aways are. Keep yourself clean and groomed and people/cops won&#039;t bother you much. Stay away from druggies, they&#039;re bad news. OK, I&#039;ll shut up now.
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12701" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12701">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12701" id="delete_12701" />
+                <label for="delete_12701">
+                  <span class="name">Batou</span>
+                  <time datetime="2025-04-07T10:02:14Z">2025-04-07 10:02:14</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12701" onclick="highlightReply(12701)" href="/Δ/res/7549.html#12701">No.</a>
+                <a class="post_no" onclick="citeReply(12701)" href="/Δ/res/7549.html#q12701">12701</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">propane and propane accessories</div>
+            </div>
+          </div>
+          <br />
+          <br class="clear" />
+          <hr />
+        </div>
+        <div class="thread" id="thread_12644" data-board="Δ">
+          <div class="files">
+            <div class="file">
+              <p class="fileinfo">File: <a href="/Δ/src/1742928591309-0.jpg" target="_blank">1742928591309-0.jpg</a>
+                <span class="details">(39.67 KB, 736x736, 1:1, <span class="postfilename">987654321234567.jpg</span>) <span class='unimportant image_id'>
+                    <a href="http://imgops.com/lainchan.org/Δ/src/1742928591309-0.jpg" target="_blank">ImgOps</a>
+                    <a href="http://exif.regex.info/exif.cgi?url=lainchan.org/Δ/src/1742928591309-0.jpg" target="_blank">Exif</a>
+                    <a href="http://iqdb.org/?url=lainchan.org/Δ/src/1742928591309-0.jpg" target="_blank">iqdb</a>
+                  </span>
+                </span>
+              </p>
+              <a href="/Δ/src/1742928591309-0.jpg" target="_blank">
+                <img class="post-image" src="/Δ/thumb/1742928591309-0.png" style="width:300px;height:300px" alt="" />
+              </a>
+            </div>
+          </div>
+          <div class="post op" id="op_12644">
+            <p class="intro">
+              <input type="checkbox" class="delete" name="delete_12644" id="delete_12644" />
+              <label for="delete_12644">
+                <span class="subject">Permaculture</span>
+                <span class="name">Jean Dupont</span>
+                <time datetime="2025-03-25T11:49:51Z">2025-03-25 11:49:51</time>
+              </label>&nbsp; <a class="post_no" id="post_no_12644" onclick="highlightReply(12644)" href="/Δ/res/12644.html#12644">No.</a>
+              <a class="post_no" onclick="citeReply(12644)" href="/Δ/res/12644.html#q12644">12644</a>
+              <a href="/Δ/res/12644.html">[Reply]</a>
+            </p>
+            <div class="body">The practice and principles of Permaculture are one of the most important tools for not only creating a sustainable socialism, but also for repairing the damage done to the global ecosystem by capitalism, and lessening your individual reliance on the current capitalist system.Permacultural practice and socialism are two very powerful allies, and learning about permaculture should be necessity for modern socialists and communists.</div>
+            <span class="omitted">1 post and 1 image reply omitted. Click reply to view.</span>
+          </div>
+          <div class="postcontainer" id="pc12647" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12647">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12647" id="delete_12647" />
+                <label for="delete_12647">
+                  <span class="name">Nobody special</span>
+                  <time datetime="2025-03-26T09:00:04Z">2025-03-26 09:00:04</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12647" onclick="highlightReply(12647)" href="/Δ/res/12644.html#12647">No.</a>
+                <a class="post_no" onclick="citeReply(12647)" href="/Δ/res/12644.html#q12647">12647</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">Please don&#039;t conflate a technique and an ideology. You&#039;re the reason Ted K. wrote about &quot;leftists&quot;.</div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12648" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12648">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12648" id="delete_12648" />
+                <label for="delete_12648">
+                  <span class="name">The Fin</span>
+                  <time datetime="2025-03-26T14:18:53Z">2025-03-26 14:18:53</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12648" onclick="highlightReply(12648)" href="/Δ/res/12644.html#12648">No.</a>
+                <a class="post_no" onclick="citeReply(12648)" href="/Δ/res/12644.html#q12648">12648</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">
+                <a onclick="highlightReply('12647', event);" href="/Δ/res/12644.html#12647">&gt;&gt;12647</a>
+                <br /> Ted K? Maybe next you can mail me a manifesto.
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12677" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12677">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12677" id="delete_12677" />
+                <label for="delete_12677">
+                  <span class="name">Cutter</span>
+                  <time datetime="2025-03-31T19:26:37Z">2025-03-31 19:26:37</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12677" onclick="highlightReply(12677)" href="/Δ/res/12644.html#12677">No.</a>
+                <a class="post_no" onclick="citeReply(12677)" href="/Δ/res/12644.html#q12677">12677</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">
+                <a href="https://permies.com/" rel="nofollow" target="_blank">https://permies.com/</a>
+                <br />
+                <br />
+                <a href="https://www.mastodonvalleyfarm.com/" rel="nofollow" target="_blank">https://www.mastodonvalleyfarm.com/</a>
+                <br />
+                <a href="https://www.thehighersidechats.com/peter-allen-mastodon-valley-farm-permaculture-the-wilderness-myth/" rel="nofollow" target="_blank">https://www.thehighersidechats.com/peter-allen-mastodon-valley-farm-permaculture-the-wilderness-myth/</a>
+                <br />
+                <br />
+                <a href="https://newforestfarm.us/" rel="nofollow" target="_blank">https://newforestfarm.us/</a>
+                <br />
+                <br />And could you have picked a worse flippin image for the op?
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12696" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12696">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12696" id="delete_12696" />
+                <label for="delete_12696">
+                  <span class="name">Joe Bloggs</span>
+                  <time datetime="2025-04-05T19:04:05Z">2025-04-05 19:04:05</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12696" onclick="highlightReply(12696)" href="/Δ/res/12644.html#12696">No.</a>
+                <a class="post_no" onclick="citeReply(12696)" href="/Δ/res/12644.html#q12696">12696</a>
+              </p>
+              <div class="files">
+                <div class="file">
+                  <p class="fileinfo">File: <a href="/Δ/src/1743905044584.jpg" target="_blank">1743905044584.jpg</a>
+                    <span class="details">(58.43 KB, 600x396, 50:33, <span class="postfilename" title="a-small-farm-future-600x396.jpg">a-small-farm-future-600x39….jpg</span>) <span class='unimportant image_id'>
+                        <a href="http://imgops.com/lainchan.org/Δ/src/1743905044584.jpg" target="_blank">ImgOps</a>
+                        <a href="http://exif.regex.info/exif.cgi?url=lainchan.org/Δ/src/1743905044584.jpg" target="_blank">Exif</a>
+                        <a href="http://iqdb.org/?url=lainchan.org/Δ/src/1743905044584.jpg" target="_blank">iqdb</a>
+                      </span>
+                    </span>
+                  </p>
+                  <a href="/Δ/src/1743905044584.jpg" target="_blank">
+                    <img class="post-image" src="/Δ/thumb/1743905044584.png" style="width:199px;height:132px" alt="" />
+                  </a>
+                </div>
+              </div>
+              <div class="body">A few years ago I read this book, A Small Farm Future. It is more of a technical and data driven breakdown of what the author believes will be the structure of food production systems after the collapse of global supply chains and megacorporations. He believes that things will become more locally focused and less carbon energy-dependant not only because it&#039;s a common goal, but because of nessecity. More like &quot;it&#039;s going to happen, how should we manuver as it happens&quot;. <br />
+                <br />to be honest it&#039;s not the best book I&#039;ve read, I think it takes a long time to get to its main points. The main ideas of each chapter *could* be pretty easily communicated in like 3 or 4 bullet points (though I suppose that&#039;s true of any publication? Just the feeling I got) <br />
+                <br />In relation to permaculture, the best point he argues is the difference in harvesting from Skims versus Stores. <br />
+                <br />A store of a good is an output that consumes the good and the producing method at the same time. <br />
+                <br />Skimming would be taking from an output that is continuously generated and renewable, or in some form of ongoing system or lifecycle. <br />
+                <br />For example: a chicken has skims in the form of eggs, or stores in the form of meat. A cow has skims of milk (lol) and stores of meat. <br />
+                <br />An example other than food, he argues that a deposit of coal or oil is a store, while solar/wind are a skim. <br />
+                <br />Permaculture systems are more likely to be this type of system, like a food forest.
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12697" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12697">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12697" id="delete_12697" />
+                <label for="delete_12697">
+                  <a class="email" href="mailto:sage">
+                    <span class="name">Shogun</span>
+                  </a>
+                  <time datetime="2025-04-06T17:36:08Z">2025-04-06 17:36:08</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12697" onclick="highlightReply(12697)" href="/Δ/res/12644.html#12697">No.</a>
+                <a class="post_no" onclick="citeReply(12697)" href="/Δ/res/12644.html#q12697">12697</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">Key to a sustainable socialism is overcoming the harmful intellectual baggage that has held back socialism in the 19th and 20th centuries. Marx was a double edged sword. He helped create the &quot;scientific&quot; socialist obsession with industrialization and environmental destruction. The three problems are: 1. Rejection of market mechanism 2. Obsession with heavy industry and bureaucracy 2. Atheism and totalitarian rationalization of all areas of life.</div>
+            </div>
+          </div>
+          <br />
+          <br class="clear" />
+          <hr />
+        </div>
+        <div class="thread" id="thread_7710" data-board="Δ">
+          <div class="files">
+            <div class="file">
+              <p class="fileinfo">File: <a href="/Δ/src/1637782263311-0.jpg" target="_blank">1637782263311-0.jpg</a>
+                <span class="details">(147.68 KB, 720x960, 3:4, <span class="postfilename">scrubbed.jpg</span>) <span class='unimportant image_id'>
+                    <a href="http://imgops.com/lainchan.org/Δ/src/1637782263311-0.jpg" target="_blank">ImgOps</a>
+                    <a href="http://exif.regex.info/exif.cgi?url=lainchan.org/Δ/src/1637782263311-0.jpg" target="_blank">Exif</a>
+                    <a href="http://iqdb.org/?url=lainchan.org/Δ/src/1637782263311-0.jpg" target="_blank">iqdb</a>
+                  </span>
+                </span>
+              </p>
+              <a href="/Δ/src/1637782263311-0.jpg" target="_blank">
+                <img class="post-image" src="/Δ/thumb/1637782263311-0.png" style="width:225px;height:300px" alt="" />
+              </a>
+            </div>
+          </div>
+          <div class="post op" id="op_7710">
+            <p class="intro">
+              <input type="checkbox" class="delete" name="delete_7710" id="delete_7710" />
+              <label for="delete_7710">
+                <span class="subject">Leeching as a cyberpunk lifestyle</span>
+                <span class="name">Joe Bloggs</span>
+                <time datetime="2021-11-24T11:31:04Z">2021-11-24 11:31:04</time>
+              </label>&nbsp; <a class="post_no" id="post_no_7710" onclick="highlightReply(7710)" href="/Δ/res/7710.html#7710">No.</a>
+              <a class="post_no" onclick="citeReply(7710)" href="/Δ/res/7710.html#q7710">7710</a>
+              <a href="/Δ/res/7710.html">[Reply]</a>
+            </p>
+            <div class="body">
+              <strong> Aight, this thread will be about leeching. </strong>
+              <br />
+              <br />What do i mean by this? Basically, everything one can do to profit from society's fruits, without giving back. It is a more radical form of the protest by non-participation, and aims to destabilize Society by taking energy out of the system, thus slowing it down and leading to gradual breakdown of system components and, as an end result, the entire system. <br />
+              <br />Leeching can take many forms, be it the simple act of stealing gas, stealing books from the library, utilizing public wifi and power outlets, taking public resources <span class="spoiler">a simple example being toilet paper and soap from public restrooms </span>, dumpster diving <span class="spoiler">this being an increasingly acceptable form of leeching </span>, and many others. <br />
+              <br />If you have experience with the leeches' lifestyle, and are willing to share, post your experiences, tips, tricks and strategies to extract as much as possible from the society we are living in.
+            </div>
+            <span class="omitted">90 posts and 17 image replies omitted. Click reply to view.</span>
+          </div>
+          <div class="postcontainer" id="pc12515" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12515">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12515" id="delete_12515" />
+                <label for="delete_12515">
+                  <span class="name">Crash Override</span>
+                  <time datetime="2025-02-11T18:36:30Z">2025-02-11 18:36:30</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12515" onclick="highlightReply(12515)" href="/Δ/res/7710.html#12515">No.</a>
+                <a class="post_no" onclick="citeReply(12515)" href="/Δ/res/7710.html#q12515">12515</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">
+                <a onclick="highlightReply('7713', event);" href="/Δ/res/7710.html#7713">&gt;&gt;7713</a>
+                <br />I dunno why OP included dumpster diving as &quot;leeching&quot; cuz, I would expect something to only be in this category if it is hurting society. dumpster diving doesn&#039;t hurt anyone. So, the reason to steal gas instead of using cooking oil is that the theft hurts the system. using the system&#039;s trash doesn&#039;t hurt it.
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12518" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12518">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12518" id="delete_12518" />
+                <label for="delete_12518">
+                  <span class="name">Hiro Protagonist</span>
+                  <time datetime="2025-02-18T02:46:23Z">2025-02-18 02:46:23</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12518" onclick="highlightReply(12518)" href="/Δ/res/7710.html#12518">No.</a>
+                <a class="post_no" onclick="citeReply(12518)" href="/Δ/res/7710.html#q12518">12518</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">
+                <a onclick="highlightReply('12515', event);" href="/Δ/res/7710.html#12515">&gt;&gt;12515</a>
+                <br />If you get free food you wont buy food. Its the piracy logic.This is also why the supermarkets rather trash food than give it away for free.
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12519" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12519">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12519" id="delete_12519" />
+                <label for="delete_12519">
+                  <span class="name">Spooky</span>
+                  <time datetime="2025-02-18T06:15:34Z">2025-02-18 06:15:34</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12519" onclick="highlightReply(12519)" href="/Δ/res/7710.html#12519">No.</a>
+                <a class="post_no" onclick="citeReply(12519)" href="/Δ/res/7710.html#q12519">12519</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">
+                <a onclick="highlightReply('12518', event);" href="/Δ/res/7710.html#12518">&gt;&gt;12518</a>
+                <br />And this is why we flooded some African states with free food. Their agriculture is reduced to nothing because good luck being competitive against free and if they don&#039;t do as they are told, the humanitarian help stop.
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12694" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12694">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12694" id="delete_12694" />
+                <label for="delete_12694">
+                  <span class="name">Joe Bloggs</span>
+                  <time datetime="2025-04-05T12:44:10Z">2025-04-05 12:44:10</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12694" onclick="highlightReply(12694)" href="/Δ/res/7710.html#12694">No.</a>
+                <a class="post_no" onclick="citeReply(12694)" href="/Δ/res/7710.html#q12694">12694</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">
+                <a onclick="highlightReply('7712', event);" href="/Δ/res/7710.html#7712">&gt;&gt;7712</a>
+                <br />
+                <a onclick="highlightReply('12498', event);" href="/Δ/res/7710.html#12498">&gt;&gt;12498</a>
+                <br />No one ever talks about the specifics of this idea. It pisses me off a little. <br />
+                <br />Here I refer to the pi3 as the client, and the server as the home wg server. <br />
+                <span class="quote">
+                  <br />&gt;can&#039;t just connect server to client because new/unestablished INPUT traffic is blocked on all/most cafe/work/library networks </span>
+                <br />
+                <span class="quote">&gt;connect client to server</span>
+                <br />
+                <span class="quote">&gt;ssh from server to client</span>
+                <br />
+                <span class="quote">&gt;all traffic 180&#039;s back to the home server and onto the web</span>
+                <br />
+                <span class="quote">&gt;it&#039;s pointless, you can just set up the client at your home in this case</span>
+                <br />
+                <br />Here is how you get server -&gt; client traffic to step out of the wg tunnel when it arrives at the client. <br />
+                <br />
+                <pre>
+							<code class="hljs bash">
+								<span class="hljs-meta">#!/bin/bash
+									<br/>
+								</span>
+								<br/>WG_CLIENT_IP=
+								<span class="hljs-string">"10.0.0.2"</span>
+								<br/>LOCAL_IFACE=
+								<span class="hljs-string">"eth0"</span>
+								<br/>MARK_VALUE=
+								<span class="hljs-string">"42"</span>
+								<br/>TABLE_ID=
+								<span class="hljs-string">"200"</span>
+								<br/>TABLE_NAME=
+								<span class="hljs-string">"localout"</span>
+								<br/>
+								<br/>LOCAL_GATEWAY=$(ip route show dev
+								<span class="hljs-string">"
+									<span class="hljs-variable">$LOCAL_IFACE</span>"
+								</span> | grep -oP
+								<span class="hljs-string">'default via \K[\d.]+'</span>)
+								<br/>
+								<br/>
+								<span class="hljs-keyword">if</span> [ -z
+								<span class="hljs-string">"
+									<span class="hljs-variable">$LOCAL_GATEWAY</span>"
+								</span> ];
+								<span class="hljs-keyword">then</span>
+								<br/>
+							</pre>
+                </code>
+                <span class="toolong">Post too long. Click <a href="/Δ/res/7710.html#12694">here</a> to view the full text. </span>
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12695" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12695">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12695" id="delete_12695" />
+                <label for="delete_12695">
+                  <span class="name">The Phantom Phreak</span>
+                  <time datetime="2025-04-05T12:49:48Z">2025-04-05 12:49:48</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12695" onclick="highlightReply(12695)" href="/Δ/res/7710.html#12695">No.</a>
+                <a class="post_no" onclick="citeReply(12695)" href="/Δ/res/7710.html#q12695">12695</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">
+                <a onclick="highlightReply('12694', event);" href="/Δ/res/7710.html#12694">&gt;&gt;12694</a>
+                <br />And here is the list of tear-down steps <br />
+                <br />
+                <pre>
+							<code class="hljs bash">
+								<span class="hljs-meta">#!/bin/bash
+									<br/>
+								</span>
+								<br/>WG_CLIENT_IP=
+								<span class="hljs-string">"10.0.0.2"</span>
+								<br/>LOCAL_IFACE=
+								<span class="hljs-string">"eth0"</span>
+								<br/>MARK_VALUE=
+								<span class="hljs-string">"42"</span>
+								<br/>TABLE_ID=
+								<span class="hljs-string">"200"</span>
+								<br/>TABLE_NAME=
+								<span class="hljs-string">"localout"</span>
+								<br/>
+								<br/>iptables -t mangle -C OUTPUT -s
+								<span class="hljs-string">"
+									<span class="hljs-variable">$WG_CLIENT_IP</span>"
+								</span> -j MARK --
+								<span class="hljs-built_in">set</span>-mark
+								<span class="hljs-string">"
+									<span class="hljs-variable">$MARK_VALUE</span>"
+								</span> 2&gt;/dev/null &amp;&amp; \
+								<br/>iptables -t mangle -D OUTPUT -s
+								<span class="hljs-string">"
+									<span class="hljs-variable">$WG_CLIENT_IP</span>"
+								</span> -j MARK --
+								<span class="hljs-built_in">set</span>-mark
+								<span class="hljs-string">"
+									<span class="hljs-variable">$MARK_VALUE</span>"
+								</span>
+								<br/>
+								<br/>ip rule list | grep -q
+								<span class="hljs-string">"fwmark
+									<span class="hljs-variable">$MARK_VALUE</span>.*lookup
+									<span class="hljs-variable">$TABLE_NAME</span>"
+								</span> &amp;&amp; \
+								<br/>ip rule del fwmark
+								<span class="hljs-string">"
+									<span class="hljs-variable">$MARK_VALUE</span>"
+								</span> table
+								<span class="hljs-string">"
+									<span class="hljs-variable">$TABLE_ID</span>"
+								</span>
+								<br/>
+								<br/>ip route show table
+								<span class="hljs-string">"
+									<span class="hljs-variable">$TABLE_ID</span>"
+								</span> | grep -q
+								<span class="hljs-string">"^default"</span> &amp;&amp; \
+								<br/>ip route del default table
+								<span class="hljs-string">"
+									<span class="hljs-variable">$TABLE_ID</span>"
+								</span>
+								<br/>
+								<br/>
+								<span class="hljs-comment"># manually remove custom table entry from /etc/iproute2/rt_tables</span>
+								<br/>
+								<br/>ip route flush cache
+							</code>
+						</pre>
+              </div>
+            </div>
+          </div>
+          <br />
+          <br class="clear" />
+          <hr />
+        </div>
+        <div class="thread" id="thread_12615" data-board="Δ">
+          <div class="files">
+            <div class="file">
+              <p class="fileinfo">File: <a href="/Δ/src/1742717376432-0.jpg" target="_blank">1742717376432-0.jpg</a>
+                <span class="details">(508.39 KB, 1792x1408, 14:11, <span class="postfilename" title="the-ancient-library-at-alexandria-midjourney-2mcpbx7j8o.jpg">the-ancient-library-at-ale….jpg</span>) <span class='unimportant image_id'>
+                    <a href="http://imgops.com/lainchan.org/Δ/src/1742717376432-0.jpg" target="_blank">ImgOps</a>
+                    <a href="http://exif.regex.info/exif.cgi?url=lainchan.org/Δ/src/1742717376432-0.jpg" target="_blank">Exif</a>
+                    <a href="http://iqdb.org/?url=lainchan.org/Δ/src/1742717376432-0.jpg" target="_blank">iqdb</a>
+                  </span>
+                </span>
+              </p>
+              <a href="/Δ/src/1742717376432-0.jpg" target="_blank">
+                <img class="post-image" src="/Δ/thumb/1742717376432-0.png" style="width:300px;height:236px" alt="" />
+              </a>
+            </div>
+          </div>
+          <div class="post op" id="op_12615">
+            <p class="intro">
+              <input type="checkbox" class="delete" name="delete_12615" id="delete_12615" />
+              <label for="delete_12615">
+                <span class="subject">Text To Speech</span>
+                <span class="name">Jim Hilger</span>
+                <time datetime="2025-03-23T01:09:36Z">2025-03-23 01:09:36</time>
+              </label>&nbsp; <a class="post_no" id="post_no_12615" onclick="highlightReply(12615)" href="/Δ/res/12615.html#12615">No.</a>
+              <a class="post_no" onclick="citeReply(12615)" href="/Δ/res/12615.html#q12615">12615</a>
+              <a href="/Δ/res/12615.html">[Reply]</a>
+            </p>
+            <div class="body">tortoise TTS is too slow and making good AI models takes time <br />
+              <br />websites like elevenlabs and fakeyou are too expensive for mass production of audio. You can get away with shorter stuff for free, however. <br />
+              <br />for TTS i still use festival scripts piped through libreoffice writer TTS plugin. I can get Linux or Windows to generate an 10 hour audiobook from a pile of text ripped out of a PDF in about a half an hour. Not bad. problem is, it sounds like soykaf.
+            </div>
+          </div>
+          <div class="postcontainer" id="pc12620" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12620">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12620" id="delete_12620" />
+                <label for="delete_12620">
+                  <span class="name">Aristóteles Amadópulus</span>
+                  <time datetime="2025-03-23T17:03:44Z">2025-03-23 17:03:44</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12620" onclick="highlightReply(12620)" href="/Δ/res/12615.html#12620">No.</a>
+                <a class="post_no" onclick="citeReply(12620)" href="/Δ/res/12615.html#q12620">12620</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">
+                <a onclick="highlightReply('12615', event);" href="/Δ/res/12615.html#12615">&gt;&gt;12615</a>
+                <br />This is basically what I do. I&#039;ve gotten used to the voice. <br />
+                <br />But I don&#039;t get what you are using libreoffice writer tts for? Are you using it to handle some rare characters better? <br />
+                <br />I just use text2wave on a regular text file, and I definitely generate a 10 hour audiobook way faster than a half hour on a half-dead computer that rattles if I run it too hot. I&#039;d be surprised if it took even five minutes.
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12693" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12693">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12693" id="delete_12693" />
+                <label for="delete_12693">
+                  <span class="name">Shogun</span>
+                  <time datetime="2025-04-05T11:05:19Z">2025-04-05 11:05:19</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12693" onclick="highlightReply(12693)" href="/Δ/res/12615.html#12693">No.</a>
+                <a class="post_no" onclick="citeReply(12693)" href="/Δ/res/12615.html#q12693">12693</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">
+                <a onclick="highlightReply('12620', event);" href="/Δ/res/12615.html#12620">&gt;&gt;12620</a>
+                <br />lain probably just uses it because it&#039;s free
+              </div>
+            </div>
+          </div>
+          <br />
+          <br class="clear" />
+          <hr />
+        </div>
+        <div class="thread" id="thread_3474" data-board="Δ">
+          <div class="files">
+            <div class="file">
+              <p class="fileinfo">File: <a href="/Δ/src/1566656215916.jpg" target="_blank">1566656215916.jpg</a>
+                <span class="details">(43.05 KB, 628x458, 314:229, <span class="postfilename">rpi2b_1024x1024.jpg</span>) <span class='unimportant image_id'>
+                    <a href="http://imgops.com/lainchan.org/Δ/src/1566656215916.jpg" target="_blank">ImgOps</a>
+                    <a href="http://exif.regex.info/exif.cgi?url=lainchan.org/Δ/src/1566656215916.jpg" target="_blank">Exif</a>
+                    <a href="http://iqdb.org/?url=lainchan.org/Δ/src/1566656215916.jpg" target="_blank">iqdb</a>
+                  </span>
+                </span>
+              </p>
+              <a href="/Δ/src/1566656215916.jpg" target="_blank">
+                <img class="post-image" src="/Δ/thumb/1566656215916.png" style="width:300px;height:219px" alt="" />
+              </a>
+            </div>
+          </div>
+          <div class="post op" id="op_3474">
+            <p class="intro">
+              <input type="checkbox" class="delete" name="delete_3474" id="delete_3474" />
+              <label for="delete_3474">
+                <span class="subject">Ras Pi / Arduino Projects!</span>
+                <span class="name">Sipho Nkosi</span>
+                <time datetime="2019-08-24T07:16:56Z">2019-08-24 07:16:56</time>
+              </label>&nbsp; <a class="post_no" id="post_no_3474" onclick="highlightReply(3474)" href="/Δ/res/3474.html#3474">No.</a>
+              <a class="post_no" onclick="citeReply(3474)" href="/Δ/res/3474.html#q3474">3474</a>
+              <a href="/Δ/res/3474.html">[Reply]</a>
+              <a href="/Δ/res/3474+50.html">[Last 50 Posts]</a>
+            </p>
+            <div class="body">Anyone doing anything with a Pi or Arduino, etc? <br />I'd love to hear! <br />
+              <br />Some people have bots running on them, or have them used as a piratebox, or connected to mesh networks, or use them as proxies, use them in controllers and robotics, drones, and much more!
+            </div>
+            <span class="omitted">198 posts and 45 image replies omitted. Click reply to view.</span>
+          </div>
+          <div class="postcontainer" id="pc8907" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_8907">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_8907" id="delete_8907" />
+                <label for="delete_8907">
+                  <span class="name">Chan Siu Ming</span>
+                  <time datetime="2022-06-26T12:40:41Z">2022-06-26 12:40:41</time>
+                </label>&nbsp; <a class="post_no" id="post_no_8907" onclick="highlightReply(8907)" href="/Δ/res/3474.html#8907">No.</a>
+                <a class="post_no" onclick="citeReply(8907)" href="/Δ/res/3474.html#q8907">8907</a>
+              </p>
+              <div class="files">
+                <div class="file">
+                  <p class="fileinfo">File: <a href="/Δ/src/1656272441313-0.svg" target="_blank">1656272441313-0.svg</a>
+                    <span class="details">(3.5 KB, <span class="postfilename">logoMAPSDOTME.svg</span>) <span class='unimportant image_id'>
+                        <a href="http://imgops.com/lainchan.org/Δ/src/1656272441313-0.svg" target="_blank">ImgOps</a>
+                        <a href="http://iqdb.org/?url=lainchan.org/Δ/src/1656272441313-0.svg" target="_blank">iqdb</a>
+                      </span>
+                    </span>
+                  </p>
+                  <a href="/Δ/src/1656272441313-0.svg" target="_blank">
+                    <img class="post-image" src="/Δ/thumb/1656272441313-0.svg" style="width:200px;height:200px" alt="" />
+                  </a>
+                </div>
+              </div>
+              <div class="body">
+                <a onclick="highlightReply('3705', event);" href="/Δ/res/3474.html#3705">&gt;&gt;3705</a>
+                <br />Maps.me has less options, but you can just download really good maps for free. <br />You'll need something like AOSP or lineageOS+Pico.
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc11335" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_11335">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_11335" id="delete_11335" />
+                <label for="delete_11335">
+                  <span class="name">Yet Another Lainon</span>
+                  <time datetime="2024-02-21T17:30:49Z">2024-02-21 17:30:49</time>
+                </label>&nbsp; <a class="post_no" id="post_no_11335" onclick="highlightReply(11335)" href="/Δ/res/3474.html#11335">No.</a>
+                <a class="post_no" onclick="citeReply(11335)" href="/Δ/res/3474.html#q11335">11335</a>
+              </p>
+              <div class="files">
+                <div class="file">
+                  <p class="fileinfo">File: <a href="/Δ/src/1708565449034-0.jpg" target="_blank">1708565449034-0.jpg</a>
+                    <span class="details">(124.95 KB, 1400x1028, 350:257, <span class="postfilename">01.jpg</span>) <span class='unimportant image_id'>
+                        <a href="http://imgops.com/lainchan.org/Δ/src/1708565449034-0.jpg" target="_blank">ImgOps</a>
+                        <a href="http://exif.regex.info/exif.cgi?url=lainchan.org/Δ/src/1708565449034-0.jpg" target="_blank">Exif</a>
+                        <a href="http://iqdb.org/?url=lainchan.org/Δ/src/1708565449034-0.jpg" target="_blank">iqdb</a>
+                      </span>
+                    </span>
+                  </p>
+                  <a href="/Δ/src/1708565449034-0.jpg" target="_blank">
+                    <img class="post-image" src="/Δ/thumb/1708565449034-0.png" style="width:200px;height:147px" alt="" />
+                  </a>
+                </div>
+              </div>
+              <div class="body">But I have an hdmi splitter in the mail so I guess that will have to be my &#039;diy&#039; solution. Buying yet another peripherals. I would have bought all of those electronic parts, resistors and all, but forgetting the fact that I suck at soldering they end up costing more than the hdmi splitter and you still have to alter how the OS thinks so it will output to it and I have not much confidence with that either. I would have not went on about it but I was out of money and I&#039;m thinking it will switch to hdmi monitor and ignore composite altogether if I plug an hdmi audio and video splitter into it. When I plug hdmi into it and composite it ignores composite. So if that happens my next issues will be what to put into the config to get it to stop that. Or, I&#039;ll have to buy a third screen for it. GPIO one was silly due to drivers, composite sound issues, then an hdmi one, the most expensive and large. One is only 5 inches though and is less than 40 usd right now, but I can&#039;t buy it without sending stuff back or else I&#039;ll get soykaf from my &#039;father&#039; over it as I&#039;m neet.</div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc11357" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_11357">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_11357" id="delete_11357" />
+                <label for="delete_11357">
+                  <span class="name">Mentat</span>
+                  <time datetime="2024-02-23T16:16:27Z">2024-02-23 16:16:27</time>
+                </label>&nbsp; <a class="post_no" id="post_no_11357" onclick="highlightReply(11357)" href="/Δ/res/3474.html#11357">No.</a>
+                <a class="post_no" onclick="citeReply(11357)" href="/Δ/res/3474.html#q11357">11357</a>
+              </p>
+              <div class="files">
+                <div class="file">
+                  <p class="fileinfo">File: <a href="/Δ/src/1708733787423-0.png" target="_blank">1708733787423-0.png</a>
+                    <span class="details">(141.35 KB, 2400x2112, 25:22, <span class="postfilename">high_voltage_PNG2.png</span>) <span class='unimportant image_id'>
+                        <a href="http://imgops.com/lainchan.org/Δ/src/1708733787423-0.png" target="_blank">ImgOps</a>
+                        <a href="http://iqdb.org/?url=lainchan.org/Δ/src/1708733787423-0.png" target="_blank">iqdb</a>
+                      </span>
+                    </span>
+                  </p>
+                  <a href="/Δ/src/1708733787423-0.png" target="_blank">
+                    <img class="post-image" src="/Δ/thumb/1708733787423-0.png" style="width:200px;height:176px" alt="" />
+                  </a>
+                </div>
+              </div>
+              <div class="body">
+                <span class="quote">&gt;&gt;5099</span>
+                <br />Public service announcement: don&#039;t disassemble and mess around with power supplies or other high voltage components if you don&#039;t even know how ground works. <br />Don&#039;t have such components operational without a Faraday cage or other insulating enclosure. <br />People get fried relatively often when tinkering around with their microwave.
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12687" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12687">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12687" id="delete_12687" />
+                <label for="delete_12687">
+                  <span class="name">Cypher</span>
+                  <time datetime="2025-04-03T23:46:48Z">2025-04-03 23:46:48</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12687" onclick="highlightReply(12687)" href="/Δ/res/3474.html#12687">No.</a>
+                <a class="post_no" onclick="citeReply(12687)" href="/Δ/res/3474.html#q12687">12687</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">
+                <a onclick="highlightReply('3482', event);" href="/Δ/res/3474.html#3482">&gt;&gt;3482</a>
+                <br />
+                <span class="quote">&gt;every single non-kernel program is memory-safe. That&#039;s an entire CLASS of attacks that this OS is inherently immune to.</span>
+                <br />lol, lmao even
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12688" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12688">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12688" id="delete_12688" />
+                <label for="delete_12688">
+                  <span class="name">Unnamed</span>
+                  <time datetime="2025-04-04T04:47:56Z">2025-04-04 04:47:56</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12688" onclick="highlightReply(12688)" href="/Δ/res/3474.html#12688">No.</a>
+                <a class="post_no" onclick="citeReply(12688)" href="/Δ/res/3474.html#q12688">12688</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">
+                <a href="https://youtu.be/znPJZK1lwaY" rel="nofollow" target="_blank">https://youtu.be/znPJZK1lwaY</a>
+                <br />
+                <br />Here
+              </div>
+            </div>
+          </div>
+          <br />
+          <br class="clear" />
+          <hr />
+        </div>
+        <div class="thread" id="thread_12678" data-board="Δ">
+          <div class="files">
+            <div class="file">
+              <p class="fileinfo">File: <a href="/Δ/src/1743483033792-0.gif" target="_blank">1743483033792-0.gif</a>
+                <span class="details">(38.87 KB, 720x60, 12:1, <span class="postfilename">1002.gif</span>) <span class='unimportant image_id'>
+                    <a href="http://imgops.com/lainchan.org/Δ/src/1743483033792-0.gif" target="_blank">ImgOps</a>
+                    <a href="http://iqdb.org/?url=lainchan.org/Δ/src/1743483033792-0.gif" target="_blank">iqdb</a>
+                  </span>
+                </span>
+              </p>
+              <a href="/Δ/src/1743483033792-0.gif" target="_blank">
+                <img class="post-image" src="/Δ/thumb/1743483033792-0.png" style="width:300px;height:25px" alt="" />
+              </a>
+            </div>
+          </div>
+          <div class="post op" id="op_12678">
+            <p class="intro">
+              <input type="checkbox" class="delete" name="delete_12678" id="delete_12678" />
+              <label for="delete_12678">
+                <span class="subject">streaming downloaded content on the TV</span>
+                <span class="name">Unsigned</span>
+                <time datetime="2025-03-31T21:50:34Z">2025-03-31 21:50:34</time>
+              </label>&nbsp; <a class="post_no" id="post_no_12678" onclick="highlightReply(12678)" href="/Δ/res/12678.html#12678">No.</a>
+              <a class="post_no" onclick="citeReply(12678)" href="/Δ/res/12678.html#q12678">12678</a>
+              <a href="/Δ/res/12678.html">[Reply]</a>
+            </p>
+            <div class="body">Anyone have a setup to play downloaded content on the TV? <br />
+              <br />My current top goal would be to have: <br />
+              <span class="quote">&gt;VPN torrent downloads + easy web interface to add torrents or easy way to upload </span>
+              <br />
+              <br />
+              <br />
+              <br />I was reading online and I&#039;m thinking of getting a cheap raspberry pi, installing something nice, and getting an external HDD which are now very cheap. <br />
+              <br />Interested in learning what setup you have if any.
+            </div>
+          </div>
+          <div class="postcontainer" id="pc12679" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12679">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12679" id="delete_12679" />
+                <label for="delete_12679">
+                  <span class="name">Naomi Nascimento</span>
+                  <time datetime="2025-03-31T22:55:01Z">2025-03-31 22:55:01</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12679" onclick="highlightReply(12679)" href="/Δ/res/12678.html#12679">No.</a>
+                <a class="post_no" onclick="citeReply(12679)" href="/Δ/res/12678.html#q12679">12679</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">Plug your computer on the TV? HDMI cables are pretty cheap nowadays.</div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12680" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12680">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12680" id="delete_12680" />
+                <label for="delete_12680">
+                  <span class="name">Unknown</span>
+                  <time datetime="2025-04-01T05:14:43Z">2025-04-01 05:14:43</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12680" onclick="highlightReply(12680)" href="/Δ/res/12678.html#12680">No.</a>
+                <a class="post_no" onclick="citeReply(12680)" href="/Δ/res/12678.html#q12680">12680</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">So do you want to turn your TV into a custom smart TV to download then view torrents? or do you want to broadcast an analog or digital signal from your computer to any TV that tunes into it?</div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12681" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12681">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12681" id="delete_12681" />
+                <label for="delete_12681">
+                  <span class="name">Mario Rossi</span>
+                  <time datetime="2025-04-01T05:18:53Z">2025-04-01 05:18:53</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12681" onclick="highlightReply(12681)" href="/Δ/res/12678.html#12681">No.</a>
+                <a class="post_no" onclick="citeReply(12681)" href="/Δ/res/12678.html#q12681">12681</a>
+              </p>
+              <div class="files">
+                <div class="file">
+                  <p class="fileinfo">File: <a href="/Δ/src/1743509933185-0.gif" target="_blank">1743509933185-0.gif</a>
+                    <span class="details">(2.14 MB, 960x540, 16:9, <span class="postfilename">ccc.gif</span>) <span class='unimportant image_id'>
+                        <a href="http://imgops.com/lainchan.org/Δ/src/1743509933185-0.gif" target="_blank">ImgOps</a>
+                        <a href="http://iqdb.org/?url=lainchan.org/Δ/src/1743509933185-0.gif" target="_blank">iqdb</a>
+                      </span>
+                    </span>
+                  </p>
+                  <a href="/Δ/src/1743509933185-0.gif" target="_blank">
+                    <img class="post-image" src="/Δ/thumb/1743509933185-0.png" style="width:200px;height:113px" alt="" />
+                  </a>
+                </div>
+              </div>
+              <div class="body">HTPC/&quot;media centre&quot; stuff is a problem solved to the point of being able to pick up a box which does exactly what you ask off the shelf at elektronik stores. <br />As for your setup idea, sure, a rpi would work just fine, but so would an old laptop thrown in a closet (you&#039;d get real a SATA port too, external hard drives can be kind of a pain sometimes). <br />Setup headless qbittorrent + its webui plugin and a minidlna daemon and you should be good to go, providing you got a TV/stb that supports DLNA (pretty much any piece of home theatre gear with an ethernet port on the back and made in the last ~20 years or so) <br />This soykaf is EZ. </div>
+            </div>
+          </div>
+          <br />
+          <div class="postcontainer" id="pc12684" data-board="Δ">
+            <div class="sidearrows">&gt;&gt;</div>
+            <div class="post reply" id="reply_12684">
+              <p class="intro">
+                <input type="checkbox" class="delete" name="delete_12684" id="delete_12684" />
+                <label for="delete_12684">
+                  <span class="name">The Fin</span>
+                  <time datetime="2025-04-01T16:11:53Z">2025-04-01 16:11:53</time>
+                </label>&nbsp; <a class="post_no" id="post_no_12684" onclick="highlightReply(12684)" href="/Δ/res/12678.html#12684">No.</a>
+                <a class="post_no" onclick="citeReply(12684)" href="/Δ/res/12678.html#q12684">12684</a>
+              </p>
+              <div class="files"></div>
+              <div class="body">
+                <a onclick="highlightReply('12680', event);" href="/Δ/res/12678.html#12680">&gt;&gt;12680</a>
+                <br />Yes, I want to upgrade my TV to a smart TV setup that supports torrent downloads and playback <br />
+                <a onclick="highlightReply('12681', event);" href="/Δ/res/12678.html#12681">&gt;&gt;12681</a>
+                <br />Let me look into it
+              </div>
+            </div>
+          </div>
+          <br />
+          <br class="clear" />
+          <hr />
+        </div>
+        <div id="post-moderation-fields">
+          <div id="delete-fields">Delete Post [ <input title="Delete file only" type="checkbox" name="file" id="delete_file" />
+            <label for="delete_file">File</label>] <label for="password">Password</label>
+            <input id="password" type="password" name="password" size="12" maxlength="18" />
+            <input type="submit" name="delete" value="Delete" />
+          </div>
+          <div id="report-fields">
+            <label for="reason">Reason</label>
+            <input id="reason" type="text" name="reason" size="20" maxlength="100" />
+            <input type="submit" name="report" value="Report" />
+          </div>
+        </div>
+      </form>
+      <div class="boardlist bottom">
+        <span class="sub" data-description="Notices">[ <a href="/donate.html">$$$</a> / <a href="/rules.html">rules</a> / <a href="/faq.html">faq</a> / <a href="/news.html">news</a> ] </span>
+        <span class="sub" data-description="STEM">[ <a href="/λ/index.html" title="Programming">λ</a> / <a href="/Δ/index.html" title="Do It Yourself">diy</a> / <a href="/sec/index.html" title="Security">sec</a> / <a href="/Ω/index.html" title="Technology">tech</a> ] </span>
+        <span class="sub" data-description="People">[ <a href="/inter/index.html" title="Games and Interactive Media">inter</a> / <a href="/lit/index.html" title="Literature">lit</a> / <a href="/music/index.html" title="Musical and Audible Media">music</a> / <a href="/vis/index.html" title="Visual Media">vis</a> / <a href="/hum/index.html" title="Humanity">hum</a> / <a href="/drug/index.html" title="Drugs 3.0">drg</a> / <a href="/zzz/index.html" title="Consciousness and Dreams">zzz</a> ] </span>
+        <span class="sub" data-description="Misc">[ <a href="/layer/index.html" title="layer">layer</a> / <a href="/q/index.html" title="Questions and Complaints">q</a> / <a href="/r/index.html" title="Random">r</a> ] </span>
+        <span class="sub" data-description="Overboards 1">[ <a href="/culture/index.html">cult</a> / <a href="/psy/index.html">psy</a> ] </span>
+        <span class="sub" data-description="Overboards 2">[ <a href="/mega/index.html">mega</a> / <a href="/random/index.html">random</a> ] </span>
+        <span class="sub" data-description="Elsewhere">[ <a href="https://github.com/lainchan/lainchan">
+            <i class="fa">&#xf09b;</i>
+          </a> / <a href="https://twitter.com/_lainchan">
+            <i class="fa">&#xf099;</i>
+          </a> ] </span>
+        <span class="sub" data-description="Services">[ <a href="/calendar.html">cal</a> / <a href="/irc.html">irc</a> / <a href="/radio.html">radio</a> / <a href="/stream.html">stream</a> / <a href="/zine/">zine</a> ] </span>
+      </div>
+      <footer>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p class="unimportant" style="margin-top:20px;text-align:center;">- <a href="https://github.com/savetheinternet/Tinyboard/">Tinyboard</a> + <a href='https://int.vichan.net/devel/'>vichan</a> + <a href='https://github.com/lainchan/lainchan'>lainchan</a> 5.1.3 - <br>
+          <a href="https://github.com/savetheinternet/Tinyboard/">Tinyboard</a> Copyright &copy; 2010-2014 Tinyboard Development Group <br>
+          <a href="https://engine.vichan.net/">vichan</a> Copyright &copy; 2012-2016 vichan-devel <br>
+          <a href="https://github.com/lainchan/lainchan">lainchan</a> Copyright &copy; 2014-2017 lainchan Administration
+        </p>
+        <p class="unimportant" style="text-align:center;">All trademarks, copyrights, comments, and images on this page are owned by and are the responsibility of their respective parties.</p>
+        <p class="unimportant" style="text-align:center;">The administration of lainchan.org has been issued 0 (zero) requests for information by any third party, <br />including but not limited to government agencies. </p>
+      </footer>
+    </div>
+    <div class="bar bottom">
+      <div class="pages">Previous [ <a class="selected">1</a> / <a href="/Δ/2.html">2</a> / <a href="/Δ/3.html">3</a> / <a href="/Δ/4.html">4</a> / <a href="/Δ/5.html">5</a> / <a href="/Δ/6.html">6</a> / <a href="/Δ/7.html">7</a> / <a href="/Δ/8.html">8</a> / <a href="/Δ/9.html">9</a> ] <form action="/Δ/2.html" method="get">
+          <input type="submit" value="Next" />
+        </form> | <a href="/Δ/catalog.html">Catalog</a> | <a href="/">Home</a>
+      </div>
+    </div>
+    </div>
+    <script type="text/javascript">
+      ready();
+    </script>
+  </body>
+</html>

@@ -1,7 +1,6 @@
 <div class="boardlist">
     <span>
         <a href="/b/">/b/</a>
-        <a href="/tomo/">/tomo/</a>
         <a href="/nottomo/">/nottomo/</a>
     </span>
 </div>
@@ -11,6 +10,12 @@
     <h1>/{{ board }}/ - placeholder</h1>
 </header>
 
+{% if posts %}
+<div class="form_banner">
+    Posting mode: Reply
+    <a href="/{{ board }}/">[Return]</a>
+</div>
+{% endif %}
 <form action="" method="post" target="" novalidate>
         {{ form.hidden_tag() }}
         <table>
@@ -24,7 +29,7 @@
             </tr>
             <tr>
                 <th>{{ form.subject.label }}</th>
-                <td>{{ form.subject(size=25) }}{{ form.submit() }}</td>
+                <td>{{ form.subject(size=26) }}{{ form.submit() }}</td>
             </tr>
             <tr>
                 <th>{{ form.post.label }}</th>
@@ -32,7 +37,7 @@
             </tr>
             <tr>
                 <th>{{ form.file.label }}</th>
-                <td>{{ form.file }} {{ form.spoiler.label }} {{ form.spoiler }}</td>
+                <td>{{ form.file }} [{{ form.spoiler }}{{ form.spoiler.label }}] </td>
             </tr>
         </table>
     </form>

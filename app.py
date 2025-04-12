@@ -7,13 +7,14 @@ from wtforms.validators import DataRequired, Optional
 from datetime import datetime, timezone, timedelta
 import sqlite3
 import random
+import magic
 import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '7f4bc5403ecbc99f2b10dc1c582be3f9632369dea8d6e45d'
 app.config['UPLOAD_FOLDER'] = 'uploads'
 
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'avif'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'avif', 'webp', 'heic', 'heif' 'jxl'}
 boards = ['b', 'tomo', 'nottomo']
 sql = ("INSERT INTO posts(post_id, board_id, thread_id, op, last_bump, time, name, email, subject, content, filename, file_actual, spoiler) "
        "values(:post_id, :board_id, :thread_id, :op, :last_bump, :time, :name, :email, :subject, :content, :filename, :file_actual, :spoiler)")
@@ -34,7 +35,7 @@ cur.execute("CREATE TABLE IF NOT EXISTS posts("
                 "subject TEXT, "
                 "content TEXT NOT NULL, "
                 "filename TEXT, "
-                "file_actual TEXT "
+                "file_actual TEXT, "
                 "spoiler INTEGER NOT NULL)")
 
 con.close()
@@ -45,6 +46,11 @@ insert into posts (post_id, board_id, thread_id, op, last_bump, time, name, emai
 insert into posts (post_id, board_id, thread_id, op, last_bump, time, name, email, subject, content, filename, spoiler) values(3, 'b', 1, 0, NULL, 1744376519, 'tomo', NULL, NULL, 'i too am in this thread', NULL, 0);
 
 """
+
+def allowed_mime_type(file):
+    mime = magic.from_buffer(file.stream.read(2048), mime=True)
+    file.stream.seek(0)  # Reset file pointer after reading
+    return mime in ['image/png', 'image/jpeg', 'application/pdf']
 
 def dict_factory(cursor, row):
     d = {}
@@ -64,7 +70,7 @@ def post(new_post):
         new_post['post_id'] = largest_post_id + 1
     if new_post['thread_id'] == 'new':
         new_post['thread_id'] = new_post['post_id']
-    if new_post['email'] == 'sage' and new_post['op'] == 0:
+    if (new_post['email'] == 'sage' or new_post['email'] == 'nonokosage') and new_post['op'] == 0:
         new_post['last_bump'] = None
         cur.execute(sql, new_post)
     else:
@@ -135,7 +141,7 @@ def board_page(board):
                         'time' : timestamp,
                         'filename' : None}
             posted = post(new_post)
-            if form.email.data == "nonoko":
+            if form.email.data == "nonoko" or form.email.data == "nonokosage":
                 return redirect(url_for('board_page', board=board))
             else:
                 return redirect(url_for('thread_page', board=posted['board_id'], thread=posted['thread_id']))
