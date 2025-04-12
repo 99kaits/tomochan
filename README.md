@@ -19,6 +19,7 @@ TODO:
 - config file
 - init scripts
 - mod view/tools
+- add ips into posts table
 - mobile, just mobile
 - password for delete
 - tripcodes and capcodes
