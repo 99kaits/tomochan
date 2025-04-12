@@ -37,6 +37,8 @@ TODO:
 - figure out what the fuck the checkbox is for on not current day 4chan (too much js shit to really get at the meat and potatoes i mean even the banner is js now its crazy)
 - maybe setup a futaba board for reference
 - job queueing?
+- auto update/refresh js? also tomo ticker (ticker of recent posts/recently bumped threads/new threads)
+- if i make my own futaba/yotsuba esque theme call it mitsuba
 - maybe an eventual rewrite with kotlin/postgres?????? idk?????????
 
 DONE:
