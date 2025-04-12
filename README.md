@@ -35,6 +35,8 @@ TODO:
 - qol javascript stuff?
 - boardlist/info in db maybe? maybe not?
 - figure out what the fuck the checkbox is for on not current day 4chan (too much js shit to really get at the meat and potatoes i mean even the banner is js now its crazy)
+- maybe setup a futaba board for reference
+- job queueing?
 - maybe an eventual rewrite with kotlin/postgres?????? idk?????????
 
 DONE:
