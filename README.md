@@ -27,6 +27,8 @@ TODO:
 - stickies
 - blotter
 - flags
+- flood detection, ill need it sooner or later
+- proxy detection? Even if i dont use it
 - captcha? probably with an audio one too
 - placeholders of various varieties
 - search
