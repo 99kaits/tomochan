@@ -4,7 +4,9 @@
 some type of imageboard (images not implemented yet) using python/flask, and sqlite
 
 TODO:
-- file uploads, maybe a configurable default? also multiple images in the form, also videso and audio probably
+- multiple file uploads
+- videos/audio
+- displaying images on posts
 - post formatting of some variety (im thinking markdown, and maybe a selector for classical formatting which apparently is bbcode), also greentext
 - aesthetics
 - \>\>1 replying
@@ -61,6 +63,7 @@ DONE:
 - reply button on threads on the board view too
 - bumping
 - board page showing last 5 threads and replies ommitted
+- file uploads
 
 
 markdown things:

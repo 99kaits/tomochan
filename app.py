@@ -2,7 +2,9 @@ import math
 
 from flask import Flask, render_template, send_file, redirect, url_for
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, TextAreaField, BooleanField, FileField
+from flask_wtf.file import FileField, FileAllowed
+from werkzeug.utils import secure_filename
+from wtforms import StringField, SubmitField, TextAreaField, BooleanField
 from wtforms.validators import DataRequired, Optional
 from datetime import datetime, timezone, timedelta
 import sqlite3
@@ -53,31 +55,61 @@ def dict_factory(cursor, row):
         d[col[0]] = row[idx]
     return d
 
-def post(new_post):
-    # TODO: ACTUAL FILE CODE
-    new_post['file_actual'] = None
+def post(form, board, thread_id):
     con = sqlite3.connect("tomochan.db")
     cur = con.cursor()
     largest_post_id = cur.execute('SELECT max(post_id) from posts').fetchone()[0]
 
-    if new_post['op'] == 0:
-        if not (new_post['email'] == 'sage' or new_post['email'] == 'nonokosage'):
-            cur.execute('UPDATE posts SET last_bump = ? WHERE post_id = ?', (new_post['time'], new_post['thread_id']))
+    if form.name.data:
+        name = form.name.data
+    else:
+        name = "Anonymous"
+
+    timestamp = datetime.now(timezone.utc).timestamp()
 
     if not largest_post_id:
-        new_post['post_id'] = 1
+        post_id = 1
     else:
-        new_post['post_id'] = largest_post_id + 1
+        post_id = largest_post_id + 1
 
-    if new_post['thread_id'] == 'new':
-        new_post['thread_id'] = new_post['post_id']
-
-        cur.execute(sql, new_post)
+    if not thread_id:
+        thread_id = post_id
+        last_bump = timestamp
+        op = 1
     else:
-        cur.execute(sql, new_post)
+        last_bump = None
+        op = 0
+        
+    if op == 0:
+        if not form.email.data == 'sage' or form.email.data == 'nonokosage':
+            cur.execute('UPDATE posts SET last_bump = ? WHERE post_id = ?', (timestamp, thread_id))
+
+    if form.file.data:
+        filename = secure_filename(form.file.data.filename)
+        file_actual = str(post_id) + '.' + filename.rsplit('.', 1)[1].lower()
+        form.file.data.save(os.path.join(app.config['UPLOAD_FOLDER'], file_actual))
+    else:
+        filename = None
+        file_actual = None
+
+    new_post = {'post_id' : post_id,
+                'board_id' : board,
+                'thread_id' : thread_id,
+                'op' : op,
+                'last_bump' : last_bump,
+                'time' : timestamp,
+                'name' : name,
+                'email' : form.email.data,
+                'subject' : form.subject.data,
+                'content' : form.post.data,
+                'filename' : filename,
+                'file_actual' : file_actual,
+                'spoiler' : form.spoiler.data}
+
+    cur.execute(sql, new_post)
     con.commit()
     con.close()
-    return new_post
+    return post_id
 
 def get_banner(board):
     banner = random.choice(os.listdir("static/banners"))
@@ -124,7 +156,7 @@ class PostForm(FlaskForm):
     email = StringField('Email', validators=[Optional()])
     subject = StringField('Subject', validators=[Optional()])
     post = TextAreaField('Content', validators=[DataRequired()])
-    file = FileField('File', validators=[Optional()])
+    file = FileField('File', validators=[FileAllowed(ALLOWED_EXTENSIONS, "the fuck is this shit?")])
     spoiler = BooleanField('Spoiler?', validators=[Optional()])
     submit = SubmitField('Post')
 
@@ -137,27 +169,16 @@ def board_page(board):
 
         form = PostForm()
         if form.validate_on_submit():
-            if form.name.data:
-                name = form.name.data
+            if form.data.file:
+                thread_id = None
+                new_post = post(form, board, thread_id)
+                if form.email.data == "nonoko" or form.email.data == "nonokosage":
+                    return redirect(url_for('board_page', board=board))
+                else:
+                    return redirect(url_for('thread_page', board=board, thread=new_post))
             else:
-                name = "Anonymous"
-            timestamp = last_bump = datetime.now(timezone.utc).timestamp()
-            new_post = {'thread_id' : 'new',
-                        'board_id' : board,
-                        'op' : 1,
-                        'last_bump' : last_bump,
-                        'name' : name,
-                        'email' : form.email.data,
-                        'subject' : form.subject.data,
-                        'content' : form.post.data,
-                        'spoiler' : form.spoiler.data,
-                        'time' : timestamp,
-                        'filename' : None}
-            posted = post(new_post)
-            if form.email.data == "nonoko" or form.email.data == "nonokosage":
-                return redirect(url_for('board_page', board=board))
-            else:
-                return redirect(url_for('thread_page', board=posted['board_id'], thread=posted['thread_id']))
+                # TODO: error code for trying to make a new thread without a picture
+                pass
         return render_template('board.html', board=board, form=form, threads=threadlist, banner=banner)
     else:
         return send_file('static/404.html'), 404
@@ -181,23 +202,7 @@ def thread_page(board, thread):
 
             form = PostForm()
             if form.validate_on_submit():
-                if form.name.data:
-                    name = form.name.data
-                else:
-                    name = "Anonymous"
-                timestamp = datetime.now(timezone.utc).timestamp()
-                new_post = {'thread_id': thread,
-                            'board_id': board,
-                            'op': 0,
-                            'last_bump': None,
-                            'name': name,
-                            'email': form.email.data,
-                            'subject': form.subject.data,
-                            'content': form.post.data,
-                            'spoiler': form.spoiler.data,
-                            'time': timestamp,
-                            'filename': None}
-                posted = post(new_post)
+                new_post = post(form, board, thread)
                 return redirect(url_for('thread_page', board=board, thread=thread))
 
             return render_template('thread.html', board=board, form=form, posts=posts, banner=banner)
