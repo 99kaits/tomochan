@@ -19,7 +19,7 @@ boards = ['b', 'tomo', 'nottomo']
 sql = ("INSERT INTO posts(post_id, board_id, thread_id, op, last_bump, time, name, email, subject, content, filename, file_actual, spoiler) "
        "values(:post_id, :board_id, :thread_id, :op, :last_bump, :time, :name, :email, :subject, :content, :filename, :file_actual, :spoiler)")
 
-
+"""
 con = sqlite3.connect("tomochan.db")
 cur = con.cursor()
 
@@ -41,11 +41,6 @@ cur.execute("CREATE TABLE IF NOT EXISTS posts("
 con.close()
 
 """
-insert into posts (post_id, board_id, thread_id, op, last_bump, time, name, email, subject, content, filename, spoiler) values(1, 'b', 1, 1, 1744376519, 1744374813, 'Anonymous', NULL, 'wow', 'i am inserting this with sqlite cmd', NULL, 0);
-insert into posts (post_id, board_id, thread_id, op, last_bump, time, name, email, subject, content, filename, spoiler) values(2, 'b', 2, 1, 1744375966, 1744375966, 'Anonymous', NULL, 'wow again', 'second test post', NULL, 0);
-insert into posts (post_id, board_id, thread_id, op, last_bump, time, name, email, subject, content, filename, spoiler) values(3, 'b', 1, 0, NULL, 1744376519, 'tomo', NULL, NULL, 'i too am in this thread', NULL, 0);
-
-"""
 
 def allowed_mime_type(file):
     mime = magic.from_buffer(file.stream.read(2048), mime=True)
@@ -64,14 +59,19 @@ def post(new_post):
     con = sqlite3.connect("tomochan.db")
     cur = con.cursor()
     largest_post_id = cur.execute('SELECT max(post_id) from posts').fetchone()[0]
+
+    if new_post['op'] == 0:
+        if not (new_post['email'] == 'sage' or new_post['email'] == 'nonokosage'):
+            cur.execute('UPDATE posts SET last_bump = ? WHERE post_id = ?', (new_post['time'], new_post['thread_id']))
+
     if not largest_post_id:
         new_post['post_id'] = 1
     else:
         new_post['post_id'] = largest_post_id + 1
+
     if new_post['thread_id'] == 'new':
         new_post['thread_id'] = new_post['post_id']
-    if (new_post['email'] == 'sage' or new_post['email'] == 'nonokosage') and new_post['op'] == 0:
-        new_post['last_bump'] = None
+
         cur.execute(sql, new_post)
     else:
         cur.execute(sql, new_post)
@@ -98,6 +98,25 @@ def get_strftime(timestamp):
     return time.strftime("%Y-%m-%d(%a) %H:%M:%S")
 
 
+def get_threads(board):
+    con = sqlite3.connect("tomochan.db")
+    con.row_factory = dict_factory
+    cur = con.cursor()
+    threadsquery = cur.execute("SELECT * FROM posts WHERE op = 1 AND board_id = ? ORDER BY last_bump DESC", (board,))
+    oplist = threadsquery.fetchall()
+    threadlist = []
+    for op in oplist:
+        numberpostsquery = cur.execute("SELECT COUNT(*) FROM posts WHERE thread_id = ? AND op = 0", (op['post_id'],))
+        numposts = numberpostsquery.fetchone()['COUNT(*)']
+        last5 = cur.execute("SELECT * FROM posts WHERE thread_id = ? AND op = 0 ORDER BY post_id DESC LIMIT 5", (op['post_id'],))
+        thread = list(reversed(last5.fetchall()))
+        if numposts > 5:
+            op['numposts'] = numposts - 5
+        thread.insert(0, op)
+        threadlist.append(thread)
+    con.close()
+    return threadlist
+
 app.jinja_env.globals.update(get_swatch=get_swatch, get_strftime=get_strftime)
 
 class PostForm(FlaskForm):
@@ -112,14 +131,8 @@ class PostForm(FlaskForm):
 @app.route("/<board>/", methods=['GET', 'POST'])
 def board_page(board):
     if board in boards:
-        con = sqlite3.connect("tomochan.db")
-        con.row_factory = dict_factory
-        cur = con.cursor()
-        threads = cur.execute("SELECT * FROM posts WHERE op = 1 AND board_id = ? ORDER BY last_bump DESC", (board,))
-        threadlist = threads.fetchall()
-        con.close()
-        print(threadlist)
-
+        
+        threadlist = get_threads(board)
         banner = get_banner(board)
 
         form = PostForm()
@@ -153,12 +166,14 @@ def board_page(board):
 @app.route("/<board>/<thread>/", methods=['GET', 'POST'])
 def thread_page(board, thread):
     if board in boards:
+
         con = sqlite3.connect("tomochan.db")
         con.row_factory = dict_factory
         cur = con.cursor()
         select_posts = cur.execute("SELECT * FROM posts WHERE thread_id = ?", (thread,))
         posts = select_posts.fetchall()
         con.close()
+        
         if not posts:
             return send_file('static/404.html'), 404
         else:

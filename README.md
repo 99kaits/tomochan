@@ -9,7 +9,6 @@ TODO:
 - aesthetics
 - \>\>1 replying
 - show direct replies in post header (\>\>2 \>\>10)
-- board page showing last 5 threads
 - maybe some other email easter eggs besides sage and nonoko? (like dice rolling? deffo #fortune)
 - other pages, maybe an /ukko/ or homepage or rules/faq or whatever
 - funny 404 pages
@@ -40,7 +39,7 @@ TODO:
 - atom/rss???
 - qol javascript stuff?
 - boardlist/info in db maybe? maybe not?
-- figure out what the fuck the checkbox is for on not current day 4chan (too much js shit to really get at the meat and potatoes i mean even the banner is js now its crazy)
+- checkbox for post deleting and reporting
 - maybe setup a futaba board for reference
 - job queueing?
 - auto update/refresh js? also tomo ticker (ticker of recent posts/recently bumped threads/new threads)
@@ -60,6 +59,8 @@ DONE:
 - sage and nonoko (im going for modern 4ch behavior there its just actually better defaulting to noko)
 - combined sage and nonoko, gotta add that but idk what the thing to combine them is because im at the library and i dont want to open 4chan at the library right now (its nonokosage btw)
 - reply button on threads on the board view too
+- bumping
+- board page showing last 5 threads and replies ommitted
 
 
 markdown things:
