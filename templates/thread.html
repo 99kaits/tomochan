@@ -2,7 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>/{{ board }}/ - tomochan</title>
+    <title>/{{ board }}/ -
+    {% if posts[0]['subject'] %}
+    {{ posts[0]['subject'] }}
+    {% else %}
+    {{ posts[0]['content'][:50] }}
+    {% endif %}
+     - tomochan</title>
 </head>
 <body>
     {% include 'header.html' %}

@@ -5,8 +5,9 @@ some type of imageboard (images not implemented yet) using python/flask, and sql
 
 TODO:
 - multiple file uploads
+- image thumbnails
+- file size and dimentions in db
 - videos/audio
-- displaying images on posts
 - post formatting of some variety (im thinking markdown, and maybe a selector for classical formatting which apparently is bbcode), also greentext
 - aesthetics
 - \>\>1 replying
@@ -34,7 +35,7 @@ TODO:
 - flags
 - flood detection, ill need it sooner or later
 - proxy detection? Even if i dont use it
-- captcha? probably with an audio one too
+- captcha? probably with an audio one too (DEFINITELY NOT RECAPTCHA, a basic one is enough to stop unambitious bots and anything more complicated is never gonna be sufficent to block the ambitious ones)
 - placeholders of various varieties
 - search
 - (USER WAS BANNED FOR THIS POST) its a SA thing not originally an imageboard thing but its still just so iconic i gotta have it
@@ -64,6 +65,7 @@ DONE:
 - bumping
 - board page showing last 5 threads and replies ommitted
 - file uploads
+- displaying images on posts
 
 
 markdown things:

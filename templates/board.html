@@ -10,14 +10,9 @@
 
     {% if threads %}
     {% for thread in threads %}
+    <div class="thread">
     {% for post in thread %}
-    {% if post['op'] == 1 %}
-    <div class="post op" id="post_{{ post['id'] }}">
-    {% else %}
-    <div class="post reply" id="post_{{ post['id'] }}">
-    {% endif %}
         {% include 'post.html' %}
-    </div>
     {% if post['numposts'] %}
     <span class="summary">{{ post['numposts'] }}
     {% if post['numposts'] == 1 %}
@@ -27,6 +22,7 @@
     {% endif %} ommitted, <a href="/{{ board }}/{{ post['post_id'] }}">Click here</a> to view.</span>
     {% endif %}
     {% endfor %}
+    </div>
     <br>
     {% endfor %}
     {% else %}

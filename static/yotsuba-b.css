@@ -21,3 +21,32 @@ th {
     font-weight: bold;
     font-size: 10pt;
 }
+
+.file {
+    display: block;
+}
+
+.file img {
+    max-width: 200px;
+    float: left;
+}
+
+.thread {
+    clear: both;
+}
+
+.post {
+    display: inline;
+}
+
+.reply {
+    background-color: #D6DAF0;
+    border: 1px solid #B7C5D9;
+    display: table;
+    padding: 2px;
+}
+
+.post .header {
+    display: block;
+    width: 100%;
+}

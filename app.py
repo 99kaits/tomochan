@@ -1,12 +1,13 @@
 import math
 
-from flask import Flask, render_template, send_file, redirect, url_for
+from flask import Flask, render_template, send_file, redirect, url_for, send_from_directory
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from werkzeug.utils import secure_filename
 from wtforms import StringField, SubmitField, TextAreaField, BooleanField
 from wtforms.validators import DataRequired, Optional
 from datetime import datetime, timezone, timedelta
+from markupsafe import escape
 import sqlite3
 import random
 import magic
@@ -92,6 +93,8 @@ def post(form, board, thread_id):
         filename = None
         file_actual = None
 
+    content = escape(form.post.data)
+
     new_post = {'post_id' : post_id,
                 'board_id' : board,
                 'thread_id' : thread_id,
@@ -101,7 +104,7 @@ def post(form, board, thread_id):
                 'name' : name,
                 'email' : form.email.data,
                 'subject' : form.subject.data,
-                'content' : form.post.data,
+                'content' : content,
                 'filename' : filename,
                 'file_actual' : file_actual,
                 'spoiler' : form.spoiler.data}
@@ -112,6 +115,7 @@ def post(form, board, thread_id):
     return post_id
 
 def get_banner(board):
+    # TODO: board specific banners
     banner = random.choice(os.listdir("static/banners"))
     return "/static/banners/" + banner
 
@@ -134,6 +138,7 @@ def get_threads(board):
     con = sqlite3.connect("tomochan.db")
     con.row_factory = dict_factory
     cur = con.cursor()
+
     threadsquery = cur.execute("SELECT * FROM posts WHERE op = 1 AND board_id = ? ORDER BY last_bump DESC", (board,))
     oplist = threadsquery.fetchall()
     threadlist = []
@@ -146,6 +151,7 @@ def get_threads(board):
             op['numposts'] = numposts - 5
         thread.insert(0, op)
         threadlist.append(thread)
+    
     con.close()
     return threadlist
 
@@ -169,7 +175,7 @@ def board_page(board):
 
         form = PostForm()
         if form.validate_on_submit():
-            if form.data.file:
+            if form.file.data:
                 thread_id = None
                 new_post = post(form, board, thread_id)
                 if form.email.data == "nonoko" or form.email.data == "nonokosage":
@@ -208,3 +214,12 @@ def thread_page(board, thread):
             return render_template('thread.html', board=board, form=form, posts=posts, banner=banner)
     else:
         return send_file('static/404.html'), 404
+
+
+@app.route("/uploads/<path:name>")
+def show_upload(name):
+    return send_from_directory(
+        app.config['UPLOAD_FOLDER'],
+        name,
+        as_attachment=False
+    )

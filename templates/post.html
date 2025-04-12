@@ -1,27 +1,42 @@
-        <p class="header">
-            {% if post['subject'] %}
-            <span class="subject">{{ post['subject'] }} </span>
+{% if post['op'] == 1 %}
+<div class="post op" id="post_{{ post['post_id'] }}">
+{% else %}
+<div class="post reply" id="post_{{ post['post_id'] }}">
+{% endif %}
+
+    {% if post['file_actual'] and post['op'] == 1%}
+    <div class="file">
+        File: <a href="/uploads/{{ post['file_actual'] }}">{{ post['filename'] }}</a>
+        <img src="/uploads/{{ post['file_actual'] }}">
+    </div>
+    {% endif %}
+    <p class="header">
+        {% if post['subject'] %}
+        <span class="subject">{{ post['subject'] }} </span>
+        {% endif %}
+        <span class="name">
+            {% if post['email'] %}
+            <a href="mailto:{{ post['email'] }}">{{ post['name'] }}</a>
+            {% else %}
+            {{ post['name'] }}
             {% endif %}
-            <span class="name">
-                {% if post['email'] %}
-                <a href="mailto:{{ post['email'] }}">{{ post['name'] }}</a>
-                {% else %}
-                {{ post['name'] }}
-                {% endif %}
-            </span>
-            <span class="timestamp">{{ get_strftime(post['time']) }} @{{ get_swatch(post['time']) }}</span>
-            <span class="id">
-                <a href="/{{ post['board_id']}}/{{ post['thread_id'] }}#{{ post['post_id'] }}">No.</a>
-                <a href="/{{ post['board_id']}}/{{ post['thread_id'] }}#q{{ post['post_id'] }}">{{ post['post_id'] }}</a>
-            </span>
-            {% if post['op'] == 1 and not posts %}
-            <span>[<a href="/{{ post['board_id']}}/{{ post['thread_id'] }}#{{ post['post_id'] }}">Reply</a>]</span>
-            {% endif %}
-        </p>
-        <div class="content">
-            <!--
-            {% for paragraph in post['content'] %}
-                {{ paragraph }}<br>
-            {% endfor %} -->
-            {{ post['content'] }}
-        </div>
+        </span>
+        <span class="timestamp">{{ get_strftime(post['time']) }} @{{ get_swatch(post['time']) }}</span>
+        <span class="id">
+            <a href="/{{ post['board_id']}}/{{ post['thread_id'] }}#{{ post['post_id'] }}">No.</a>
+            <a href="/{{ post['board_id']}}/{{ post['thread_id'] }}#q{{ post['post_id'] }}">{{ post['post_id'] }}</a>
+        </span>
+        {% if post['op'] == 1 and not posts %}
+        <span>[<a href="/{{ post['board_id']}}/{{ post['thread_id'] }}#{{ post['post_id'] }}">Reply</a>]</span>
+        {% endif %}
+    </p>
+    {% if post['file_actual'] and op == 0 %}
+    <div class="file">
+        File: <a href="/uploads/{{ post['file_actual'] }}">{{ post['filename'] }}</a>
+        <img src="/uploads/{{ post['file_actual'] }}">
+    </div>
+    {% endif %}
+    <div class="content">
+        {{ post['content'].replace('\n', '<br>') | safe}}
+    </div>
+</div>
