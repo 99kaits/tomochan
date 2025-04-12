@@ -26,6 +26,7 @@ TODO:
 - catalog
 - post archival
 - stickies
+- fun polls?
 - blotter
 - localizations? at least the architecture for them
 - flags
