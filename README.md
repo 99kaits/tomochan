@@ -23,6 +23,7 @@ TODO:
 - password for delete
 - tripcodes and capcodes
 - bump limits (configurable)
+- catalog
 - post archival
 - stickies
 - blotter
