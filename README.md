@@ -38,7 +38,8 @@ TODO:
 - proxy detection? Even if i dont use it
 - captcha? probably with an audio one too (DEFINITELY NOT RECAPTCHA, a basic one is enough to stop unambitious bots and anything more complicated is never gonna be sufficent to block the ambitious ones)
 - placeholders of various varieties
-- search
+- search (prob just ops by default)
+- banning users (youve been banned for (timespan) - take a moment to reflect on your actions and (wait until (date/time) || send an appeal to (appeals email))
 - (USER WAS BANNED FOR THIS POST) its a SA thing not originally an imageboard thing but its still just so iconic i gotta have it
 - atom/rss???
 - qol javascript stuff?
