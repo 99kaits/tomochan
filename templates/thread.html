@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/yotsuba-b.css">
     <title>/{{ board }}/ -
     {% if posts[0]['subject'] %}
     {{ posts[0]['subject'] }}
@@ -14,13 +15,7 @@
     {% include 'header.html' %}
 
     {% for post in posts %}
-    {% if post['op'] == 1 %}
-    <div class="post op" id="post_{{ post['id'] }}">
-    {% else %}
-    <div class="post reply" id="post_{{ post['id'] }}">
-    {% endif %}
         {% include 'post.html' %}
-    </div>
     {% endfor %}
 
     {% with messages = get_flashed_messages() %}

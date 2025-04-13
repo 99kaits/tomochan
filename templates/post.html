@@ -1,6 +1,9 @@
 {% if post['op'] == 1 %}
+<div class="postContainer opContainer">
 <div class="post op" id="post_{{ post['post_id'] }}">
 {% else %}
+<div class="postContainer replyContainer">
+<span class="side_arrows">>></span>
 <div class="post reply" id="post_{{ post['post_id'] }}">
 {% endif %}
 
@@ -39,7 +42,7 @@
         <span>[<a href="/{{ post['board_id']}}/{{ post['thread_id'] }}#{{ post['post_id'] }}">Reply</a>]</span>
         {% endif %}
     </p>
-    {% if post['file_actual'] and op == 0 %}
+    {% if post['file_actual'] and post['op'] == 0 %}
     <div class="file">
         File: <a href="/uploads/{{ post['file_actual'] }}">{{ post['filename'] }}</a>
         <img src="/uploads/{{ post['file_actual'] }}">
@@ -48,4 +51,5 @@
     <div class="content">
         {{ post['content'].replace('\n', '<br>') | safe}}
     </div>
+</div>
 </div>

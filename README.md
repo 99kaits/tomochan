@@ -5,6 +5,8 @@ some type of imageboard (images not implemented yet) using python/flask, and sql
 
 TODO:
 - refactor templates
+- save name in cookie
+- better tabbing on the post form, plus ctrl-enter to send
 - multiple file uploads
 - image thumbnails
 - file size and dimentions in db
@@ -26,6 +28,7 @@ TODO:
 - mod view/tools
 - mobile, just mobile
 - password for delete
+- save password in cookie
 - tripcodes and capcodes
 - bump limits (configurable)
 - catalog
