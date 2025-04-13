@@ -4,6 +4,7 @@
 some type of imageboard (images not implemented yet) using python/flask, and sqlite
 
 TODO:
+- refactor templates
 - multiple file uploads
 - image thumbnails
 - file size and dimentions in db
