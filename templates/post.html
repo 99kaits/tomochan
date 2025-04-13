@@ -7,7 +7,13 @@
     {% if post['file_actual'] and post['op'] == 1%}
     <div class="file">
         File: <a href="/uploads/{{ post['file_actual'] }}">{{ post['filename'] }}</a>
-        <img src="/uploads/{{ post['file_actual'] }}">
+        <a href="/uploads/{{ post['file_actual'] }}"><img src=
+        {% if post['spoiler'] == 1 %}
+        "/static/spoiler.png"
+        {% else %}
+        "/uploads/{{ post['file_actual'] }}"
+        {% endif %}
+        ></a>
     </div>
     {% endif %}
     <p class="header">
@@ -26,6 +32,9 @@
             <a href="/{{ post['board_id']}}/{{ post['thread_id'] }}#{{ post['post_id'] }}">No.</a>
             <a href="/{{ post['board_id']}}/{{ post['thread_id'] }}#q{{ post['post_id'] }}">{{ post['post_id'] }}</a>
         </span>
+        {% if post['sticky'] == 1 %}
+        <img src="/static/sticky.gif">
+        {% endif %}
         {% if post['op'] == 1 and not posts %}
         <span>[<a href="/{{ post['board_id']}}/{{ post['thread_id'] }}#{{ post['post_id'] }}">Reply</a>]</span>
         {% endif %}

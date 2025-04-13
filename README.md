@@ -8,6 +8,8 @@ TODO:
 - image thumbnails
 - file size and dimentions in db
 - videos/audio
+- allowed filetypes and number of uploads configurable by board
+- optimize sql queries
 - post formatting of some variety (im thinking markdown, and maybe a selector for classical formatting which apparently is bbcode), also greentext
 - aesthetics
 - \>\>1 replying
@@ -21,14 +23,12 @@ TODO:
 - config file
 - init scripts
 - mod view/tools
-- add ips into posts table
 - mobile, just mobile
 - password for delete
 - tripcodes and capcodes
 - bump limits (configurable)
 - catalog
 - post archival
-- stickies
 - fun polls?
 - blotter
 - localizations? at least the architecture for them
@@ -66,6 +66,10 @@ DONE:
 - board page showing last 5 threads and replies ommitted
 - file uploads
 - displaying images on posts
+- spoiler image
+- add ips into posts table
+- stickies
+
 
 
 markdown things:

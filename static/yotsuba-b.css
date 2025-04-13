@@ -13,6 +13,28 @@ body {
 	padding-right: 5px;
 }
 
+header {
+    text-align: center;
+    color: #AF0A0F;
+}
+
+header img {
+    border: 1px solid #34345C;
+    margin: 5px auto;
+}
+
+.post_form table {
+    margin: auto
+}
+
+header h1 {
+    font-family: Tahoma, sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: -2px;
+    margin-top: 0px;
+}
+
 th {
     background-color: #98E;
     border: 1px solid;
@@ -49,4 +71,27 @@ th {
 .post .header {
     display: block;
     width: 100%;
+}
+
+.post span.name {
+    color: #117743;
+    font-weight: bold;
+}
+
+.post span.subject {
+    color: #0F0C5D;
+    font-weight: bold;
+}
+
+.post span.id a {
+    text-decoration: none;
+    color: #000000;
+}
+
+a, a:visited {
+    color: #34345C
+}
+
+a:hover, .post span.id a:hover {
+    color: #ff0000;
 }

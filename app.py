@@ -1,6 +1,6 @@
 import math
 
-from flask import Flask, render_template, send_file, redirect, url_for, send_from_directory
+from flask import Flask, render_template, send_file, redirect, url_for, send_from_directory, request
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from werkzeug.utils import secure_filename
@@ -19,10 +19,11 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'avif', 'webp', 'heic', 'heif' 'jxl'}
 boards = ['b', 'tomo', 'nottomo']
-sql = ("INSERT INTO posts(post_id, board_id, thread_id, op, last_bump, time, name, email, subject, content, filename, file_actual, spoiler) "
-       "values(:post_id, :board_id, :thread_id, :op, :last_bump, :time, :name, :email, :subject, :content, :filename, :file_actual, :spoiler)")
+sql = ("INSERT INTO posts(post_id, board_id, thread_id, op, last_bump, sticky, time, name, email, subject, content, filename, file_actual, spoiler, ip) "
+       "values(:post_id, :board_id, :thread_id, :op, :last_bump, :sticky, :time, :name, :email, :subject, :content, :filename, :file_actual, :spoiler, :ip)")
 
 """
+import sqlite3
 con = sqlite3.connect("tomochan.db")
 cur = con.cursor()
 
@@ -32,6 +33,7 @@ cur.execute("CREATE TABLE IF NOT EXISTS posts("
                 "thread_id INTEGER NOT NULL, "
                 "op INTEGER NOT NULL, "
                 "last_bump INTEGER, "
+                "sticky INTEGER, "
                 "time INTEGER NOT NULL, "
                 "name TEXT NOT NULL, "
                 "email TEXT, "
@@ -39,7 +41,8 @@ cur.execute("CREATE TABLE IF NOT EXISTS posts("
                 "content TEXT NOT NULL, "
                 "filename TEXT, "
                 "file_actual TEXT, "
-                "spoiler INTEGER NOT NULL)")
+                "spoiler INTEGER NOT NULL, "
+                "ip TEXT NOT NULL)")
 
 con.close()
 
@@ -93,6 +96,11 @@ def post(form, board, thread_id):
         filename = None
         file_actual = None
 
+    if 'X-Forwarded-For' in request.headers:
+        ip = request.headers.getlist("X-Forwarded-For")[0].rpartition(' ')[-1]
+    else:
+        ip = request.remote_addr
+
     content = escape(form.post.data)
 
     new_post = {'post_id' : post_id,
@@ -100,6 +108,7 @@ def post(form, board, thread_id):
                 'thread_id' : thread_id,
                 'op' : op,
                 'last_bump' : last_bump,
+                'sticky' : 0,
                 'time' : timestamp,
                 'name' : name,
                 'email' : form.email.data,
@@ -107,7 +116,8 @@ def post(form, board, thread_id):
                 'content' : content,
                 'filename' : filename,
                 'file_actual' : file_actual,
-                'spoiler' : form.spoiler.data}
+                'spoiler' : form.spoiler.data,
+                'ip' : ip}
 
     cur.execute(sql, new_post)
     con.commit()
@@ -139,8 +149,12 @@ def get_threads(board):
     con.row_factory = dict_factory
     cur = con.cursor()
 
-    threadsquery = cur.execute("SELECT * FROM posts WHERE op = 1 AND board_id = ? ORDER BY last_bump DESC", (board,))
-    oplist = threadsquery.fetchall()
+    oplist = []
+    threadsquery = cur.execute("SELECT * FROM posts WHERE op = 1 AND board_id = ? AND sticky = 1 ORDER BY last_bump DESC", (board,))
+    oplist = oplist + threadsquery.fetchall()
+
+    threadsquery = cur.execute("SELECT * FROM posts WHERE op = 1 AND board_id = ? AND sticky = 0 ORDER BY last_bump DESC", (board,))
+    oplist = oplist + threadsquery.fetchall()
     threadlist = []
     for op in oplist:
         numberpostsquery = cur.execute("SELECT COUNT(*) FROM posts WHERE thread_id = ? AND op = 0", (op['post_id'],))
@@ -175,7 +189,7 @@ def board_page(board):
 
         form = PostForm()
         if form.validate_on_submit():
-            if form.file.data:
+            if form.file.data and form.post.data:
                 thread_id = None
                 new_post = post(form, board, thread_id)
                 if form.email.data == "nonoko" or form.email.data == "nonokosage":
@@ -184,7 +198,7 @@ def board_page(board):
                     return redirect(url_for('thread_page', board=board, thread=new_post))
             else:
                 # TODO: error code for trying to make a new thread without a picture
-                pass
+                return redirect('/static/posterror.html')
         return render_template('board.html', board=board, form=form, threads=threadlist, banner=banner)
     else:
         return send_file('static/404.html'), 404
