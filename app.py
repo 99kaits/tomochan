@@ -210,6 +210,7 @@ class PostForm(FlaskForm):
     email = StringField('Email', validators=[Optional()])
     subject = StringField('Subject', validators=[Optional()])
     post = TextAreaField('Content', validators=[DataRequired()])
+    # TODO: FILE SIZE LIMIT IN CONFIG
     file = FileField('File', validators=[FileAllowed(ALLOWED_EXTENSIONS, "the fuck is this shit?"), FileSize(0, 10000000, "too big sorry 10mb max")])
     spoiler = BooleanField('Spoiler?', validators=[Optional()])
     submit = SubmitField('Post')
