@@ -6,6 +6,7 @@ some type of imageboard (images not implemented yet) using python/flask, and sql
 TODO:
 - move more shit to config file
 - split into modules
+- textboard mode with 2ch type templates
 - refactor templates
 - save name in cookie
 - better tabbing on the post form, plus ctrl-enter to send
