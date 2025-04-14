@@ -4,6 +4,8 @@
 some type of imageboard (images not implemented yet) using python/flask, and sqlite
 
 TODO:
+- move more shit to config file
+- split into modules
 - refactor templates
 - save name in cookie
 - better tabbing on the post form, plus ctrl-enter to send
@@ -17,23 +19,23 @@ TODO:
 - aesthetics
 - \>\>1 replying
 - show direct replies in post header (\>\>2 \>\>10)
-- maybe some other email easter eggs besides sage and nonoko? (like dice rolling? deffo #fortune)
+- maybe some other email easter eggs besides sage and nonoko? (like dice rolling? definitely #fortune)
 - other pages, maybe an /ukko/ or homepage or rules/faq or whatever
 - funny 404 pages
 - board specific banners
 - oekaki would be so epic just imagine
 - caching rendered templates for extra performance maybe?
-- config file
 - r9k
 - init scripts
 - mod view/tools
 - mobile, just mobile
 - password for delete
 - save password in cookie
-- tripcodes and capcodes
+- tripcodes and capcodes (prob "secure" tripcodes and maybe even tripkeys too)
 - bump limits (configurable)
 - catalog
-- post archival
+- post archival/falling off the board
+- pages
 - fun polls?
 - blotter
 - localizations? at least the architecture for them
@@ -52,7 +54,6 @@ TODO:
 - maybe setup a futaba board for reference
 - job queueing?
 - auto update/refresh js? also tomo ticker (ticker of recent posts/recently bumped threads/new threads)
-- if i make my own futaba/yotsuba esque theme call it mitsuba
 - maybe an eventual rewrite with kotlin/postgres?????? idk?????????
 
 DONE:
@@ -75,7 +76,7 @@ DONE:
 - spoiler image
 - add ips into posts table
 - stickies
-
+- config file
 
 
 markdown things:

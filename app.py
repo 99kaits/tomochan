@@ -18,8 +18,11 @@ import os
 config = configparser.ConfigParser()
 if not os.path.exists('tomochan.ini'):
     new_key = ''.join(random.choices(string.ascii_letters + string.digits, k=72))
+    new_pass = ''.join(random.choices(string.ascii_letters + string.digits, k=32))
+    print("new admin password is " + new_pass)
     config['GLOBAL'] = {'secret_key' : new_key,
-                        'upload_folder' : 'uploads'}
+                        'upload_folder' : 'uploads',
+                        'admin_pass' : new_pass}
     with open('tomochan.ini', 'w') as configfile:
         config.write(configfile)
 else:
@@ -28,9 +31,6 @@ else:
 app = Flask(__name__)
 app.config['SECRET_KEY'] = config['GLOBAL']['secret_key']
 app.config['UPLOAD_FOLDER'] = config['GLOBAL']['upload_folder']
-
-print(config['GLOBAL']['secret_key'])
-print(config['GLOBAL']['upload_folder'])
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'avif', 'webp', 'heic', 'heif', 'jxl'}
 boards = ['b', 'tomo', 'nottomo']
