@@ -20,9 +20,17 @@ if not os.path.exists('tomochan.ini'):
     new_key = ''.join(random.choices(string.ascii_letters + string.digits, k=72))
     new_pass = ''.join(random.choices(string.ascii_letters + string.digits, k=32))
     print("new admin password is " + new_pass)
+    boards = ["b", "tomo", "nottomo"]
     config['GLOBAL'] = {'secret_key' : new_key,
                         'upload_folder' : 'uploads',
-                        'admin_pass' : new_pass}
+                        'admin_pass' : new_pass,
+                        'boards' : ' '.join(boards)}
+    for board in boards:
+        config[board] = {'name' : "Placeholder",
+                        'subtitle' : "wow you should change me in the ini",
+                        'bump_limit' : 50,
+                        'size' : 50,
+                        'hidden' : False}
     with open('tomochan.ini', 'w') as configfile:
         config.write(configfile)
 else:
@@ -33,7 +41,12 @@ app.config['SECRET_KEY'] = config['GLOBAL']['secret_key']
 app.config['UPLOAD_FOLDER'] = config['GLOBAL']['upload_folder']
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'avif', 'webp', 'heic', 'heif', 'jxl'}
-boards = ['b', 'tomo', 'nottomo']
+boards = config['GLOBAL']['boards'].split(' ')
+boardlist = []
+for board in boards:
+    if not config[board].getboolean('hidden'):
+        boardlist.append(board)
+
 sql = ("INSERT INTO posts(post_id, board_id, thread_id, op, last_bump, sticky, time, name, email, subject, content, filename, file_actual, spoiler, ip) "
        "values(:post_id, :board_id, :thread_id, :op, :last_bump, :sticky, :time, :name, :email, :subject, :content, :filename, :file_actual, :spoiler, :ip)")
 
@@ -66,7 +79,7 @@ con.close()
 def allowed_mime_type(file):
     mime = magic.from_buffer(file.stream.read(2048), mime=True)
     file.stream.seek(0)  # Reset file pointer after reading
-    return mime in ['image/png', 'image/jpeg', 'application/pdf']
+    return mime in ['image/png', 'image/jpeg', 'image/gif', 'image/avif', 'image/webp', 'image/heic', 'image/heif', 'image/jxl']
 
 def dict_factory(cursor, row):
     d = {}
@@ -103,7 +116,7 @@ def post(form, board, thread_id):
         if not form.email.data == 'sage' or form.email.data == 'nonokosage':
             cur.execute('UPDATE posts SET last_bump = ? WHERE post_id = ?', (timestamp, thread_id))
 
-    if form.file.data:
+    if form.file.data and allowed_mime_type(form.file.data):
         filename = secure_filename(form.file.data.filename)
         file_actual = str(post_id) + '.' + filename.rsplit('.', 1)[1].lower()
         form.file.data.save(os.path.join(app.config['UPLOAD_FOLDER'], file_actual))
@@ -199,6 +212,8 @@ def board_page(board):
         
         threadlist = get_threads(board)
         banner = get_banner(board)
+        boardname = config[board]['name']
+        boardsubtitle = config[board]['subtitle']
 
         form = PostForm()
         if form.validate_on_submit():
@@ -212,7 +227,7 @@ def board_page(board):
             else:
                 # TODO: error code for trying to make a new thread without a picture
                 return redirect('/static/posterror.html')
-        return render_template('board.html', board=board, form=form, threads=threadlist, banner=banner)
+        return render_template('board.html', boardlist=boardlist, board=board, boardname=boardname, boardsubtitle=boardsubtitle, form=form, threads=threadlist, banner=banner)
     else:
         return send_file('static/404.html'), 404
 
@@ -232,13 +247,15 @@ def thread_page(board, thread):
             return send_file('static/404.html'), 404
         else:
             banner = get_banner(board)
+            boardname = config[board]['name']
+            boardsubtitle = config[board]['subtitle']
 
             form = PostForm()
             if form.validate_on_submit():
                 new_post = post(form, board, thread)
                 return redirect(url_for('thread_page', board=board, thread=thread))
 
-            return render_template('thread.html', board=board, form=form, posts=posts, banner=banner)
+            return render_template('thread.html', boardlist=boardlist, board=board, boardname=boardname, boardsubtitle=boardsubtitle, form=form, posts=posts, banner=banner)
     else:
         return send_file('static/404.html'), 404
 

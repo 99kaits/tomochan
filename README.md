@@ -78,6 +78,7 @@ DONE:
 - add ips into posts table
 - stickies
 - config file
+- hidden boards
 
 
 markdown things:
