@@ -24,6 +24,7 @@ TODO:
 - oekaki would be so epic just imagine
 - caching rendered templates for extra performance maybe?
 - config file
+- r9k
 - init scripts
 - mod view/tools
 - mobile, just mobile
