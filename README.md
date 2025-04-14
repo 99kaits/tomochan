@@ -4,8 +4,6 @@
 some type of imageboard (images not implemented yet) using python/flask, and sqlite
 
 TODO:
-- MOVE TO MULTIPLE SQL TABLES (one for each board)
-- also orm?
 - refactor templates
 - save name in cookie
 - better tabbing on the post form, plus ctrl-enter to send

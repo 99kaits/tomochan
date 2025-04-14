@@ -150,11 +150,9 @@ def get_threads(board):
     cur = con.cursor()
 
     oplist = []
-    threadsquery = cur.execute("SELECT * FROM posts WHERE op = 1 AND board_id = ? AND sticky = 1 ORDER BY last_bump DESC", (board,))
+    threadsquery = cur.execute("SELECT * FROM posts WHERE op = 1 AND board_id = ? ORDER BY sticky DESC, last_bump DESC", (board,))
     oplist = oplist + threadsquery.fetchall()
 
-    threadsquery = cur.execute("SELECT * FROM posts WHERE op = 1 AND board_id = ? AND sticky = 0 ORDER BY last_bump DESC", (board,))
-    oplist = oplist + threadsquery.fetchall()
     threadlist = []
     for op in oplist:
         numberpostsquery = cur.execute("SELECT COUNT(*) FROM posts WHERE thread_id = ? AND op = 0", (op['post_id'],))
