@@ -2,7 +2,7 @@ import math
 
 from flask import Flask, render_template, send_file, redirect, url_for, send_from_directory, request
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileAllowed
+from flask_wtf.file import FileField, FileAllowed, FileSize
 from werkzeug.utils import secure_filename
 from wtforms import StringField, SubmitField, TextAreaField, BooleanField
 from wtforms.validators import DataRequired, Optional
@@ -30,7 +30,8 @@ if not os.path.exists('tomochan.ini'):
                         'subtitle' : "wow you should change me in the ini",
                         'bump_limit' : 50,
                         'size' : 50,
-                        'hidden' : False}
+                        'hidden' : False,
+                        'r9k' : False}
     with open('tomochan.ini', 'w') as configfile:
         config.write(configfile)
 else:
@@ -157,6 +158,13 @@ def get_banner(board):
     banner = random.choice(os.listdir("static/banners"))
     return "/static/banners/" + banner
 
+def content_parser(content):
+    # TODO: MAKE SURE THE TAGS CLOSE
+    # TODO: replace \n with <br>
+    # TODO: replace > with span with class quote
+    if "&gt;" in content:
+        pass
+
 def get_swatch(timestamp):
     time = datetime.fromtimestamp(timestamp)
     bmt = time + timedelta(hours=1)
@@ -202,7 +210,7 @@ class PostForm(FlaskForm):
     email = StringField('Email', validators=[Optional()])
     subject = StringField('Subject', validators=[Optional()])
     post = TextAreaField('Content', validators=[DataRequired()])
-    file = FileField('File', validators=[FileAllowed(ALLOWED_EXTENSIONS, "the fuck is this shit?")])
+    file = FileField('File', validators=[FileAllowed(ALLOWED_EXTENSIONS, "the fuck is this shit?"), FileSize(0, 10000000, "too big sorry 10mb max")])
     spoiler = BooleanField('Spoiler?', validators=[Optional()])
     submit = SubmitField('Post')
 

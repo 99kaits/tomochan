@@ -11,6 +11,7 @@ TODO:
 - save name in cookie
 - better tabbing on the post form, plus ctrl-enter to send
 - multiple file uploads
+- file size limit
 - image thumbnails
 - file size and dimentions in db
 - videos/audio

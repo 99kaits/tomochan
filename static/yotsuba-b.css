@@ -13,6 +13,17 @@ body {
 	padding-right: 5px;
 }
 
+.boardlist span {
+    font-size: 9pt;
+    color: #89A;
+}
+
+.boardlist a {
+    padding: 1px;
+    text-decoration: none;
+    color: #34345C;
+}
+
 header {
     text-align: center;
     color: #AF0A0F;
@@ -23,6 +34,15 @@ header img {
     margin: 5px auto;
 }
 
+hr {
+    border: none;
+    border-top: 1px solid #B7C5D9;
+    height: 0;
+}
+
+hr.above_post_form {
+    width: 90%;
+}
 .post_form .form_banner {
     text-align: center;
 }
@@ -78,6 +98,7 @@ th {
     border-top: none;
     display: table;
     padding: 2px;
+    
 }
 
 span.side_arrows {
@@ -119,4 +140,8 @@ a, a:visited {
 
 a:hover, .post span.id a:hover {
     color: #ff0000;
+}
+
+.quote {
+    color: #789922;
 }

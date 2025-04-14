@@ -1,8 +1,10 @@
 <div class="boardlist">
     <span>
+        [
         {% for boardlink in boardlist %}
-        <a href="/{{ boardlink }}/">/{{ boardlink }}/</a>
+        <a href="/{{ boardlink }}/">{{ boardlink }}</a> /
         {% endfor %}
+        ]
     </span>
 </div>
 
@@ -11,6 +13,8 @@
     <h1>/{{ board }}/ - {{ boardname }}</h1>
     <p>{{ boardsubtitle }}</p>
 </header>
+
+<hr class="above_post_form"></hr>
 
 <div class="post_form">
 {% if posts %}
@@ -44,4 +48,5 @@
             </tr>
         </table>
     </form>
+    <hr>
 </div>
