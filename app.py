@@ -8,16 +8,31 @@ from wtforms import StringField, SubmitField, TextAreaField, BooleanField
 from wtforms.validators import DataRequired, Optional
 from datetime import datetime, timezone, timedelta
 from markupsafe import escape
+import configparser
 import sqlite3
 import random
+import string
 import magic
 import os
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = '7f4bc5403ecbc99f2b10dc1c582be3f9632369dea8d6e45d'
-app.config['UPLOAD_FOLDER'] = 'uploads'
+config = configparser.ConfigParser()
+if not os.path.exists('tomochan.ini'):
+    new_key = ''.join(random.choices(string.ascii_letters + string.digits, k=72))
+    config['GLOBAL'] = {'secret_key' : new_key,
+                        'upload_folder' : 'uploads'}
+    with open('tomochan.ini', 'w') as configfile:
+        config.write(configfile)
+else:
+    config.read('tomochan.ini')
 
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'avif', 'webp', 'heic', 'heif' 'jxl'}
+app = Flask(__name__)
+app.config['SECRET_KEY'] = config['GLOBAL']['secret_key']
+app.config['UPLOAD_FOLDER'] = config['GLOBAL']['upload_folder']
+
+print(config['GLOBAL']['secret_key'])
+print(config['GLOBAL']['upload_folder'])
+
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'avif', 'webp', 'heic', 'heif', 'jxl'}
 boards = ['b', 'tomo', 'nottomo']
 sql = ("INSERT INTO posts(post_id, board_id, thread_id, op, last_bump, sticky, time, name, email, subject, content, filename, file_actual, spoiler, ip) "
        "values(:post_id, :board_id, :thread_id, :op, :last_bump, :sticky, :time, :name, :email, :subject, :content, :filename, :file_actual, :spoiler, :ip)")
