@@ -8,8 +8,8 @@
 {% endif %}
 
     {% if post['file_actual'] and post['op'] == 1%}
+    <span class="file_header">File: <a href="/uploads/{{ post['file_actual'] }}">{{ post['file_actual'] }}</a>-(dimensions/size will be here soon, {{ post['filename'] }}</span>
     <div class="file">
-        File: <a href="/uploads/{{ post['file_actual'] }}">{{ post['filename'] }}</a>
         <a href="/uploads/{{ post['file_actual'] }}"><img src=
         {% if post['spoiler'] == 1 %}
         "/static/spoiler.png"
@@ -43,8 +43,8 @@
         {% endif %}
     </p>
     {% if post['file_actual'] and post['op'] == 0 %}
+    <span class="file_header">File: <a href="/uploads/{{ post['file_actual'] }}">{{ post['file_actual'] }}</a>-(dimensions/size will be here soon, {{ post['filename'] }}</span>
     <div class="file">
-        File: <a href="/uploads/{{ post['file_actual'] }}">{{ post['filename'] }}</a>
         <img src="/uploads/{{ post['file_actual'] }}">
     </div>
     {% endif %}

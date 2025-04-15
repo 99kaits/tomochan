@@ -161,3 +161,8 @@ a:hover, .post span.id a:hover {
 .catalog_entry {
     display: inline-block;
 }
+
+.footer {
+    text-align: center;
+    font-size: 75%;
+}

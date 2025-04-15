@@ -4,6 +4,11 @@
 some type of imageboard (images not implemented yet) using python/flask, and sqlite
 
 TODO:
+- rewrite with sqlalchemy? idk maybe?
+- sanitize ALL the inputs
+- figure out error handling/logging
+- beef up the security practices (prob already better than yotsuba tho lol)
+- check thread ids in the post code
 - figure out better way to render board links list (similar to 4chan) [ b / tomo / nottomo ] (remove trailing /)
 - wordfilters (language enhancers)
 - start truncating post content in board view and in catalog view
@@ -59,7 +64,7 @@ TODO:
 - atom/rss???
 - qol javascript stuff?
 - boardlist/info in db maybe? maybe not?
-- maybe setup a futaba board for reference
+- maybe setup a yotsuba board for reference (we need not settle for futaba anymore)
 - job queueing?
 - auto update/refresh js? also tomo ticker (ticker of recent posts/recently bumped threads/new threads)
 - maybe an eventual rewrite with kotlin/postgres?????? idk?????????

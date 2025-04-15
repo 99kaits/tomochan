@@ -43,6 +43,7 @@ if not os.path.exists("tomochan.ini"):
         "upload_folder": "uploads",
         "admin_pass": new_pass,
         "boards": " ".join(boards),
+        "db_uri": "sqlite:///tomochan.db"
     }
     for board in boards:
         config[board] = {
@@ -61,7 +62,7 @@ else:
 app = Flask(__name__)
 app.config["SECRET_KEY"] = config["GLOBAL"]["secret_key"]
 app.config["UPLOAD_FOLDER"] = config["GLOBAL"]["upload_folder"]
-# app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///tomochan.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = config['GLOBAL']['db_uri']
 
 ALLOWED_EXTENSIONS = {
     "png",
@@ -91,10 +92,10 @@ sql = (
 
 """
 class Base(DeclarativeBase):
-  pass
+    pass
+
 
 db = SQLAlchemy(model_class=Base)
-
 db.init_app(app)
 """
 
@@ -124,9 +125,10 @@ def dict_factory(cursor, row):
 def post(form, board, thread_id):
     con = sqlite3.connect("tomochan.db")
     cur = con.cursor()
-    largest_post_id = cur.execute("SELECT max(post_id) from posts").fetchone()[0]
 
     if board in boards:
+        largest_post_id = cur.execute("SELECT max(post_id) from posts").fetchone()[0]
+
         if form.name.data:
             name = form.name.data
         else:
