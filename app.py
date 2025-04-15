@@ -116,7 +116,7 @@ def post(form, board, thread_id):
     if op == 0:
         if not form.email.data == 'sage' or form.email.data == 'nonokosage':
             cur.execute('UPDATE posts SET last_bump = ? WHERE post_id = ?', (timestamp, thread_id))
-
+        
     if form.file.data and allowed_mime_type(form.file.data):
         filename = secure_filename(form.file.data.filename)
         file_actual = str(post_id) + '.' + filename.rsplit('.', 1)[1].lower()
@@ -252,6 +252,12 @@ def catalog_page(board):
         cur = con.cursor()
         select_threads = cur.execute("SELECT * FROM posts WHERE op = 1 ORDER BY last_bump DESC")
         threads = select_threads.fetchall()
+
+
+        for thread in threads:
+            reply_select = cur.execute("SELECT COUNT(*) FROM posts WHERE thread_id = ? AND op = 0", (op['post_id']))
+            thread['reply_count'] = cur.fetchone()['COUNT(*)']
+
         con.close()
 
         banner = get_banner(board)

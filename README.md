@@ -4,6 +4,7 @@
 some type of imageboard (images not implemented yet) using python/flask, and sqlite
 
 TODO:
+- REPLY COUNT FOR OPS IN DB REPLY COUNT FOR OPS IN DB!!!!
 - start truncating post content in board view and in catalog view
 - move more shit to config file
 - split into modules
