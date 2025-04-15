@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>/{{ board }}/ - {{ boardname }} - Catalog - tomochan</title>
+</head>
+
+<body>
+    {% include 'header.html' %}
+    {% if threads %}
+    <div class="catalog_container">
+        {% for thread in threads %}
+        <div class="catalog_entry" id="thread['post_id']">
+            <a href="/{{ board }}/{{ thread['post_id'] }}/">
+                <img src="/uploads/{{ thread['file_actual'] }}">
+            </a>
+        <!-- reply count will go here eventually -->
+        {% if thread['subject'] %}
+            <span class="subject">{{ thread['subject'] }}: </span>
+        {% endif %}
+        <span class="content">{{ thread['content'] }}</span>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>idk what to say man there are supposed to be posts here</p>
+    {% endif %}
+    </div>
+</body>
+</html>

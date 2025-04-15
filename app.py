@@ -228,9 +228,7 @@ def board_page(board):
 
         form = PostForm()
         if form.validate_on_submit():
-            print("submitted")
             if form.file.data and form.post.data:
-                print("file and post checked out")
                 thread_id = None
                 new_post = post(form, board, thread_id)
                 if form.email.data == "nonoko" or form.email.data == "nonokosage":
@@ -244,6 +242,37 @@ def board_page(board):
                                 form=form, threads=threadlist, banner=banner, password=randompassword)
     else:
         return send_file('static/404.html'), 404
+
+
+@app.route("/<board>/catalog", methods=['GET', 'POST'])
+def catalog_page(board):
+    if board in boards:
+        con = sqlite3.connect("tomochan.db")
+        con.row_factory = dict_factory
+        cur = con.cursor()
+        select_threads = cur.execute("SELECT * FROM posts WHERE op = 1 ORDER BY last_bump DESC")
+        threads = select_threads.fetchall()
+        con.close()
+
+        banner = get_banner(board)
+        boardname = config[board]['name']
+        boardsubtitle = config[board]['subtitle']
+        randompassword = ''.join(random.choices(string.ascii_letters + string.digits, k=12))
+
+        form = PostForm()
+        if form.validate_on_submit():
+            if form.file.data and form.post.data:
+                thread_id = None
+                new_post = post(form, board, thread_id)
+                if form.email.data == "nonoko" or form.email.data == "nonokosage":
+                    return redirect(url_for('board_page', board=board))
+                else:
+                    return redirect(url_for('thread_page', board=board, thread=new_post))
+            else:
+                # TODO: error code for trying to make a new thread without a picture
+                return redirect('/static/posterror.html')
+        return render_template('catalog.html', boardlist=boardlist, board=board, boardname=boardname, boardsubtitle=boardsubtitle, 
+                                form=form, threads=threads, banner=banner, password=randompassword)
 
 
 @app.route("/<board>/<thread>/", methods=['GET', 'POST'])
