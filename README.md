@@ -4,6 +4,7 @@
 some type of imageboard (images not implemented yet) using python/flask, and sqlite
 
 TODO:
+- figure out better way to render board links list (similar to 4chan) [ b / tomo / nottomo ] (remove trailing /)
 - wordfilters (language enhancers)
 - start truncating post content in board view and in catalog view
 - move more shit to config file
@@ -49,6 +50,7 @@ TODO:
 - flood detection, ill need it sooner or later
 - proxy detection? Even if i dont use it
 - captcha? probably with an audio one too (DEFINITELY NOT RECAPTCHA, a basic one is enough to stop unambitious bots and anything more complicated is never gonna be sufficent to block the ambitious ones)
+- possibly altcha?
 - placeholders of various varieties
 - search (prob just ops by default)
 - banning users (youve been banned for (timespan) - take a moment to reflect on your actions and (wait until (date/time) || send an appeal to (appeals email))
