@@ -99,3 +99,8 @@ image filename scheme:
 (post id)_(image number (0-2)).whatever
 validated by extension and then mime type
 original filename ran through secure_filename before being put in db
+
+
+r9k notes:
+- check content against content fields
+- start hashing images (im pretty sure 4chan r9k checks images too) and check against those hashes (new column in db?)
