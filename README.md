@@ -9,15 +9,16 @@ TODO:
 - textboard mode with 2ch type templates
 - refactor templates
 - save name in cookie
-- better tabbing on the post form, plus ctrl-enter to send
+- ctrl-enter to send
+- better accessibility (deffo alt text on images at least)
 - multiple file uploads
 - file size limit
 - image thumbnails
-- file size and dimentions in db
-- videos/audio
+- file size and dimentions in db, kinda goes hand in hand with thumbnails actually i can prob use PIL for both
+- videos/audio, with thumbnails for video so ffmpeg will probably be involved somehow there
 - allowed filetypes and number of uploads configurable by board
 - optimize sql queries
-- post formatting of some variety (im thinking markdown, and maybe a selector for classical formatting which apparently is bbcode), also greentext
+- post formatting of some variety (im thinking markdown, and maybe a selector for bbcode), also greentext
 - aesthetics
 - \>\>1 replying
 - show direct replies in post header (\>\>2 \>\>10)
@@ -37,7 +38,7 @@ TODO:
 - bump limits (configurable)
 - catalog
 - post archival/falling off the board
-- pages
+- thread list pages
 - fun polls?
 - blotter
 - localizations? at least the architecture for them
@@ -80,6 +81,7 @@ DONE:
 - stickies
 - config file
 - hidden boards
+- better tabbing on the post form
 
 
 markdown things:

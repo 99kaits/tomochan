@@ -28,23 +28,27 @@
         <table>
             <tr>
                 <th>{{ form.name.label }}</th>
-                <td>{{ form.name(size=25, placeholder="Anonymous") }}</td>
+                <td>{{ form.name(size=25, placeholder="Anonymous", tabindex=1) }}</td>
             </tr>
             <tr>
                 <th>{{ form.email.label }}</th>
-                <td>{{ form.email(size=25) }}</td>
+                <td>{{ form.email(size=25, tabindex=2) }}</td>
             </tr>
             <tr>
                 <th>{{ form.subject.label }}</th>
-                <td>{{ form.subject(size=25) }}{{ form.submit() }}</td>
+                <td>{{ form.subject(size=25, tabindex=3) }}{{ form.submit(tabindex=7) }}</td>
             </tr>
             <tr>
                 <th>{{ form.post.label }}</th>
-                <td>{{ form.post(cols="35", rows="10") }}</td>
+                <td>{{ form.post(cols="35", rows="10", tabindex=4) }}</td>
             </tr>
             <tr>
                 <th>{{ form.file.label }}</th>
-                <td>{{ form.file }} [{{ form.spoiler }}{{ form.spoiler.label }}] </td>
+                <td>{{ form.file(accept="image/*", tabindex=5) }} [{{ form.spoiler(tabindex=6) }}{{ form.spoiler.label }}] </td>
+            </tr>
+            <tr>
+                <th>{{ form.password.label }}</th>
+                <td>{{ form.password(maxlength=12, size=12, value=password) }} <span style="font-size: smaller;">(Password used for deletion)</span></td>
             </tr>
         </table>
     </form>

@@ -12,6 +12,7 @@ CREATE TABLE posts (
   content TEXT NOT NULL,
   filename TEXT,
   file_actual TEXT,
+  password TEXT,
   spoiler INTEGER NOT NULL,
   ip TEXT NOT NULL
 );

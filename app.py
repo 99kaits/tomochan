@@ -17,8 +17,8 @@ import os
 
 config = configparser.ConfigParser()
 if not os.path.exists('tomochan.ini'):
-    new_key = ''.join(random.choices(string.ascii_letters + string.digits, k=72))
-    new_pass = ''.join(random.choices(string.ascii_letters + string.digits, k=32))
+    new_key = ''.join(random.choices(string.ascii_letters + string.digits + string.punctuation, k=72))
+    new_pass = ''.join(random.choices(string.ascii_letters + string.digits + string.punctuation, k=32))
     print("new admin password is " + new_pass)
     boards = ["b", "tomo", "nottomo"]
     config['GLOBAL'] = {'secret_key' : new_key,
@@ -48,8 +48,8 @@ for board in boards:
     if not config[board].getboolean('hidden'):
         boardlist.append(board)
 
-sql = ("INSERT INTO posts(post_id, board_id, thread_id, op, last_bump, sticky, time, name, email, subject, content, filename, file_actual, spoiler, ip) "
-       "values(:post_id, :board_id, :thread_id, :op, :last_bump, :sticky, :time, :name, :email, :subject, :content, :filename, :file_actual, :spoiler, :ip)")
+sql = ("INSERT INTO posts(post_id, board_id, thread_id, op, last_bump, sticky, time, name, email, subject, content, filename, file_actual, password, spoiler, ip) "
+       "values(:post_id, :board_id, :thread_id, :op, :last_bump, :sticky, :time, :name, :email, :subject, :content, :filename, :file_actual, :password, :spoiler, :ip)")
 
 """
 import sqlite3
@@ -145,9 +145,9 @@ def post(form, board, thread_id):
                 'content' : content,
                 'filename' : filename,
                 'file_actual' : file_actual,
+                'password' : form.password.data,
                 'spoiler' : form.spoiler.data,
                 'ip' : ip}
-
     cur.execute(sql, new_post)
     con.commit()
     con.close()
@@ -210,9 +210,10 @@ class PostForm(FlaskForm):
     email = StringField('Email', validators=[Optional()])
     subject = StringField('Subject', validators=[Optional()])
     post = TextAreaField('Content', validators=[DataRequired()])
-    # TODO: FILE SIZE LIMIT IN CONFIG
-    file = FileField('File', validators=[FileAllowed(ALLOWED_EXTENSIONS, "the fuck is this shit?"), FileSize(0, 10000000, "too big sorry 10mb max")])
+    # TODO: FILE SIZE LIMIT, THE VALIDATOR DOESNT WORK FOR SOME REASON
+    file = FileField('File', validators=[FileAllowed(ALLOWED_EXTENSIONS, "the fuck is this shit?")])
     spoiler = BooleanField('Spoiler?', validators=[Optional()])
+    password = StringField('Password', validators=[Optional()])
     submit = SubmitField('Post')
 
 @app.route("/<board>/", methods=['GET', 'POST'])
@@ -223,10 +224,13 @@ def board_page(board):
         banner = get_banner(board)
         boardname = config[board]['name']
         boardsubtitle = config[board]['subtitle']
+        randompassword = ''.join(random.choices(string.ascii_letters + string.digits, k=12))
 
         form = PostForm()
         if form.validate_on_submit():
+            print("submitted")
             if form.file.data and form.post.data:
+                print("file and post checked out")
                 thread_id = None
                 new_post = post(form, board, thread_id)
                 if form.email.data == "nonoko" or form.email.data == "nonokosage":
@@ -236,7 +240,8 @@ def board_page(board):
             else:
                 # TODO: error code for trying to make a new thread without a picture
                 return redirect('/static/posterror.html')
-        return render_template('board.html', boardlist=boardlist, board=board, boardname=boardname, boardsubtitle=boardsubtitle, form=form, threads=threadlist, banner=banner)
+        return render_template('board.html', boardlist=boardlist, board=board, boardname=boardname, boardsubtitle=boardsubtitle, 
+                                form=form, threads=threadlist, banner=banner, password=randompassword)
     else:
         return send_file('static/404.html'), 404
 
@@ -258,13 +263,18 @@ def thread_page(board, thread):
             banner = get_banner(board)
             boardname = config[board]['name']
             boardsubtitle = config[board]['subtitle']
+            randompassword = ''.join(random.choices(string.ascii_letters + string.digits + string.punctuation, k=12))
 
             form = PostForm()
             if form.validate_on_submit():
                 new_post = post(form, board, thread)
-                return redirect(url_for('thread_page', board=board, thread=thread))
+                response = redirect(url_for('thread_page', board=board, thread=thread))
+                if form.name.data:
+                    response.set_cookie('Name', form.name.data)
+                return response
 
-            return render_template('thread.html', boardlist=boardlist, board=board, boardname=boardname, boardsubtitle=boardsubtitle, form=form, posts=posts, banner=banner)
+            return render_template('thread.html', boardlist=boardlist, board=board, boardname=boardname, boardsubtitle=boardsubtitle, 
+                                    form=form, posts=posts, banner=banner, password=randompassword)
     else:
         return send_file('static/404.html'), 404
 
