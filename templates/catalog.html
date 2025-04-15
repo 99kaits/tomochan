@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/yotsuba-b.css">
     <title>/{{ board }}/ - {{ boardname }} - Catalog - tomochan</title>
 </head>
 
@@ -13,7 +15,6 @@
             <a href="/{{ board }}/{{ thread['post_id'] }}/">
                 <img src="/uploads/{{ thread['file_actual'] }}">
             </a>
-        <!-- reply count will go here eventually -->
         <p class="reply_count">R : <b>{{ thread['reply_count'] }}</b></p>
         {% if thread['subject'] %}
             <span class="subject">{{ thread['subject'] }}: </span>

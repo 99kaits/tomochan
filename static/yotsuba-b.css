@@ -157,3 +157,7 @@ a:hover, .post span.id a:hover {
 .clarification {
     font-size: 75%;
 }
+
+.catalog_entry {
+    display: inline-block;
+}
