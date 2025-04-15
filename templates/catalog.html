@@ -14,6 +14,7 @@
                 <img src="/uploads/{{ thread['file_actual'] }}">
             </a>
         <!-- reply count will go here eventually -->
+        <p class="reply_count">R : <b>{{ thread['reply_count'] }}</b></p>
         {% if thread['subject'] %}
             <span class="subject">{{ thread['subject'] }}: </span>
         {% endif %}

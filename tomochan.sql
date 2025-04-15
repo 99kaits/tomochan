@@ -4,6 +4,7 @@ CREATE TABLE posts (
   thread_id INTEGER NOT NULL,
   op INTEGER NOT NULL,
   last_bump INTEGER,
+  reply_count INTEGER,
   sticky INTEGER,
   time INTEGER NOT NULL,
   name TEXT NOT NULL,

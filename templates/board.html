@@ -13,9 +13,9 @@
     <div class="thread">
     {% for post in thread %}
         {% include 'post.html' %}
-    {% if post['numposts'] %}
-    <span class="summary">{{ post['numposts'] }}
-    {% if post['numposts'] == 1 %}
+    {% if post['reply_count'] > 5 %}
+    <span class="summary">{{ post['reply_count'] - 5 }}
+    {% if post['reply_count'] == 6 %}
     reply
     {% else %}
     replies

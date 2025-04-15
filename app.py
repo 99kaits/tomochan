@@ -1,4 +1,10 @@
 import math
+import configparser
+import sqlite3
+import random
+import string
+import magic
+import os
 
 from flask import Flask, render_template, send_file, redirect, url_for, send_from_directory, request
 from flask_wtf import FlaskForm
@@ -6,14 +12,12 @@ from flask_wtf.file import FileField, FileAllowed, FileSize
 from werkzeug.utils import secure_filename
 from wtforms import StringField, SubmitField, TextAreaField, BooleanField
 from wtforms.validators import DataRequired, Optional
+
+#from flask_sqlalchemy import SQLAlchemy
+#from sqlalchemy.orm import DeclarativeBase
+
 from datetime import datetime, timezone, timedelta
 from markupsafe import escape
-import configparser
-import sqlite3
-import random
-import string
-import magic
-import os
 
 config = configparser.ConfigParser()
 if not os.path.exists('tomochan.ini'):
@@ -40,6 +44,7 @@ else:
 app = Flask(__name__)
 app.config['SECRET_KEY'] = config['GLOBAL']['secret_key']
 app.config['UPLOAD_FOLDER'] = config['GLOBAL']['upload_folder']
+# app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///tomochan.db"
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'avif', 'webp', 'heic', 'heif', 'jxl'}
 boards = config['GLOBAL']['boards'].split(' ')
@@ -48,34 +53,18 @@ for board in boards:
     if not config[board].getboolean('hidden'):
         boardlist.append(board)
 
-sql = ("INSERT INTO posts(post_id, board_id, thread_id, op, last_bump, sticky, time, name, email, subject, content, filename, file_actual, password, spoiler, ip) "
-       "values(:post_id, :board_id, :thread_id, :op, :last_bump, :sticky, :time, :name, :email, :subject, :content, :filename, :file_actual, :password, :spoiler, :ip)")
+sql = ("INSERT INTO posts(post_id, board_id, thread_id, op, last_bump, reply_count, sticky, time, name, email, subject, content, filename, file_actual, password, spoiler, ip) "
+       "values(:post_id, :board_id, :thread_id, :op, :last_bump, :reply_count, :sticky, :time, :name, :email, :subject, :content, :filename, :file_actual, :password, :spoiler, :ip)")
 
 """
-import sqlite3
-con = sqlite3.connect("tomochan.db")
-cur = con.cursor()
+class Base(DeclarativeBase):
+  pass
 
-cur.execute("CREATE TABLE IF NOT EXISTS posts("
-                "post_id INTEGER PRIMARY KEY UNIQUE NOT NULL, "
-                "board_id TEXT NOT NULL, "
-                "thread_id INTEGER NOT NULL, "
-                "op INTEGER NOT NULL, "
-                "last_bump INTEGER, "
-                "sticky INTEGER, "
-                "time INTEGER NOT NULL, "
-                "name TEXT NOT NULL, "
-                "email TEXT, "
-                "subject TEXT, "
-                "content TEXT NOT NULL, "
-                "filename TEXT, "
-                "file_actual TEXT, "
-                "spoiler INTEGER NOT NULL, "
-                "ip TEXT NOT NULL)")
+db = SQLAlchemy(model_class=Base)
 
-con.close()
-
+db.init_app(app)
 """
+
 
 def allowed_mime_type(file):
     mime = magic.from_buffer(file.stream.read(2048), mime=True)
@@ -115,7 +104,7 @@ def post(form, board, thread_id):
         
     if op == 0:
         if not form.email.data == 'sage' or form.email.data == 'nonokosage':
-            cur.execute('UPDATE posts SET last_bump = ? WHERE post_id = ?', (timestamp, thread_id))
+            cur.execute('UPDATE posts SET last_bump = ?, reply_count = reply_count + 1 WHERE post_id = ? AND op == 1', (timestamp, thread_id))
         
     if form.file.data and allowed_mime_type(form.file.data):
         filename = secure_filename(form.file.data.filename)
@@ -137,6 +126,7 @@ def post(form, board, thread_id):
                 'thread_id' : thread_id,
                 'op' : op,
                 'last_bump' : last_bump,
+                'reply_count' : 0,
                 'sticky' : 0,
                 'time' : timestamp,
                 'name' : name,
@@ -191,12 +181,8 @@ def get_threads(board):
 
     threadlist = []
     for op in oplist:
-        numberpostsquery = cur.execute("SELECT COUNT(*) FROM posts WHERE thread_id = ? AND op = 0", (op['post_id'],))
-        numposts = numberpostsquery.fetchone()['COUNT(*)']
         last5 = cur.execute("SELECT * FROM posts WHERE thread_id = ? AND op = 0 ORDER BY post_id DESC LIMIT 5", (op['post_id'],))
         thread = list(reversed(last5.fetchall()))
-        if numposts > 5:
-            op['numposts'] = numposts - 5
         thread.insert(0, op)
         threadlist.append(thread)
     
@@ -252,12 +238,6 @@ def catalog_page(board):
         cur = con.cursor()
         select_threads = cur.execute("SELECT * FROM posts WHERE op = 1 ORDER BY last_bump DESC")
         threads = select_threads.fetchall()
-
-
-        for thread in threads:
-            reply_select = cur.execute("SELECT COUNT(*) FROM posts WHERE thread_id = ? AND op = 0", (op['post_id']))
-            thread['reply_count'] = cur.fetchone()['COUNT(*)']
-
         con.close()
 
         banner = get_banner(board)
