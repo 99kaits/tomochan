@@ -145,3 +145,15 @@ a:hover, .post span.id a:hover {
 .quote {
     color: #789922;
 }
+
+.form_banner {
+    background-color: #e04000;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 125%;
+    padding: 1px;
+}
+
+.clarification {
+    font-size: 75%;
+}

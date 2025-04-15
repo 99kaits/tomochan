@@ -17,6 +17,7 @@ TODO:
 - file size and dimentions in db, kinda goes hand in hand with thumbnails actually i can prob use PIL for both
 - videos/audio, with thumbnails for video so ffmpeg will probably be involved somehow there
 - allowed filetypes and number of uploads configurable by board
+- silly banner ads
 - optimize sql queries
 - post formatting of some variety (im thinking markdown, and maybe a selector for bbcode), also greentext
 - aesthetics
