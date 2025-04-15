@@ -11,7 +11,7 @@ TODO:
 - refactor templates
 - save name in cookie
 - ctrl-enter to send
-- better accessibility (deffo alt text on images at least)
+- better accessibility (deffo alt text on images at least) (DEFINITELY do a pass with a screen reader to test that)
 - multiple file uploads
 - file size limit
 - image thumbnails
