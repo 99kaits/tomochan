@@ -11,7 +11,7 @@ TODO:
 - split into modules
 - textboard mode with 2ch type templates
 - refactor templates
-- save name in cookie
+- save and request name in cookie
 - ctrl-enter to send
 - better accessibility (deffo alt text on images at least) (DEFINITELY do a pass with a screen reader to test that)
 - multiple file uploads
@@ -22,12 +22,12 @@ TODO:
 - allowed filetypes and number of uploads configurable by board
 - silly banner ads
 - optimize sql queries
-- post formatting of some variety (im thinking markdown, and maybe a selector for bbcode), also greentext
+- markdown post formatting with discord newlines and also greentext
 - aesthetics
 - \>\>1 replying
 - show direct replies in post header (\>\>2 \>\>10)
-- maybe some other email easter eggs besides sage and nonoko? (like dice rolling? definitely #fortune)
-- other pages, maybe an /ukko/ or homepage or rules/faq or whatever
+- maybe some other email easter eggs besides sage and nonoko? (like dice rolling? definitely #fortune), writing my own fortunes even tho i have all the 4chan ones now because tbh i can do better i can make sillier ones
+- other pages, maybe an overboard (/ukko/) or homepage or rules/faq or whatever
 - funny 404 pages
 - board specific banners
 - oekaki would be so epic just imagine
@@ -36,7 +36,8 @@ TODO:
 - init scripts
 - mod view/tools
 - mobile, just mobile
-- password for delete
+- checkbox for post deleting and reporting
+- post deletion using the password
 - save password in cookie
 - tripcodes and capcodes (prob "secure" tripcodes and maybe even tripkeys too)
 - bump limits (configurable)
@@ -58,7 +59,6 @@ TODO:
 - atom/rss???
 - qol javascript stuff?
 - boardlist/info in db maybe? maybe not?
-- checkbox for post deleting and reporting
 - maybe setup a futaba board for reference
 - job queueing?
 - auto update/refresh js? also tomo ticker (ticker of recent posts/recently bumped threads/new threads)

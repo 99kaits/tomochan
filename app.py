@@ -126,72 +126,82 @@ def post(form, board, thread_id):
     cur = con.cursor()
     largest_post_id = cur.execute("SELECT max(post_id) from posts").fetchone()[0]
 
-    if form.name.data:
-        name = form.name.data
+    if board in boards:
+        if form.name.data:
+            name = form.name.data
+        else:
+            name = "Anonymous"
+
+        timestamp = datetime.now(timezone.utc).timestamp()
+
+        if not largest_post_id:
+            post_id = 1
+        else:
+            post_id = largest_post_id + 1
+
+        # TODO: CHECK THREAD IDS IN THE POST CODE!!!!
+        """
+        if thread_id:
+            threadquery = cur.execute('SELECT * FROM posts WHERE thread_id = ?', (thread_id,))
+            if threadquery
+        """
+
+        if not thread_id:
+            thread_id = post_id
+            last_bump = timestamp
+            op = 1
+        else:
+            last_bump = None
+            op = 0
+
+        if op == 0:
+            if not form.email.data == "sage" or form.email.data == "nonokosage":
+                cur.execute(
+                    "UPDATE posts SET last_bump = ?, reply_count = reply_count + 1"
+                    " WHERE post_id = ? AND op == 1",
+                    (timestamp, thread_id),
+                )
+
+        if form.file.data and allowed_mime_type(form.file.data):
+            filename = secure_filename(form.file.data.filename)
+            file_actual = str(post_id) + "." + filename.rsplit(".", 1)[1].lower()
+            form.file.data.save(os.path.join(app.config["UPLOAD_FOLDER"], file_actual))
+        else:
+            filename = None
+            file_actual = None
+
+        if "X-Forwarded-For" in request.headers:
+            ip = request.headers.getlist("X-Forwarded-For")[0].rpartition(" ")[-1]
+        else:
+            ip = request.remote_addr
+
+        content = escape(form.post.data)
+
+        new_post = {
+            "post_id": post_id,
+            "board_id": board,
+            "thread_id": thread_id,
+            "op": op,
+            "last_bump": last_bump,
+            "reply_count": 0,
+            "sticky": 0,
+            "time": timestamp,
+            "name": name,
+            "email": form.email.data,
+            "subject": form.subject.data,
+            "content": content,
+            "filename": filename,
+            "file_actual": file_actual,
+            "password": form.password.data,
+            "spoiler": form.spoiler.data,
+            "ip": ip,
+        }
+        cur.execute(sql, new_post)
+        con.commit()
+        con.close()
+        return post_id
     else:
-        name = "Anonymous"
-
-    timestamp = datetime.now(timezone.utc).timestamp()
-
-    if not largest_post_id:
-        post_id = 1
-    else:
-        post_id = largest_post_id + 1
-
-    if not thread_id:
-        thread_id = post_id
-        last_bump = timestamp
-        op = 1
-    else:
-        last_bump = None
-        op = 0
-
-    if op == 0:
-        if not form.email.data == "sage" or form.email.data == "nonokosage":
-            cur.execute(
-                "UPDATE posts SET last_bump = ?, reply_count = reply_count + 1"
-                " WHERE post_id = ? AND op == 1",
-                (timestamp, thread_id),
-            )
-
-    if form.file.data and allowed_mime_type(form.file.data):
-        filename = secure_filename(form.file.data.filename)
-        file_actual = str(post_id) + "." + filename.rsplit(".", 1)[1].lower()
-        form.file.data.save(os.path.join(app.config["UPLOAD_FOLDER"], file_actual))
-    else:
-        filename = None
-        file_actual = None
-
-    if "X-Forwarded-For" in request.headers:
-        ip = request.headers.getlist("X-Forwarded-For")[0].rpartition(" ")[-1]
-    else:
-        ip = request.remote_addr
-
-    content = escape(form.post.data)
-
-    new_post = {
-        "post_id": post_id,
-        "board_id": board,
-        "thread_id": thread_id,
-        "op": op,
-        "last_bump": last_bump,
-        "reply_count": 0,
-        "sticky": 0,
-        "time": timestamp,
-        "name": name,
-        "email": form.email.data,
-        "subject": form.subject.data,
-        "content": content,
-        "filename": filename,
-        "file_actual": file_actual,
-        "password": form.password.data,
-        "spoiler": form.spoiler.data,
-        "ip": ip,
-    }
-    cur.execute(sql, new_post)
-    con.commit()
-    con.close()
-    return post_id
+        return 0
 
 
 def get_password():
@@ -289,12 +299,15 @@ def board_page(board):
             if form.file.data and form.post.data:
                 thread_id = None
                 new_post = post(form, board, thread_id)
-                if form.email.data == "nonoko" or form.email.data == "nonokosage":
-                    return redirect(url_for("board_page", board=board))
+                if new_post > 0:
+                    if form.email.data == "nonoko" or form.email.data == "nonokosage":
+                        return redirect(url_for("board_page", board=board))
+                    else:
+                        return redirect(
+                            url_for("thread_page", board=board, thread=new_post)
+                        )
                 else:
-                    return redirect(
-                        url_for("thread_page", board=board, thread=new_post)
-                    )
+                    return redirect("/static/posterror.html")
             else:
                 # TODO: error code for trying to make a new thread without a picture
                 return redirect("/static/posterror.html")
@@ -335,12 +348,15 @@ def catalog_page(board):
             if form.file.data and form.post.data:
                 thread_id = None
                 new_post = post(form, board, thread_id)
-                if form.email.data == "nonoko" or form.email.data == "nonokosage":
-                    return redirect(url_for("board_page", board=board))
+                if new_post > 0:
+                    if form.email.data == "nonoko" or form.email.data == "nonokosage":
+                        return redirect(url_for("board_page", board=board))
+                    else:
+                        return redirect(
+                            url_for("thread_page", board=board, thread=new_post)
+                        )
                 else:
-                    return redirect(
-                        url_for("thread_page", board=board, thread=new_post)
-                    )
+                    return redirect("/static/posterror.html")
             else:
                 # TODO: error code for trying to make a new thread without a picture
                 return redirect("/static/posterror.html")
@@ -378,11 +394,11 @@ def thread_page(board, thread):
 
             form = PostForm()
             if form.validate_on_submit():
-                post(form, board, thread)
-                response = redirect(url_for("thread_page", board=board, thread=thread))
-                if form.name.data:
-                    response.set_cookie("Name", form.name.data)
-                return response
+                new_post = post(form, board, thread)
+                if new_post > 0:
+                    return redirect(url_for("thread_page", board=board, thread=thread))
+                else:
+                    return redirect("/static/posterror.html")
 
             return render_template(
                 "thread.html",
