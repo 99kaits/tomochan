@@ -1,32 +1,27 @@
-import math
 import configparser
-import sqlite3
-import random
-import string
+import math
 import os
+import random
+import sqlite3
+import string
+from datetime import datetime, timedelta, timezone
+
 import magic
-
-
 from flask import (
     Flask,
-    render_template,
-    send_file,
     redirect,
-    url_for,
-    send_from_directory,
+    render_template,
     request,
+    send_file,
+    send_from_directory,
+    url_for,
 )
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileAllowed
-from werkzeug.utils import secure_filename
-from wtforms import StringField, SubmitField, TextAreaField, BooleanField
-from wtforms.validators import DataRequired, Optional
-
-# from flask_sqlalchemy import SQLAlchemy
-# from sqlalchemy.orm import DeclarativeBase
-
-from datetime import datetime, timezone, timedelta
+from flask_wtf.file import FileAllowed, FileField
 from markupsafe import escape
+from werkzeug.utils import secure_filename
+from wtforms import BooleanField, StringField, SubmitField, TextAreaField
+from wtforms.validators import DataRequired, Optional
 
 config = configparser.ConfigParser()
 if not os.path.exists("tomochan.ini"):
@@ -36,21 +31,20 @@ if not os.path.exists("tomochan.ini"):
     new_pass = "".join(
         random.choices(string.ascii_letters + string.digits + string.punctuation, k=32)
     )
-    print("new admin password is " + new_pass)
+    print("admin password is " + new_pass + " probably change it idk")
     boards = ["b", "tomo", "nottomo"]
     config["GLOBAL"] = {
         "secret_key": new_key,
         "upload_folder": "uploads",
         "admin_pass": new_pass,
         "boards": " ".join(boards),
-        "db_uri": "sqlite:///tomochan.db"
     }
     for board in boards:
         config[board] = {
             "name": "Placeholder",
             "subtitle": "wow you should change me in the ini",
-            "bump_limit": 50,
-            "size": 50,
+            "bump_limit": 300,
+            "size": 150,
             "hidden": False,
             "r9k": False,
         }
@@ -62,7 +56,6 @@ else:
 app = Flask(__name__)
 app.config["SECRET_KEY"] = config["GLOBAL"]["secret_key"]
 app.config["UPLOAD_FOLDER"] = config["GLOBAL"]["upload_folder"]
-app.config['SQLALCHEMY_DATABASE_URI'] = config['GLOBAL']['db_uri']
 
 ALLOWED_EXTENSIONS = {
     "png",
@@ -86,18 +79,9 @@ sql = (
     "reply_count, sticky, time, name, email, subject, content, filename, "
     "file_actual, password, spoiler, ip) "
     "values(:post_id, :board_id, :thread_id, :op, :last_bump, "
-    ":reply_count, :sticky, :time, :name, email, :subject, :content, "
+    ":reply_count, :sticky, :time, :name, :email, :subject, :content, "
     ":filename, :file_actual, :password, :spoiler, :ip)"
 )
-
-"""
-class Base(DeclarativeBase):
-    pass
-
-
-db = SQLAlchemy(model_class=Base)
-db.init_app(app)
-"""
 
 
 def allowed_mime_type(file):

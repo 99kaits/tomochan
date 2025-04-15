@@ -2,9 +2,9 @@
 # tomochan
 
 some type of imageboard (images not implemented yet) using python/flask, and sqlite
+VERY WIP DO NOT USE
 
 TODO:
-- rewrite with sqlalchemy? idk maybe?
 - sanitize ALL the inputs
 - figure out error handling/logging
 - beef up the security practices (prob already better than yotsuba tho lol)
@@ -24,6 +24,7 @@ TODO:
 - image thumbnails
 - file size and dimentions in db, kinda goes hand in hand with thumbnails actually i can prob use PIL for both
 - videos/audio, with thumbnails for video so ffmpeg will probably be involved somehow there
+- maybe even pdfs but NOT using ghostscript i do not want to get hacked like 4chan
 - allowed filetypes and number of uploads configurable by board
 - silly banner ads
 - optimize sql queries
