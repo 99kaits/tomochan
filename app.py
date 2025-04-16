@@ -63,8 +63,8 @@ if config['GLOBAL']['captcha'] == "simple":
     imagecaptcha = ImageCaptcha()
     audiocaptcha = AudioCaptcha()
 else:
-    imagecaptcha = False
-    audiocaptcha = False
+    imagecaptcha = None
+    audiocaptcha = None
 
 ALLOWED_EXTENSIONS = {
     "png",
@@ -241,8 +241,8 @@ def get_swatch(timestamp):
     time = datetime.fromtimestamp(timestamp, timezone.utc)
     bmt = time + timedelta(hours=1)
     beat = (
-        math.floor(bmt.hour * 41.666 + bmt.minute * 0.6944 + bmt.second * 0.011574)
-        % 1000
+            math.floor(bmt.hour * 41.666 + bmt.minute * 0.6944 + bmt.second * 0.011574)
+            % 1000
     )
     return beat
 
