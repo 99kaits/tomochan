@@ -4,12 +4,12 @@
 some type of imageboard (images not implemented yet) using python/flask, and sqlite
 VERY WIP DO NOT USE
 
-TODO:
+TODO URGENT:
 - FIX ANIMATED IMAGE SUPPORT!!!! THE PROCESSING STEP BREAKS THEM RN
 - have image sizes display in MB for large images maybe
 - separate logic for videos and audio
 
-
+TODO less urgent:
 - cycling image like the garfield calander on the homepage
 - tacky gold theme called "tomo premium"
 - sanitize ALL the inputs
