@@ -8,7 +8,9 @@ import sqlite3
 import string
 
 from captcha.image import ImageCaptcha
+from captcha.audio import AudioCaptcha
 from datetime import datetime, timedelta, timezone
+from io import BytesIO
 from flask import (
     Flask,
     redirect,
@@ -59,6 +61,10 @@ app.config["UPLOAD_FOLDER"] = config["GLOBAL"]["upload_folder"]
 
 if config['GLOBAL']['captcha'] == "simple":
     imagecaptcha = ImageCaptcha()
+    audiocaptcha = AudioCaptcha()
+else:
+    imagecaptcha = False
+    audiocaptcha = False
 
 ALLOWED_EXTENSIONS = {
     "png",
@@ -227,7 +233,7 @@ def content_parser(content):
     # TODO: MAKE SURE THE TAGS CLOSE
     # TODO: replace \n with <br>
     # TODO: replace > with span with class quote
-    if "&gt;" in content:
+    if "&gt;" in content:  # > escaped
         pass
 
 
@@ -303,16 +309,21 @@ def board_page(board):
         boardsubtitle = config[board]["subtitle"]
         randompassword = get_password()
         if imagecaptcha:
-            captcha_code = "ABCD"
+            captcha_code = "JOE BIDEN"
             captcha_data = imagecaptcha.generate(captcha_code)
             captcha = base64.b64encode(captcha_data.read()).decode()
+            audio_code = "42069"
+            audio_data = audiocaptcha.generate(audio_code)
+            audio = base64.b64encode(audio_data)
         else:
             captcha = None
+            audio = None
 
         form = PostForm()
         if form.validate_on_submit():
-            if captcha and form.captcha.data != captcha_code:
-                return redirect("/static/posterror.html")
+            if captcha:
+                if form.captcha.data != captcha_code or form.captcha.data != audio_code:
+                    return redirect("/static/posterror.html")
             if form.file.data and form.post.data:
                 thread_id = None
                 new_post = post(form, board, thread_id)
@@ -336,6 +347,7 @@ def board_page(board):
             boardsubtitle=boardsubtitle,
             form=form,
             captcha=captcha,
+            audio=audio,
             threads=threadlist,
             banner=banner,
             password=randompassword,
@@ -361,11 +373,15 @@ def catalog_page(board):
         boardsubtitle = config[board]["subtitle"]
         randompassword = get_password()
         if imagecaptcha:
-            captcha_code = "ABCD"
+            captcha_code = "JOE BIDEN"
             captcha_data = imagecaptcha.generate(captcha_code)
             captcha = base64.b64encode(captcha_data.read()).decode()
+            audio_code = "42069"
+            audio_data = audiocaptcha.generate(audio_code)
+            audio = base64.b64encode(BytesIO(audio_data).read())
         else:
             captcha = None
+            audio = None
 
         form = PostForm()
         if form.validate_on_submit():
@@ -394,6 +410,7 @@ def catalog_page(board):
             boardsubtitle=boardsubtitle,
             form=form,
             captcha=captcha,
+            audio=audio,
             threads=threads,
             banner=banner,
             password=randompassword,
@@ -419,11 +436,15 @@ def thread_page(board, thread):
             boardsubtitle = config[board]["subtitle"]
             randompassword = get_password()
             if imagecaptcha:
-                captcha_code = "ABCD"
+                captcha_code = "JOE BIDEN"
                 captcha_data = imagecaptcha.generate(captcha_code)
                 captcha = base64.b64encode(captcha_data.read()).decode()
+                audio_code = "42069"
+                audio_data = audiocaptcha.generate(audio_code)
+                audio = base64.b64encode(BytesIO(audio_data).read())
             else:
                 captcha = None
+                audio = None
 
             form = PostForm()
             if form.validate_on_submit():
@@ -443,6 +464,7 @@ def thread_page(board, thread):
                 boardsubtitle=boardsubtitle,
                 form=form,
                 captcha=captcha,
+                audio=audio,
                 posts=posts,
                 banner=banner,
                 password=randompassword,

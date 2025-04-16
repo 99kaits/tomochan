@@ -45,7 +45,7 @@
             {% if captcha %}
                 <tr>
                     <th>{{ form.captcha.label }}</th>
-                    <td><img class="captcha" src="data:image/png;base64, {{ captcha }}"><br>{{ form.captcha(placeholder="captcha required sorry") }}</td>
+                    <td><img class="captcha" src="data:image/png;base64, {{ captcha }}"> <audio controls src="data:audio/wav;base64. {{ audio }}"></audio><br>{{ form.captcha(placeholder="you can do image or audio") }}</td>
                 </tr>
             {% endif %}
             <tr>
