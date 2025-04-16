@@ -454,3 +454,6 @@ def thread_page(board, thread):
 @app.route("/uploads/<path:name>")
 def show_upload(name):
     return send_from_directory(app.config["UPLOAD_FOLDER"], name, as_attachment=False)
+
+if __name__ == '__main__':
+    app.run()
