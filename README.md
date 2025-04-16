@@ -5,6 +5,7 @@ some type of imageboard (images not implemented yet) using python/flask, and sql
 VERY WIP DO NOT USE
 
 TODO URGENT:
+- put boardname into config file (NOT THE FOOTER the footer stays tomochan because thats the software)
 - captcha (with config entry to turn it on or off)
 - looking into altcha and that other one i saw tho altcha is very appealing in its simplicity
 - catalog
