@@ -19,7 +19,7 @@
         ></a>
     </div>
     {% endif %}
-    <span class="header">
+    <div class="post_header">
         {% if post['subject'] %}
         <span class="subject">{{ post['subject'] }} </span>
         {% endif %}
@@ -41,7 +41,7 @@
         {% if post['op'] == 1 and not posts %}
         <span>[<a href="/{{ post['board_id']}}/{{ post['thread_id'] }}#{{ post['post_id'] }}">Reply</a>]</span>
         {% endif %}
-    </span>
+    </div>
     {% if post['file_actual'] and post['op'] == 0 %}
     <span class="file_header">File: <a href="/uploads/{{ post['file_actual'] }}">{{ post['file_actual'] }}</a>-(dimensions/size will be here soon, {{ post['filename'] }})</span>
     <div class="file">
