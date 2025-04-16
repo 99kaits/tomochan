@@ -311,6 +311,8 @@ def board_page(board):
 
         form = PostForm()
         if form.validate_on_submit():
+            if captcha and form.captcha.data != captcha_code:
+                return redirect("/static/posterror.html")
             if form.file.data and form.post.data:
                 thread_id = None
                 new_post = post(form, board, thread_id)
@@ -358,9 +360,17 @@ def catalog_page(board):
         boardname = config[board]["name"]
         boardsubtitle = config[board]["subtitle"]
         randompassword = get_password()
+        if imagecaptcha:
+            captcha_code = "ABCD"
+            captcha_data = imagecaptcha.generate(captcha_code)
+            captcha = base64.b64encode(captcha_data.read()).decode()
+        else:
+            captcha = None
 
         form = PostForm()
         if form.validate_on_submit():
+            if captcha and form.captcha.data != captcha_code:
+                return redirect("/static/posterror.html")
             if form.file.data and form.post.data:
                 thread_id = None
                 new_post = post(form, board, thread_id)
@@ -383,6 +393,7 @@ def catalog_page(board):
             boardname=boardname,
             boardsubtitle=boardsubtitle,
             form=form,
+            captcha=captcha,
             threads=threads,
             banner=banner,
             password=randompassword,
@@ -407,9 +418,17 @@ def thread_page(board, thread):
             boardname = config[board]["name"]
             boardsubtitle = config[board]["subtitle"]
             randompassword = get_password()
+            if imagecaptcha:
+                captcha_code = "ABCD"
+                captcha_data = imagecaptcha.generate(captcha_code)
+                captcha = base64.b64encode(captcha_data.read()).decode()
+            else:
+                captcha = None
 
             form = PostForm()
             if form.validate_on_submit():
+                if captcha and form.captcha.data != captcha_code:
+                    return redirect("/static/posterror.html")
                 new_post = post(form, board, thread)
                 if new_post > 0:
                     return redirect(url_for("thread_page", board=board, thread=thread))
@@ -423,6 +442,7 @@ def thread_page(board, thread):
                 boardname=boardname,
                 boardsubtitle=boardsubtitle,
                 form=form,
+                captcha=captcha,
                 posts=posts,
                 banner=banner,
                 password=randompassword,
