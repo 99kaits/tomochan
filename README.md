@@ -5,6 +5,7 @@ some type of imageboard (images not implemented yet) using python/flask, and sql
 VERY WIP DO NOT USE
 
 TODO:
+- tacky gold theme called "tomo premium"
 - sanitize ALL the inputs
 - figure out error handling/logging
 - beef up the security practices (prob already better than yotsuba tho lol)
@@ -67,8 +68,8 @@ TODO:
 - boardlist/info in db maybe? maybe not?
 - maybe setup a yotsuba board for reference (we need not settle for futaba anymore)
 - job queueing?
-- auto update/refresh js? also tomo ticker (ticker of recent posts/recently bumped threads/new threads)
-- maybe an eventual rewrite with kotlin/postgres?????? idk?????????
+- auto update/refresh js? also tomo ticker (ticker of recent posts/recently bumped threads/new threads MARQUEE IS BACK BAYBEEEEE)
+- eventual postgres migration
 
 DONE:
 - posting
