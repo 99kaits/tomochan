@@ -14,6 +14,7 @@ TODO URGENT:
 - truncate long original filenames
   
 TODO less urgent:
+- CORS
 - cycling image like the garfield calander on the homepage
 - tacky gold theme called "tomo premium"
 - sanitize ALL the inputs

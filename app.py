@@ -1,12 +1,14 @@
+import base64
 import configparser
+import magic
 import math
 import os
 import random
 import sqlite3
 import string
-from datetime import datetime, timedelta, timezone
 
-import magic
+from captcha.image import ImageCaptcha
+from datetime import datetime, timedelta, timezone
 from flask import (
     Flask,
     redirect,
@@ -35,6 +37,7 @@ if not os.path.exists("tomochan.ini"):
         "upload_folder": "uploads",
         "admin_pass": new_pass,
         "boards": " ".join(boards),
+        "captcha": "off"
     }
     for board in boards:
         config[board] = {
@@ -53,6 +56,9 @@ else:
 app = Flask(__name__)
 app.config["SECRET_KEY"] = config["GLOBAL"]["secret_key"]
 app.config["UPLOAD_FOLDER"] = config["GLOBAL"]["upload_folder"]
+
+if config['GLOBAL']['captcha'] == "simple":
+    imagecaptcha = ImageCaptcha()
 
 ALLOWED_EXTENSIONS = {
     "png",
@@ -276,6 +282,8 @@ class PostForm(FlaskForm):
     email = StringField("Email", validators=[Optional()])
     subject = StringField("Subject", validators=[Optional()])
     post = TextAreaField("Content", validators=[DataRequired()])
+    if imagecaptcha:
+        captcha = StringField("Verification", validators=[DataRequired()])
     # TODO: FILE SIZE LIMIT, THE VALIDATOR DOESNT WORK FOR SOME REASON
     file = FileField(
         "File", validators=[FileAllowed(ALLOWED_EXTENSIONS, "the fuck is this shit?")]
@@ -294,6 +302,12 @@ def board_page(board):
         boardname = config[board]["name"]
         boardsubtitle = config[board]["subtitle"]
         randompassword = get_password()
+        if imagecaptcha:
+            captcha_code = "ABCD"
+            captcha_data = imagecaptcha.generate(captcha_code)
+            captcha = base64.b64encode(captcha_data.read()).decode()
+        else:
+            captcha = None
 
         form = PostForm()
         if form.validate_on_submit():
@@ -319,6 +333,7 @@ def board_page(board):
             boardname=boardname,
             boardsubtitle=boardsubtitle,
             form=form,
+            captcha=captcha,
             threads=threadlist,
             banner=banner,
             password=randompassword,
