@@ -9,6 +9,9 @@
 <body>
     {% include 'header.html' %}
 
+    <span>[<a href="/{{ board }}/catalog">Catalog</a>]</span>
+    <hr>
+
     {% if threads %}
     {% for thread in threads %}
     <div class="thread">

@@ -5,9 +5,14 @@ some type of imageboard (images not implemented yet) using python/flask, and sql
 VERY WIP DO NOT USE
 
 TODO URGENT:
+- catalog
+- start truncating post content in board view and in catalog view
+
 - have image sizes display in MB for large images maybe
 - separate logic for videos and audio
 - truncate long original filenames
+
+
 
 TODO less urgent:
 - cycling image like the garfield calander on the homepage
@@ -52,7 +57,6 @@ TODO less urgent:
 - save password in cookie
 - tripcodes and capcodes (prob "secure" tripcodes and maybe even tripkeys too)
 - bump limits (configurable)
-- catalog
 - post archival/falling off the board
 - thread list pages
 - fun polls?
