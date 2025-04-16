@@ -13,6 +13,10 @@ CREATE TABLE posts (
   content TEXT NOT NULL,
   filename TEXT,
   file_actual TEXT,
+  file_thumbnail TEXT,
+  filesize INTEGER,
+  file_width INTEGER,
+  file_height INTEGER,
   password TEXT,
   spoiler INTEGER NOT NULL,
   ip TEXT NOT NULL

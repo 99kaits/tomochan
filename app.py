@@ -19,18 +19,15 @@ from flask import (
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed, FileField
 from markupsafe import escape
+from PIL import Image
 from werkzeug.utils import secure_filename
 from wtforms import BooleanField, StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Optional
 
 config = configparser.ConfigParser()
 if not os.path.exists("tomochan.ini"):
-    new_key = "".join(
-        random.choices(string.ascii_letters + string.digits + string.punctuation, k=72)
-    )
-    new_pass = "".join(
-        random.choices(string.ascii_letters + string.digits + string.punctuation, k=32)
-    )
+    new_key = "".join(random.choices(string.ascii_letters + string.digits, k=72))
+    new_pass = "".join(random.choices(string.ascii_letters + string.digits, k=32))
     print("admin password is " + new_pass + " probably change it idk")
     boards = ["b", "tomo", "nottomo"]
     config["GLOBAL"] = {
@@ -77,10 +74,10 @@ for board in boards:
 sql = (
     "INSERT INTO posts(post_id, board_id, thread_id, op, last_bump, "
     "reply_count, sticky, time, name, email, subject, content, filename, "
-    "file_actual, password, spoiler, ip) "
+    "file_actual, file_thumbnail, filesize, file_width, file_height, password, spoiler, ip) "
     "values(:post_id, :board_id, :thread_id, :op, :last_bump, "
     ":reply_count, :sticky, :time, :name, :email, :subject, :content, "
-    ":filename, :file_actual, :password, :spoiler, :ip)"
+    ":filename, :file_actual, :file_thumbnail, :filesize, :file_width, :file_height, :password, :spoiler, :ip)"
 )
 
 
@@ -150,11 +147,25 @@ def post(form, board, thread_id):
 
         if form.file.data and allowed_mime_type(form.file.data):
             filename = secure_filename(form.file.data.filename)
+            file = Image.open(form.file.data.stream)
+            # LETS THUMBNAIL THIS SHIT
+            file_width, file_height = file.size
+            thumb = file.copy()
+            thumb.thumbnail((200, 200))
+            file_thumbnail = str(post_id) + "_thumbnail" + "." + "webp"
+            thumb.save(os.path.join(app.config["UPLOAD_FOLDER"], file_thumbnail))
+
             file_actual = str(post_id) + "." + filename.rsplit(".", 1)[1].lower()
-            form.file.data.save(os.path.join(app.config["UPLOAD_FOLDER"], file_actual))
+            file.save(os.path.join(app.config["UPLOAD_FOLDER"], file_actual))
+            filesize = os.stat(os.path.join(app.config["UPLOAD_FOLDER"], file_actual)).st_size
+
         else:
             filename = None
             file_actual = None
+            file_thumbnail = None
+            filesize = None
+            file_width = None
+            file_height = None
 
         if "X-Forwarded-For" in request.headers:
             ip = request.headers.getlist("X-Forwarded-For")[0].rpartition(" ")[-1]
@@ -178,6 +189,10 @@ def post(form, board, thread_id):
             "content": content,
             "filename": filename,
             "file_actual": file_actual,
+            "file_thumbnail": file_thumbnail,
+            "filesize": filesize,
+            "file_width": file_width,
+            "file_height": file_height,
             "password": form.password.data,
             "spoiler": form.spoiler.data,
             "ip": ip,

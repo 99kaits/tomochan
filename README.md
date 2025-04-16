@@ -5,7 +5,9 @@ some type of imageboard (images not implemented yet) using python/flask, and sql
 VERY WIP DO NOT USE
 
 TODO:
-- CONFIG PASSWORD GENERATOR MAKES SOME CHARS THAT DONT PLAY NICE WITH PYTHON FIX IT FIX IT
+- FIX ANIMATED IMAGE SUPPORT!!!! THE PROCESSING STEP BREAKS THEM RN
+
+
 - cycling image like the garfield calander on the homepage
 - tacky gold theme called "tomo premium"
 - sanitize ALL the inputs
@@ -24,8 +26,6 @@ TODO:
 - better accessibility (deffo alt text on images at least) (DEFINITELY do a pass with a screen reader to test that)
 - multiple file uploads
 - file size limit
-- image thumbnails
-- file size and dimentions in db, kinda goes hand in hand with thumbnails actually i can prob use PIL for both
 - videos/audio, with thumbnails for video so ffmpeg will probably be involved somehow there
 - maybe even pdfs but NOT using ghostscript i do not want to get hacked like 4chan
 - allowed filetypes and number of uploads configurable by board
@@ -98,7 +98,8 @@ DONE:
 - better tabbing on the post form
 - REPLY COUNT FOR OPS IN DB REPLY COUNT FOR OPS IN DB!!!!
 - FIGURE OUT WHY THE SWATCH TIMESTAMPS ARE FUCKED UP
-
+- image thumbnails
+- file size and dimentions in db, kinda goes hand in hand with thumbnails actually i can prob use PIL for both
 
 markdown things:
 - discord style newlines, its just better esp for this kinda thing

@@ -8,13 +8,13 @@
 {% endif %}
 
     {% if post['file_actual'] and post['op'] == 1%}
-    <span class="file_header">File: <a href="/uploads/{{ post['file_actual'] }}">{{ post['file_actual'] }}</a>-(dimensions/size will be here soon, {{ post['filename'] }})</span>
+    <span class="file_header">File: <a href="/uploads/{{ post['file_actual'] }}">{{ post['file_actual'] }}</a>-({{ post['filesize'] / 1000 }} KB, {{ post['file_width'] }}x{{ post['file_height'] }}, {{ post['filename'] }})</span>
     <div class="file">
         <a href="/uploads/{{ post['file_actual'] }}"><img src=
         {% if post['spoiler'] == 1 %}
         "/static/spoiler.png"
         {% else %}
-        "/uploads/{{ post['file_actual'] }}"
+        "/uploads/{{ post['file_thumbnail'] }}"
         {% endif %}
         ></a>
     </div>
@@ -43,9 +43,15 @@
         {% endif %}
     </div>
     {% if post['file_actual'] and post['op'] == 0 %}
-    <span class="file_header">File: <a href="/uploads/{{ post['file_actual'] }}">{{ post['file_actual'] }}</a>-(dimensions/size will be here soon, {{ post['filename'] }})</span>
+    <span class="file_header">File: <a href="/uploads/{{ post['file_actual'] }}">{{ post['file_actual'] }}</a>-({{ post['filesize'] / 1000 }} KB, {{ post['file_width'] }}x{{ post['file_height'] }}, {{ post['filename'] }})</span>
     <div class="file">
-        <img src="/uploads/{{ post['file_actual'] }}">
+        <a href="/uploads/{{ post['file_actual'] }}"><img src=
+            {% if post['spoiler'] == 1 %}
+            "/static/spoiler.png"
+            {% else %}
+            "/uploads/{{ post['file_thumbnail'] }}"
+            {% endif %}
+            ></a>
     </div>
     {% endif %}
     <div class="content">
