@@ -5,7 +5,6 @@ some type of imageboard (images not implemented yet) using python/flask, and sql
 VERY WIP DO NOT USE
 
 TODO:
-- FIGURE OUT WHY THE SWATCH TIMESTAMPS ARE FUCKED UP
 - cycling image like the garfield calander on the homepage
 - tacky gold theme called "tomo premium"
 - sanitize ALL the inputs
@@ -97,6 +96,7 @@ DONE:
 - hidden boards
 - better tabbing on the post form
 - REPLY COUNT FOR OPS IN DB REPLY COUNT FOR OPS IN DB!!!!
+- FIGURE OUT WHY THE SWATCH TIMESTAMPS ARE FUCKED UP
 
 
 markdown things:
