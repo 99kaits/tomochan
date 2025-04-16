@@ -5,7 +5,6 @@ some type of imageboard (images not implemented yet) using python/flask, and sql
 VERY WIP DO NOT USE
 
 TODO URGENT:
-- FIX ANIMATED IMAGE SUPPORT!!!! THE PROCESSING STEP BREAKS THEM RN
 - have image sizes display in MB for large images maybe
 - separate logic for videos and audio
 - truncate long original filenames
@@ -102,7 +101,7 @@ DONE:
 - REPLY COUNT FOR OPS IN DB REPLY COUNT FOR OPS IN DB!!!!
 - FIGURE OUT WHY THE SWATCH TIMESTAMPS ARE FUCKED UP
 - image thumbnails
-- file size and dimentions in db, kinda goes hand in hand with thumbnails actually i can prob use PIL for both
+- file size and dimentions in db, kinda goes hand in hand with thumbnails ~~actually i can prob use PIL for both~~ FRIENDSHIP ENDED WITH PIL NOW IMAGEMAGICK IS MY NEW BEST FRIEND
 
 markdown things:
 - discord style newlines, its just better esp for this kinda thing

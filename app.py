@@ -19,7 +19,7 @@ from flask import (
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed, FileField
 from markupsafe import escape
-from PIL import Image
+from wand.image import Image
 from werkzeug.utils import secure_filename
 from wtforms import BooleanField, StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Optional
@@ -147,17 +147,17 @@ def post(form, board, thread_id):
 
         if form.file.data and allowed_mime_type(form.file.data):
             filename = secure_filename(form.file.data.filename)
-            file = Image.open(form.file.data.stream)
-            # LETS THUMBNAIL THIS SHIT
-            file_width, file_height = file.size
-            thumb = file.copy()
-            thumb.thumbnail((200, 200))
-            file_thumbnail = str(post_id) + "_thumbnail" + "." + "webp"
-            thumb.save(os.path.join(app.config["UPLOAD_FOLDER"], file_thumbnail))
+            with Image(file=form.file.data.stream, format=filename.rsplit(".", 1)[1].lower()) as original:
+                file_width = original.width
+                file_height = original.height
+                with original.clone() as thumbnail:
+                    thumbnail.transform(resize="250x250>")
+                    file_thumbnail = str(post_id) + "_thumbnail.webp"
+                    thumbnail.save(filename=os.path.join(app.config["UPLOAD_FOLDER"], file_thumbnail))
 
-            file_actual = str(post_id) + "." + filename.rsplit(".", 1)[1].lower()
-            file.save(os.path.join(app.config["UPLOAD_FOLDER"], file_actual))
-            filesize = os.stat(os.path.join(app.config["UPLOAD_FOLDER"], file_actual)).st_size
+                file_actual = str(post_id) + "." + filename.rsplit(".", 1)[1].lower()
+                original.save(filename=os.path.join(app.config["UPLOAD_FOLDER"], file_actual))
+                filesize = os.stat(os.path.join(app.config["UPLOAD_FOLDER"], file_actual)).st_size
 
         else:
             filename = None

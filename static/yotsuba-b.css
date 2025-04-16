@@ -75,12 +75,21 @@ th {
 }
 
 .file img {
-    max-width: 200px;
     float: left;
     margin-left: 20px;
     margin-right: 20px;
     margin-top: 3px;
     margin-bottom: 5px;
+}
+
+.op div.file img {
+    max-width: 250px;
+    max-height: 250px;
+}
+
+.reply div.file img {
+    max-width: 125px;
+    max-height: 125px;
 }
 
 .thread {
