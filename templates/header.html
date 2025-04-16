@@ -42,6 +42,12 @@
                 <th>{{ form.post.label }}</th>
                 <td>{{ form.post(cols="35", rows="10", tabindex=4) }}</td>
             </tr>
+            {% if captcha %}
+                <tr>
+                    <th>{{ form.captcha.label }}</th>
+                    <td><img class="captcha" src="data:image/png;base64, {{ captcha }}"><br>{{ form.captcha(placeholder="captcha required sorry") }}</td>
+                </tr>
+            {% endif %}
             <tr>
                 <th>{{ form.file.label }}</th>
                 <td>{{ form.file(accept="image/*", tabindex=5) }} [{{ form.spoiler(tabindex=6) }}{{ form.spoiler.label }}] </td>

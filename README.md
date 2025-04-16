@@ -5,16 +5,16 @@ some type of imageboard (images not implemented yet) using python/flask, and sql
 VERY WIP DO NOT USE
 
 TODO URGENT:
+- captcha (with config entry to turn it on or off)
+- looking into altcha and that other one i saw tho altcha is very appealing in its simplicity
 - catalog
 - start truncating post content in board view and in catalog view
-
 - have image sizes display in MB for large images maybe
 - separate logic for videos and audio
 - truncate long original filenames
-
-
-
+  
 TODO less urgent:
+- CORS
 - cycling image like the garfield calander on the homepage
 - tacky gold theme called "tomo premium"
 - sanitize ALL the inputs
@@ -65,8 +65,6 @@ TODO less urgent:
 - flags
 - flood detection, ill need it sooner or later
 - proxy detection? Even if i dont use it
-- captcha? probably with an audio one too (DEFINITELY NOT RECAPTCHA, a basic one is enough to stop unambitious bots and anything more complicated is never gonna be sufficent to block the ambitious ones)
-- possibly altcha?
 - placeholders of various varieties
 - search (prob just ops by default)
 - banning users (youve been banned for (timespan) - take a moment to reflect on your actions and (wait until (date/time) || send an appeal to (appeals email))
