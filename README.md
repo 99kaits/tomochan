@@ -5,6 +5,7 @@ some type of imageboard (images not implemented yet) using python/flask, and sql
 VERY WIP DO NOT USE
 
 TODO:
+- CONFIG PASSWORD GENERATOR MAKES SOME CHARS THAT DONT PLAY NICE WITH PYTHON FIX IT FIX IT
 - cycling image like the garfield calander on the homepage
 - tacky gold theme called "tomo premium"
 - sanitize ALL the inputs
