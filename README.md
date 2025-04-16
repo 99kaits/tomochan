@@ -76,6 +76,7 @@ TODO less urgent:
 - job queueing?
 - auto update/refresh js? also tomo ticker (ticker of recent posts/recently bumped threads/new threads MARQUEE IS BACK BAYBEEEEE)
 - eventual postgres migration
+- Auto create DB tables
 
 DONE:
 - posting
