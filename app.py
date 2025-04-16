@@ -211,7 +211,7 @@ def content_parser(content):
 
 
 def get_swatch(timestamp):
-    time = datetime.fromtimestamp(timestamp)
+    time = datetime.fromtimestamp(timestamp, timezone.utc)
     bmt = time + timedelta(hours=1)
     beat = (
         math.floor(bmt.hour * 41.666 + bmt.minute * 0.6944 + bmt.second * 0.011574)
@@ -221,7 +221,7 @@ def get_swatch(timestamp):
 
 
 def get_strftime(timestamp):
-    time = datetime.fromtimestamp(timestamp)
+    time = datetime.fromtimestamp(timestamp, timezone.utc)
     return time.strftime("%Y-%m-%d(%a) %H:%M:%S")
 
 
