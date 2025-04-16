@@ -17,7 +17,7 @@ TODO URGENT:
 TODO less urgent:
 - CORS
 - cycling image like the garfield calander on the homepage
-- tacky gold theme called "tomo premium"
+- tacky gold theme called "tomo premium" (maybe with ytmnd text for header? i need to learn to do that in css and not html)
 - sanitize ALL the inputs
 - figure out error handling/logging
 - beef up the security practices (prob already better than yotsuba tho lol)
