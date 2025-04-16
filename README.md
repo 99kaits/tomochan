@@ -6,6 +6,8 @@ VERY WIP DO NOT USE
 
 TODO:
 - FIX ANIMATED IMAGE SUPPORT!!!! THE PROCESSING STEP BREAKS THEM RN
+- have image sizes display in MB for large images maybe
+- separate logic for videos and audio
 
 
 - cycling image like the garfield calander on the homepage
