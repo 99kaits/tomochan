@@ -93,6 +93,9 @@ sql = (
     ":filename, :file_actual, :file_thumbnail, :filesize, :file_width, :file_height, :password, :spoiler, :ip)"
 )
 
+adtree = ET.parse("static/ads/ads.xml")  # TODO: move to a better spot
+banners = os.listdir("static/banners")
+
 
 def allowed_mime_type(file):
     mime = magic.from_buffer(file.stream.read(2048), mime=True)
@@ -226,12 +229,11 @@ def get_password():
 
 def get_banner(board):
     # TODO: board specific banners
-    banner = random.choice(os.listdir("static/banners"))
+    banner = random.choice(banners)
     return "/static/banners/" + banner
 
 def get_ad(size):
-    tree = ET.parse("static/ads/ads.xml") # TODO: move to a better spot
-    root = tree.getroot()
+    root = adtree.getroot()
     ads=[]
     for x in root.findall("ad"):
         ads.append([x.find("image").text, x.find("text").text, x.find("url").text, x.find("size").text])

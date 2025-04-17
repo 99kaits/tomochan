@@ -79,6 +79,9 @@ TODO less urgent:
 - eventual postgres migration
 - Auto create DB tables
 - Hash password for deletion
+- Offload image processing and captcha generator to a background task using something like Celery
+- Implement Async Database Queries
+- Add Flask-Caching maybe
 
 DONE:
 - posting
