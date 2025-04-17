@@ -6,6 +6,7 @@ import os
 import random
 import sqlite3
 import string
+import xml.etree.ElementTree as ET
 
 from captcha.image import ImageCaptcha
 from captcha.audio import AudioCaptcha
@@ -228,6 +229,28 @@ def get_banner(board):
     banner = random.choice(os.listdir("static/banners"))
     return "/static/banners/" + banner
 
+def get_ad(size):
+    tree = ET.parse("static/ads/ads.xml") # TODO: move to a better spot
+    root = tree.getroot()
+    ads=[]
+    for x in root.findall("ad"):
+        ads.append([x.find("image").text, x.find("text").text, x.find("url").text, x.find("size").text])
+    x = random.choice(ads)
+    if size == "small":
+        while x[3] != "small":
+            x = random.choice(ads)
+    elif size == "big":
+        while x[3] != "big":
+            x = random.choice(ads)
+    else:
+        return
+
+    ad = x[0]
+    text = x[1]
+    url = x[2]
+
+    return ("/static/ads/" + ad), text, url
+
 
 def content_parser(content):
     # TODO: MAKE SURE THE TAGS CLOSE
@@ -339,6 +362,11 @@ def board_page(board):
             else:
                 # TODO: error code for trying to make a new thread without a picture
                 return redirect("/static/posterror.html")
+
+        footad = get_ad("big")
+        headad = get_ad("big")
+        formad = get_ad("small")
+
         return render_template(
             "board.html",
             boardlist=boardlist,
@@ -351,6 +379,15 @@ def board_page(board):
             threads=threadlist,
             banner=banner,
             password=randompassword,
+            footad=footad[0],
+            footadtext=footad[1],
+            footadurl=footad[2],
+            headad=headad[0],
+            headadtext=headad[1],
+            headadurl=headad[2],
+            formad=formad[0],
+            formadtext=formad[1],
+            formadurl=formad[2]
         )
     else:
         return send_file("static/404.html"), 404
@@ -402,6 +439,11 @@ def catalog_page(board):
             else:
                 # TODO: error code for trying to make a new thread without a picture
                 return redirect("/static/posterror.html")
+
+        footad = get_ad("big")
+        headad = get_ad("big")
+        formad = get_ad("small")
+
         return render_template(
             "catalog.html",
             boardlist=boardlist,
@@ -414,6 +456,15 @@ def catalog_page(board):
             threads=threads,
             banner=banner,
             password=randompassword,
+            footad=footad[0],
+            footadtext=footad[1],
+            footadurl=footad[2],
+            headad=headad[0],
+            headadtext=headad[1],
+            headadurl=headad[2],
+            formad=formad[0],
+            formadtext=formad[1],
+            formadurl=formad[2]
         )
 
 
@@ -456,6 +507,10 @@ def thread_page(board, thread):
                 else:
                     return redirect("/static/posterror.html")
 
+            footad = get_ad("big")
+            headad = get_ad("big")
+            formad = get_ad("small")
+
             return render_template(
                 "thread.html",
                 boardlist=boardlist,
@@ -468,6 +523,15 @@ def thread_page(board, thread):
                 posts=posts,
                 banner=banner,
                 password=randompassword,
+                footad=footad[0],
+                footadtext=footad[1],
+                footadurl=footad[2],
+                headad=headad[0],
+                headadtext=headad[1],
+                headadurl=headad[2],
+                formad=formad[0],
+                formadtext=formad[1],
+                formadurl=formad[2]
             )
     else:
         return send_file("static/404.html"), 404

@@ -37,7 +37,7 @@ TODO less urgent:
 - videos/audio, with thumbnails for video so ffmpeg will probably be involved somehow there
 - maybe even pdfs but NOT using ghostscript i do not want to get hacked like 4chan
 - allowed filetypes and number of uploads configurable by board
-- silly banner ads
+
 - optimize sql queries
 - markdown post formatting with discord newlines and also greentext
 - aesthetics
@@ -106,6 +106,7 @@ DONE:
 - FIGURE OUT WHY THE SWATCH TIMESTAMPS ARE FUCKED UP
 - image thumbnails
 - file size and dimentions in db, kinda goes hand in hand with thumbnails ~~actually i can prob use PIL for both~~ FRIENDSHIP ENDED WITH PIL NOW IMAGEMAGICK IS MY NEW BEST FRIEND
+- silly banner ads
 
 markdown things:
 - discord style newlines, its just better esp for this kinda thing

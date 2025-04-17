@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ads>
+    <ad>
+        <text>placeholder</text>
+        <image>mario.png</image>
+        <url>http://example.com</url>
+        <size>small</size>
+    </ad>
+    <ad>
+        <text>Free Virus</text>
+        <image>virus.png</image>
+        <url>http://coolvirus.download</url>
+        <size>big</size>
+    </ad>
+    <ad>
+        <text>Do it.</text>
+        <image>squares_ad.png</image>
+        <url>/</url>
+        <size>big</size>
+    </ad>
+        <ad>
+        <text>Ben</text>
+        <image>ben_ad.png</image>
+        <url>https://talkingtomandfriends.com/</url>
+        <size>small</size>
+    </ad>
+    <ad>
+        <text>I'm bibil</text>
+        <image>bibil.png</image>
+        <url>https://bible4u.app/</url>
+        <size>small</size>
+    </ad>
+    <ad>
+        <text>He's never touched grass before</text>
+        <image>grass_ad.png</image>
+        <url>https://xmpp.org/</url>
+        <size>big</size>
+    </ad>
+    <ad>
+        <text>He's never touched grass before</text>
+        <image>grass_ad2.png</image>
+        <url>https://xmpp.org/</url>
+        <size>big</size>
+    </ad>
+    <ad>
+        <text>iPUFFi</text>
+        <image>ipuffi.png</image>
+        <url>https://www.youtube.com/watch?v=riMYCsZzJ2k</url>
+        <size>small</size>
+    </ad>
+</ads>
