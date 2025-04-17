@@ -35,6 +35,7 @@ if not os.path.exists("tomochan.ini"):
 else:
     config.read("tomochan.ini")
 
+
 def get_swatch(timestamp):
     time = datetime.fromtimestamp(timestamp, timezone.utc)
     bmt = time + timedelta(hours=1)
@@ -44,18 +45,17 @@ def get_swatch(timestamp):
     )
     return beat
 
+
 def get_strftime(timestamp):
     time = datetime.fromtimestamp(timestamp, timezone.utc)
     return time.strftime("%Y-%m-%d(%a) %H:%M:%S")
+
 
 def create_app():
     app = Flask(__name__)
     app.config["SECRET_KEY"] = config["GLOBAL"]["secret_key"]
     app.config["UPLOAD_FOLDER"] = config["GLOBAL"]["upload_folder"]
-
     app.jinja_env.globals.update(get_swatch=get_swatch, get_strftime=get_strftime)
-
-    for blueprint in blueprints:
-        app.register_blueprint(blueprint)
+    [app.register_blueprint(blueprint) for blueprint in blueprints]
 
     return app
