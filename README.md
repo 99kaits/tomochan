@@ -13,6 +13,7 @@ TODO URGENT:
 - have image sizes display in MB for large images maybe
 - separate logic for videos and audio
 - truncate long original filenames
+- maybe just have example config rather than generating it in code?
   
 TODO less urgent:
 - CORS
