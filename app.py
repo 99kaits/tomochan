@@ -28,6 +28,7 @@ from wand.image import Image
 from werkzeug.utils import secure_filename
 from wtforms import BooleanField, StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Optional
+from functools import lru_cache
 
 config = configparser.ConfigParser()
 if not os.path.exists("tomochan.ini"):
@@ -79,10 +80,7 @@ ALLOWED_EXTENSIONS = {
     "jxl",
 }
 boards = config["GLOBAL"]["boards"].split(" ")
-boardlist = []
-for board in boards:
-    if not config[board].getboolean("hidden"):
-        boardlist.append(board)
+boardlist = [board for board in boards if not config[board].getboolean("hidden")]
 
 sql = (
     "INSERT INTO posts(post_id, board_id, thread_id, op, last_bump, "
@@ -92,9 +90,6 @@ sql = (
     ":reply_count, :sticky, :time, :name, :email, :subject, :content, "
     ":filename, :file_actual, :file_thumbnail, :filesize, :file_width, :file_height, :password, :spoiler, :ip)"
 )
-
-adtree = ET.parse("static/ads/ads.xml")  # TODO: move to a better spot
-banners = os.listdir("static/banners")
 
 
 def allowed_mime_type(file):
@@ -110,7 +105,6 @@ def allowed_mime_type(file):
         "image/heif",
         "image/jxl",
     ]
-
 
 def dict_factory(cursor, row):
     d = {}
@@ -226,32 +220,43 @@ def get_password():
         random.choices(string.ascii_letters + string.digits + string.punctuation, k=12)
     )
 
+def get_banners_mtime():
+    # Get the latest modification time of the banners folder
+    return max(os.path.getmtime(os.path.join("static/banners", f)) for f in os.listdir("static/banners"))
+
+@lru_cache(maxsize=1) # Cache banner list.
+def get_banner_list():
+    return os.listdir("static/banners")
 
 def get_banner(board):
     # TODO: board specific banners
-    banner = random.choice(banners)
+    current_mtime = get_banners_mtime()
+    if get_banner_list.cache_info().hits > 0 and current_mtime != get_banner_list.cache_clear():
+        get_banner_list.cache_clear()
+    banner = random.choice(get_banner_list())
     return "/static/banners/" + banner
 
-def get_ad(size):
+
+@lru_cache(maxsize=1) # Cache ad list. Should only refresh when the .xml file is updated.
+def get_ads_list():
+    adtree = ET.parse("static/ads/ads.xml")  # TODO: move to a better spot
     root = adtree.getroot()
-    ads=[]
-    for x in root.findall("ad"):
-        ads.append([x.find("image").text, x.find("text").text, x.find("url").text, x.find("size").text])
-    x = random.choice(ads)
-    if size == "small":
-        while x[3] != "small":
-            x = random.choice(ads)
-    elif size == "big":
-        while x[3] != "big":
-            x = random.choice(ads)
-    else:
+    return [
+        [x.find("image").text, x.find("text").text, x.find("url").text, x.find("size").text]
+        for x in root.findall("ad")
+    ]
+
+
+def get_ad(size):
+    current_mtime = os.path.getmtime("static/ads/ads.xml")
+    if get_ads_list.cache_info().hits > 0 and current_mtime != get_ads_list.cache_clear():
+        get_ads_list.cache_clear() # Invalidate cache if the file has been updated.
+    ads = get_ads_list() # Get cached ads
+    filtered_ads = [ad for ad in ads if ad[3] == size] if size in ["small", "big"] else []
+    if not filtered_ads:
         return
-
-    ad = x[0]
-    text = x[1]
-    url = x[2]
-
-    return ("/static/ads/" + ad), text, url
+    ad = random.choice(filtered_ads)
+    return ("/static/ads/" + ad[0]), ad[1], ad[2]
 
 
 def content_parser(content):
@@ -282,23 +287,27 @@ def get_threads(board):
     con.row_factory = dict_factory
     cur = con.cursor()
 
-    oplist = []
-    threadsquery = cur.execute(
-        "SELECT * FROM posts WHERE op = 1 AND board_id = ?"
-        "ORDER BY sticky DESC, last_bump DESC",
-        (board,),
-    )
-    oplist = oplist + threadsquery.fetchall()
+    oplist = cur.execute(
+        "SELECT * FROM posts WHERE op = 1 AND board_id = ? ORDER BY sticky DESC, last_bump DESC",
+        (board,)
+    ).fetchall()
+
+    thread_ids = [op["post_id"] for op in oplist]
+    replies = cur.execute(
+        "SELECT * FROM posts WHERE thread_id IN ({}) AND op = 0 ORDER BY post_id DESC".format(
+            ",".join("?" for _ in thread_ids)
+        ),
+        thread_ids
+    ).fetchall()
+
+    # Group replies by thread_id
+    replies_by_thread = {}
+    for reply in replies:
+        replies_by_thread.setdefault(reply["thread_id"], []).append(reply)
 
     threadlist = []
     for op in oplist:
-        last5 = cur.execute(
-            "SELECT * FROM posts WHERE thread_id = ? AND op = 0 "
-            "ORDER BY post_id DESC LIMIT 5",
-            (op["post_id"],),
-        )
-        thread = list(reversed(last5.fetchall()))
-        thread.insert(0, op)
+        thread = [op] + list(reversed(replies_by_thread.get(op["post_id"], [])[:5]))
         threadlist.append(thread)
 
     con.close()
