@@ -37,7 +37,6 @@ TODO less urgent:
 - videos/audio, with thumbnails for video so ffmpeg will probably be involved somehow there
 - maybe even pdfs but NOT using ghostscript i do not want to get hacked like 4chan
 - allowed filetypes and number of uploads configurable by board
-
 - optimize sql queries
 - markdown post formatting with discord newlines and also greentext
 - aesthetics
@@ -78,6 +77,7 @@ TODO less urgent:
 - auto update/refresh js? also tomo ticker (ticker of recent posts/recently bumped threads/new threads MARQUEE IS BACK BAYBEEEEE)
 - eventual postgres migration
 - Auto create DB tables
+- Hash password for deletion
 
 DONE:
 - posting

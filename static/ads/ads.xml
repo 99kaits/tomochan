@@ -18,7 +18,7 @@
         <url>/</url>
         <size>big</size>
     </ad>
-        <ad>
+    <ad>
         <text>Ben</text>
         <image>ben_ad.png</image>
         <url>https://talkingtomandfriends.com/</url>
@@ -47,5 +47,11 @@
         <image>ipuffi.png</image>
         <url>https://www.youtube.com/watch?v=riMYCsZzJ2k</url>
         <size>small</size>
+    </ad>
+        <ad>
+        <text>Duke Shop</text>
+        <image>dukeshop.png</image>
+        <url>https://dev.java/</url>
+        <size>big</size>
     </ad>
 </ads>
