@@ -28,7 +28,6 @@ TODO less urgent:
 - wordfilters (language enhancers)
 - start truncating post content in board view and in catalog view
 - move more shit to config file
-- split into modules
 - textboard mode with 2ch type templates
 - refactor templates
 - save and request name in cookie
@@ -112,6 +111,7 @@ DONE:
 - image thumbnails
 - file size and dimentions in db, kinda goes hand in hand with thumbnails ~~actually i can prob use PIL for both~~ FRIENDSHIP ENDED WITH PIL NOW IMAGEMAGICK IS MY NEW BEST FRIEND
 - silly banner ads
+- split into modules
 
 markdown things:
 - discord style newlines, its just better esp for this kinda thing
