@@ -5,6 +5,7 @@ some type of imageboard using python/flask, and sqlite
 VERY WIP DO NOT USE
 
 TODO URGENT:
+- strip exif from images
 - put boardname into config file (NOT THE FOOTER the footer stays tomochan because thats the software)
 - captcha (with config entry to turn it on or off)
 - looking into altcha and that other one i saw tho altcha is very appealing in its simplicity
