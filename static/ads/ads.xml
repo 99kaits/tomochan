@@ -48,10 +48,28 @@
         <url>https://www.youtube.com/watch?v=riMYCsZzJ2k</url>
         <size>small</size>
     </ad>
-        <ad>
+    <ad>
         <text>Duke Shop</text>
         <image>dukeshop.png</image>
         <url>https://dev.java/</url>
+        <size>big</size>
+    </ad>
+    <ad>
+        <text>g</text>
+        <image>gkeyboard.png</image>
+        <url>https://play.google.com/store/apps/details?id=com.google.android.inputmethod.latin&amp;hl=en-US/</url>
+        <size>big</size>
+    </ad>
+    <ad>
+        <text>Al Gore</text>
+        <image>gore.png</image>
+        <url>https://www.w3.org/</url>
+        <size>big</size>
+    </ad>
+        <ad>
+        <text>Subway</text>
+        <image>subway.png</image>
+        <url>https://www.reddit.com/r/subway/comments/zs670z/how_is_subway_profitable/</url>
         <size>big</size>
     </ad>
 </ads>
