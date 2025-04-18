@@ -46,7 +46,6 @@ TODO less urgent:
 - maybe some other email easter eggs besides sage and nonoko? (like dice rolling? definitely #fortune), writing my own fortunes even tho i have all the 4chan ones now because tbh i can do better i can make sillier ones
 - other pages, maybe an overboard (/ukko/) or homepage or rules/faq or whatever
 - funny 404 pages
-- board specific banners
 - oekaki would be so epic just imagine
 - caching rendered templates for extra performance maybe?
 - r9k
@@ -112,6 +111,7 @@ DONE:
 - file size and dimentions in db, kinda goes hand in hand with thumbnails ~~actually i can prob use PIL for both~~ FRIENDSHIP ENDED WITH PIL NOW IMAGEMAGICK IS MY NEW BEST FRIEND
 - silly banner ads
 - split into modules
+- board specific banners
 
 markdown things:
 - discord style newlines, its just better esp for this kinda thing
