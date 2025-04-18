@@ -15,10 +15,10 @@
         <div class="catalog_entry" id="{{ thread['post_id'] }}">
             <a href="/{{ board }}/{{ thread['post_id'] }}/">
                 <img src="/uploads/{{ thread['file_thumbnail'] }}">
-            </a>
-        <p class="reply_count">R : <b>{{ thread['reply_count'] }}</b></p>
+            </a><br>
+        <span class="reply_count">R : <b>{{ thread['reply_count'] }}</b></span><br>
         {% if thread['subject'] %}
-            <span class="subject">{{ thread['subject'] }}: </span>
+            <span class="subject"><b>{{ thread['subject'] }}</b>: </span>
         {% endif %}
         <span class="content">{{ thread['content'] }}</span>
         </div>
@@ -28,6 +28,10 @@
     <p>idk what to say man there are supposed to be posts here</p>
     {% endif %}
     </div>
+
+    <hr>
+    [<a href="/{{ board }}">Return</a>] [<a href="#">Top</a>]
+    <hr>
 
     {% include 'footer.html' %}
 </body>
