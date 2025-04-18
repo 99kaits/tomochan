@@ -137,18 +137,18 @@ def post(form, board, thread_id):
                     file_thumbnail = str(post_id) + "_thumbnail.webp"
                     thumbnail.save(
                         filename=os.path.join(
-                            current_app.config["UPLOAD_FOLDER"], file_thumbnail
+                            "app/"+current_app.config["UPLOAD_FOLDER"], file_thumbnail
                         )
                     )
 
                 file_actual = str(post_id) + "." + filename.rsplit(".", 1)[1].lower()
                 original.save(
                     filename=os.path.join(
-                        current_app.config["UPLOAD_FOLDER"], file_actual
+                        "app/"+current_app.config["UPLOAD_FOLDER"], file_actual
                     )
                 )
                 filesize = os.stat(
-                    os.path.join(current_app.config["UPLOAD_FOLDER"], file_actual)
+                    os.path.join("app/"+current_app.config["UPLOAD_FOLDER"], file_actual)
                 ).st_size
 
         else:
