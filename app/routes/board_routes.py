@@ -298,8 +298,7 @@ def get_threads(board):
         LEFT JOIN (
             SELECT * FROM posts
             WHERE op = 0
-            ORDER BY post_id ASC
-            LIMIT 6
+            ORDER BY post_id DESC
         ) AS replies
         ON op.post_id = replies.thread_id
         WHERE op.op = 1 AND op.board_id = ?
@@ -336,7 +335,7 @@ def get_threads(board):
             })
 
     threadlist = [
-        [data["thread"]] + data["replies"] for data in thread_map.values()
+        [data["thread"]] + list(reversed(data["replies"][:5])) for data in thread_map.values()
     ]
 
     con.close()
