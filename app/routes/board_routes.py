@@ -299,7 +299,7 @@ def get_threads(board):
             SELECT * FROM posts
             WHERE op = 0
             ORDER BY post_id ASC
-            LIMIT 5
+            LIMIT 6
         ) AS replies
         ON op.post_id = replies.thread_id
         WHERE op.op = 1 AND op.board_id = ?
