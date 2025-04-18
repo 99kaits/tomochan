@@ -28,20 +28,26 @@ from wand.image import Image
 from werkzeug.utils import secure_filename
 from wtforms import StringField, TextAreaField, BooleanField, SubmitField
 from wtforms.validators import Optional, DataRequired
+from itertools import groupby
 
 board_bp = Blueprint('board', __name__, template_folder='../templates')
-config = configparser.ConfigParser()
-config.read("tomochan.ini")
 
-if config['GLOBAL']['captcha'] == "simple":
+@lru_cache(maxsize=1)
+def get_config():
+    config = configparser.ConfigParser()
+    config.read("tomochan.ini")
+    return config
+
+
+if get_config()['GLOBAL']['captcha'] == "simple":
     imagecaptcha = ImageCaptcha()
     audiocaptcha = AudioCaptcha()
 else:
     imagecaptcha = None
     audiocaptcha = None
 
-boards = config["GLOBAL"]["boards"].split(" ")
-boardlist = [board for board in boards if not config[board].getboolean("hidden")]
+boards = get_config()["GLOBAL"]["boards"].split(" ")
+boardlist = [board for board in boards if not get_config()[board].getboolean("hidden")]
 
 ALLOWED_EXTENSIONS = {
     "png",
@@ -72,6 +78,7 @@ def dict_factory(cursor, row):
     return d
 
 
+@lru_cache(maxsize=1)
 def allowed_mime_type(file):
     mime = magic.from_buffer(file.stream.read(2048), mime=True)
     file.stream.seek(0)  # Reset file pointer after reading
@@ -195,24 +202,26 @@ def get_password():
         random.choices(string.ascii_letters + string.digits + string.punctuation, k=12)
     )
 
-
-def get_banners_mtime():
-    # Get the latest modification time of the banners folder
-    return max(os.path.getmtime(os.path.join("static/banners", f)) for f in os.listdir("static/banners"))
-
-
 @lru_cache(maxsize=1)  # Cache banner list.
 def get_banner_list():
-    return os.listdir("static/banners")
+    bantree = ET.parse("static/banners/banners.xml")
+    root = bantree.getroot()
+    return [
+        [x.find("image").text, x.find("board").text] for x in root.findall("banner")
+    ]
 
 
 def get_banner(board):
-    # TODO: board specific banners
-    current_mtime = get_banners_mtime()
-    if get_banner_list.cache_info().hits > 0 and current_mtime != get_banner_list.cache_clear():
+    current_mtime = os.path.getmtime("static/banners/banners.xml")
+    if not hasattr(get_banner, "_last_mtime") or get_banner._last_mtime != current_mtime:
         get_banner_list.cache_clear()
-    banner = random.choice(get_banner_list())
-    return "/static/banners/" + banner
+        get_banner._last_mtime = current_mtime
+    banners = get_banner_list()
+    filtered_banners = [banner for banner in banners if ((banner[1] == board) or (banner[1] =="all"))]
+    if not filtered_banners:
+        return
+    banner = random.choice(filtered_banners)
+    return "/static/banners/" + banner[0]
 
 
 @lru_cache(maxsize=1)  # Cache ad list. Should only refresh when the .xml file is updated.
@@ -227,8 +236,9 @@ def get_ads_list():
 
 def get_ad(size):
     current_mtime = os.path.getmtime("static/ads/ads.xml")
-    if get_ads_list.cache_info().hits > 0 and current_mtime != get_ads_list.cache_clear():
+    if not hasattr(get_ad, "_last_mtime") or get_ad._last_mtime != current_mtime:
         get_ads_list.cache_clear()  # Invalidate cache if the file has been updated.
+        get_ad._last_mtime = current_mtime # Update mtime
     ads = get_ads_list()  # Get cached ads
     filtered_ads = [ad for ad in ads if ad[3] == size] if size in ["small", "big"] else []
     if not filtered_ads:
@@ -253,7 +263,7 @@ def get_threads(board):
     oplist = cur.execute(
         "SELECT * FROM posts WHERE op = 1 AND board_id = ? ORDER BY sticky DESC, last_bump DESC",
         (board,)
-    ).fetchall()
+    ).fetchall() # Get all threads (posts where op = 1)
 
     thread_ids = [op["post_id"] for op in oplist]
     replies = cur.execute(
@@ -261,12 +271,14 @@ def get_threads(board):
             ",".join("?" for _ in thread_ids)
         ),
         thread_ids
-    ).fetchall()
+    ).fetchall() # Get all replies for the threads
 
     # Group replies by thread_id
-    replies_by_thread = {}
-    for reply in replies:
-        replies_by_thread.setdefault(reply["thread_id"], []).append(reply)
+    replies.sort(key=lambda reply: reply["thread_id"])
+    replies_by_thread = {
+        thread_id: list(group)
+        for thread_id, group in groupby(replies, key=lambda reply: reply["thread_id"])
+    }
 
     threadlist = []
     for op in oplist:
@@ -298,8 +310,8 @@ def board_page(board):
 
         threadlist = get_threads(board)
         banner = get_banner(board)
-        boardname = config[board]["name"]
-        boardsubtitle = config[board]["subtitle"]
+        boardname = get_config()[board]["name"]
+        boardsubtitle = get_config()[board]["subtitle"]
         randompassword = get_password()
         if imagecaptcha:
             captcha_code = "JOE BIDEN"
@@ -376,8 +388,8 @@ def catalog_page(board):
         con.close()
 
         banner = get_banner(board)
-        boardname = config[board]["name"]
-        boardsubtitle = config[board]["subtitle"]
+        boardname = get_config()[board]["name"]
+        boardsubtitle = get_config()[board]["subtitle"]
         randompassword = get_password()
         if imagecaptcha:
             captcha_code = "JOE BIDEN"
@@ -453,8 +465,8 @@ def thread_page(board, thread):
             return send_file("static/404.html"), 404
         else:
             banner = get_banner(board)
-            boardname = config[board]["name"]
-            boardsubtitle = config[board]["subtitle"]
+            boardname = get_config()[board]["name"]
+            boardsubtitle = get_config()[board]["subtitle"]
             randompassword = get_password()
             if imagecaptcha:
                 captcha_code = "JOE BIDEN"
