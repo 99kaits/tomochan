@@ -335,7 +335,7 @@ def get_threads(board):
             })
 
     threadlist = [
-        [data["thread"]] + list(reversed(data["replies"][:5])) for data in thread_map.values()
+        [data["thread"]] + data["replies"][-5:] for data in thread_map.values()
     ]
 
     con.close()
