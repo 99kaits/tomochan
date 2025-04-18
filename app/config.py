@@ -4,10 +4,10 @@ import random
 import string
 
 def create_config():
-    config = configparser.ConfigParser()
     if os.path.exists("tomochan.ini"):
         return
     else:
+        config = configparser.ConfigParser()
         new_key = "".join(random.choices(string.ascii_letters + string.digits, k=72))
         new_pass = "".join(random.choices(string.ascii_letters + string.digits, k=32))
         print("admin password is " + new_pass + " probably change it idk")
