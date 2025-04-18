@@ -1,4 +1,4 @@
-![silly mario banner that says "i am a placeholder: SUPER MARIO BANNER" and the picture is a bunch of fucked up marios in gm_construct](static/banners/placeholderbanner.png)
+![silly mario banner that says "i am a placeholder: SUPER MARIO BANNER" and the picture is a bunch of fucked up marios in gm_construct](app/static/banners/placeholderbanner.png)
 # tomochan
 
 some type of imageboard using python/flask, and sqlite

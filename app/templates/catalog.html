@@ -9,6 +9,7 @@
 
 <body>
     {% include 'header.html' %}
+    [<a href="/{{ board }}">Return</a>] [<a href="#footer">Bottom</a>]
     {% if threads %}
     <div class="catalog_container">
         {% for thread in threads %}
