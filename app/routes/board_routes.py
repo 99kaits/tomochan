@@ -278,22 +278,28 @@ def get_threads(board):
     query = """
         SELECT
             op.*,
-            replies.post_id AS reply_post_id,
-            replies.content AS reply_content,
-            replies.time AS reply_time,
-            replies.filename AS reply_file,
-            replies.file_actual AS reply_actual,
-            replies.file_thumbnail AS reply_thumbnail,
-            replies.filesize AS reply_filesize,
-            replies.file_width AS reply_filewidth,
-            replies.file_height AS reply_fileheight
+            replies.post_id AS replies_post_id,
+            replies.content AS replies_content,
+            replies.time AS replies_time,
+            replies.filename AS replies_file,
+            replies.file_actual AS replies_actual,
+            replies.file_thumbnail AS replies_thumbnail,
+            replies.filesize AS replies_filesize,
+            replies.file_width AS replies_filewidth,
+            replies.file_height AS replies_fileheight,
+            replies.name AS replies_name,
+            replies.subject AS replies_subject,
+            replies.email AS replies_email,
+            replies.spoiler AS replies_spoiler,
+            replies.sticky AS replies_sticky,
+            replies.reply_count AS replies_count
         FROM
             posts AS op
         LEFT JOIN (
             SELECT * FROM posts
             WHERE op = 0
-            ORDER BY post_id DESC
-            LIMIT 5
+            ORDER BY post_id ASC
+            LIMIT 6
         ) AS replies
         ON op.post_id = replies.thread_id
         WHERE op.op = 1 AND op.board_id = ?
@@ -307,24 +313,30 @@ def get_threads(board):
     for row in results:
         thread_id = row["post_id"]
         if thread_map[thread_id]["thread"] is None:
-            thread_map[thread_id]["thread"] = {j: k for j, k in row.items()}
-        if row["reply_post_id"]:
+            thread_map[thread_id]["thread"] = {j: k for j, k in row.items() if "replies_" not in j }
+        if row["replies_post_id"]:
             thread_map[thread_id]["replies"].append({
-                "post_id": row["reply_post_id"],
-                "content": row["reply_content"],
-                "time": row["reply_time"],
+                "post_id": row["replies_post_id"],
+                "content": row["replies_content"],
+                "time": row["replies_time"],
                 "reply_count": 0,
-                "filename": row["reply_file"],
-                "file_actual": row["reply_actual"],
-                "file_thumbnail": row["reply_thumbnail"],
-                "filesize": row["reply_filesize"],
-                "file_width": row["reply_filewidth"],
-                "file_height": row["reply_fileheight"],
+                "filename": row["replies_file"],
+                "file_actual": row["replies_actual"],
+                "file_thumbnail": row["replies_thumbnail"],
+                "filesize": row["replies_filesize"],
+                "file_width": row["replies_filewidth"],
+                "file_height": row["replies_fileheight"],
+                "name": row["replies_name"],
+                "subject": row["replies_subject"],
+                "email": row["replies_email"],
+                "spoiler": row["replies_spoiler"],
+                "sticky": row["replies_sticky"],
+                "reply_count": row["replies_count"],
 
             })
 
     threadlist = [
-        [data["thread"]] + data["replies"][:5] for data in thread_map.values()
+        [data["thread"]] + data["replies"] for data in thread_map.values()
     ]
 
     con.close()
