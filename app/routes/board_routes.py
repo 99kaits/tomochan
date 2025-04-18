@@ -6,6 +6,7 @@ import string
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from functools import lru_cache
+from collections import defaultdict
 import random
 
 from flask import (
@@ -279,13 +280,20 @@ def get_threads(board):
             op.*,
             replies.post_id AS reply_post_id,
             replies.content AS reply_content,
-            replies.time AS reply_time
+            replies.time AS reply_time,
+            replies.filename AS reply_file,
+            replies.file_actual AS reply_actual,
+            replies.file_thumbnail AS reply_thumbnail,
+            replies.filesize AS reply_filesize,
+            replies.file_width AS reply_filewidth,
+            replies.file_height AS reply_fileheight
         FROM
             posts AS op
         LEFT JOIN (
             SELECT * FROM posts
             WHERE op = 0
             ORDER BY post_id DESC
+            LIMIT 5
         ) AS replies
         ON op.post_id = replies.thread_id
         WHERE op.op = 1 AND op.board_id = ?
@@ -294,21 +302,25 @@ def get_threads(board):
     results = cur.execute(query, (board,)).fetchall()
 
     # Group replies by thread ID and limit to the latest 5 replies
-    thread_map = {}
+    thread_map = defaultdict(lambda: {"thread": None, "replies": []})
 
     for row in results:
         thread_id = row["post_id"]
-        if thread_id not in thread_map:
-                thread_map[thread_id] = {
-                    "thread": {j: k for j, k in row.items()},
-                    "replies": []
-                }
+        if thread_map[thread_id]["thread"] is None:
+            thread_map[thread_id]["thread"] = {j: k for j, k in row.items()}
         if row["reply_post_id"]:
             thread_map[thread_id]["replies"].append({
                 "post_id": row["reply_post_id"],
                 "content": row["reply_content"],
                 "time": row["reply_time"],
                 "reply_count": 0,
+                "filename": row["reply_file"],
+                "file_actual": row["reply_actual"],
+                "file_thumbnail": row["reply_thumbnail"],
+                "filesize": row["reply_filesize"],
+                "file_width": row["reply_filewidth"],
+                "file_height": row["reply_fileheight"],
+
             })
 
     threadlist = [
