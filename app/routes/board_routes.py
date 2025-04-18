@@ -26,7 +26,7 @@ from wtforms import StringField, TextAreaField, BooleanField, SubmitField
 from wtforms.validators import Optional, DataRequired
 from itertools import groupby
 
-board_bp = Blueprint("board", __name__, template_folder="../templates")
+board_bp = Blueprint("board", __name__, template_folder="../../templates")
 
 
 @lru_cache(maxsize=1)
@@ -206,7 +206,7 @@ def get_password():
 
 @lru_cache(maxsize=1)  # Cache banner list.
 def get_banner_list():
-    bantree = ET.parse("static/banners/banners.xml")
+    bantree = ET.parse("app/static/banners/banners.xml")
     root = bantree.getroot()
     return [
         [x.find("image").text, x.find("board").text] for x in root.findall("banner")
@@ -214,7 +214,7 @@ def get_banner_list():
 
 
 def get_banner(board):
-    current_mtime = os.path.getmtime("static/banners/banners.xml")
+    current_mtime = os.path.getmtime("app/static/banners/banners.xml")
     if (
         not hasattr(get_banner, "_last_mtime")
         or get_banner._last_mtime != current_mtime
@@ -235,7 +235,7 @@ def get_banner(board):
     maxsize=1
 )  # Cache ad list. Should only refresh when the .xml file is updated.
 def get_ads_list():
-    adtree = ET.parse("static/ads/ads.xml")  # TODO: move to a better spot
+    adtree = ET.parse("app/static/ads/ads.xml")  # TODO: move to a better spot
     root = adtree.getroot()
     return [
         [
@@ -249,7 +249,7 @@ def get_ads_list():
 
 
 def get_ad(size):
-    current_mtime = os.path.getmtime("static/ads/ads.xml")
+    current_mtime = os.path.getmtime("app/static/ads/ads.xml")
     if not hasattr(get_ad, "_last_mtime") or get_ad._last_mtime != current_mtime:
         get_ads_list.cache_clear()  # Invalidate cache if the file has been updated.
         get_ad._last_mtime = current_mtime  # Update mtime

@@ -6,7 +6,7 @@ import string
 from datetime import timezone, timedelta, datetime
 
 from flask import Flask
-from .routes import blueprints
+from app.routes import blueprints
 
 config = configparser.ConfigParser()
 if not os.path.exists("tomochan.ini"):
@@ -30,7 +30,7 @@ if not os.path.exists("tomochan.ini"):
             "hidden": False,
             "r9k": False,
         }
-    with open("tomochan.ini", "w") as configfile:
+    with open("../tomochan.ini", "w") as configfile:
         config.write(configfile)
 else:
     config.read("tomochan.ini")
