@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>tomochan</title>
+    </head>
+    <body>
+        <marquee>tomochan tomochan tomochan tomochan tomochan tomochan tomochan tomochan tomochan tomochan tomochan tomochan tomochan tomochan tomochan tomochan tomochan tomochan tomochan tomochan tomochan tomochan tomochan tomochan tomochan tomochan tomochan tomochan tomochan tomochan </marquee>
+        <h2>welcome to tomochan</h2>
+        <p>puruse the boards:</p>
+        <ul>
+            {% for board in boardlist %}
+            <li><a href="/{{ board }}/">{{ boardlist[board] }}</a></li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
