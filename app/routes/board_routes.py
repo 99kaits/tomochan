@@ -24,7 +24,6 @@ from wand.image import Image
 from werkzeug.utils import secure_filename
 from wtforms import StringField, TextAreaField, BooleanField, SubmitField, FieldList
 from wtforms.validators import Optional, DataRequired
-from itertools import groupby
 from app.config import create_config
 
 board_bp = Blueprint("board", __name__, template_folder="../../templates")
@@ -275,30 +274,46 @@ def get_threads(board):
     con.row_factory = dict_factory
     cur = con.cursor()
 
-    oplist = cur.execute(
-        "SELECT * FROM posts WHERE op = 1 AND board_id = ? ORDER BY sticky DESC, last_bump DESC",
-        (board,),
-    ).fetchall()  # Get all threads (posts where op = 1)
+    query = """
+        SELECT
+            op.*,
+            replies.post_id AS reply_post_id,
+            replies.content AS reply_content,
+            replies.time AS reply_time
+        FROM
+            posts AS op
+        LEFT JOIN (
+            SELECT * FROM posts
+            WHERE op = 0
+            ORDER BY post_id DESC
+        ) AS replies
+        ON op.post_id = replies.thread_id
+        WHERE op.op = 1 AND op.board_id = ?
+        ORDER BY op.sticky DESC, op.last_bump DESC
+    """
+    results = cur.execute(query, (board,)).fetchall()
 
-    thread_ids = [op["post_id"] for op in oplist]
-    replies = cur.execute(
-        "SELECT * FROM posts WHERE thread_id IN ({}) AND op = 0 ORDER BY post_id DESC".format(
-            ",".join("?" for _ in thread_ids)
-        ),
-        thread_ids,
-    ).fetchall()  # Get all replies for the threads
+    # Group replies by thread ID and limit to the latest 5 replies
+    thread_map = {}
 
-    # Group replies by thread_id
-    replies.sort(key=lambda reply: reply["thread_id"])
-    replies_by_thread = {
-        thread_id: list(group)
-        for thread_id, group in groupby(replies, key=lambda reply: reply["thread_id"])
-    }
+    for row in results:
+        thread_id = row["post_id"]
+        if thread_id not in thread_map:
+                thread_map[thread_id] = {
+                    "thread": {j: k for j, k in row.items()},
+                    "replies": []
+                }
+        if row["reply_post_id"]:
+            thread_map[thread_id]["replies"].append({
+                "post_id": row["reply_post_id"],
+                "content": row["reply_content"],
+                "time": row["reply_time"],
+                "reply_count": 0,
+            })
 
-    threadlist = []
-    for op in oplist:
-        thread = [op] + list(reversed(replies_by_thread.get(op["post_id"], [])[:5]))
-        threadlist.append(thread)
+    threadlist = [
+        [data["thread"]] + data["replies"][:5] for data in thread_map.values()
+    ]
 
     con.close()
     return threadlist
