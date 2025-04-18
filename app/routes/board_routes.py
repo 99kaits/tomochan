@@ -25,12 +25,14 @@ from werkzeug.utils import secure_filename
 from wtforms import StringField, TextAreaField, BooleanField, SubmitField, FieldList
 from wtforms.validators import Optional, DataRequired
 from itertools import groupby
+from app.config import create_config
 
 board_bp = Blueprint("board", __name__, template_folder="../../templates")
 
 
 @lru_cache(maxsize=1)
 def get_config():
+    create_config()
     config = configparser.ConfigParser()
     config.read("tomochan.ini")
     return config
@@ -62,10 +64,7 @@ sql = (
 
 
 def dict_factory(cursor, row):
-    d = {}
-    for idx, col in enumerate(cursor.description):
-        d[col[0]] = row[idx]
-    return d
+    return {col[0]: row[idx] for idx, col in enumerate(cursor.description)}
 
 
 @lru_cache(maxsize=1)
