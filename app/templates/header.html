@@ -16,9 +16,11 @@
     <h1>/{{ board }}/ - {{ boardname }}</h1>
     <p>{{ boardsubtitle }}</p>
     <hr class="above_post_form">
-    <a href="{{ headadurl }}" title="{{ headadtext }}">
-        <img src="{{ headad }}" alt="{{ headadtext }}" title="{{ headadtext }}">
-    </a>
+    <div class="ad big_ad">
+        <a href="{{ headadurl }}" title="{{ headadtext }}">
+            <img src="{{ headad }}" alt="{{ headadtext }}" title="{{ headadtext }}">
+        </a>
+    </div>
 </header>
 
 <hr>
@@ -60,7 +62,7 @@
         </table>
     </form>
     <hr>
-    <div style="display: block;text-align: center;">
+    <div class="ad small_ad">
         <a href="{{ formadurl }}" title="{{ formadtext }}">
             <img src="{{ formad }}" alt="{{ formadtext }}" title="{{ formadtext }}">
         </a>

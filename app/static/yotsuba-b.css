@@ -187,8 +187,14 @@ a:hover, .post span.id a:hover {
     max-width: 1000px;
 }
 
-.footad {
-    text-align: center;
+.ad {
+    display: block;
+    margin: auto;
+    max-width: fit-content;
+}
+
+.ad img {
+    max-width: 100%;
 }
 
 .footer {
