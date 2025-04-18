@@ -12,7 +12,10 @@
     <span>[<a href="/{{ board }}/catalog">Catalog</a>]</span>
     <hr>
 
+    <!-- <form method="post"> -->
+    {# deleteform.hidden_tag() #}
     {% if threads %}
+    {# set checkbox_index = namespace(value=0) #}
     {% for thread in threads %}
     <div class="thread">
     {% for post in thread %}
@@ -42,6 +45,15 @@
             </ul>
         {% endif %}
     {% endwith %}
+
+    <div class="footad">
+        <a href="{{ footadurl }}" title="{{ footadtext }}">
+            <img src="{{ footad }}" alt="{{ footadtext }}" title="{{ footadtext }}">
+        </a>
+    </div>
+
+    {# {{ deleteform.fileonly }} {{ deleteform.password }} {{ deleteform.delete }} {{ deleteform.report }} #}
+    <!-- </form> -->
 
     {% include 'footer.html' %}
 </body>

@@ -22,7 +22,7 @@ from flask_wtf.file import FileAllowed, FileField
 from markupsafe import escape
 from wand.image import Image
 from werkzeug.utils import secure_filename
-from wtforms import StringField, TextAreaField, BooleanField, SubmitField
+from wtforms import StringField, TextAreaField, BooleanField, SubmitField, FieldList
 from wtforms.validators import Optional, DataRequired
 from itertools import groupby
 
@@ -319,16 +319,40 @@ class PostForm(FlaskForm):
     submit = SubmitField("Post")
 
 
+# doesnt work because wtforms apparently doesnt support booleans in fieldlists lol
+# gonna need to figure out a different way to get checkboxes on each post
+"""
+class DeleteForm(FlaskForm):
+    checkboxes = FieldList(BooleanField("Delete", validators=[DataRequired()]), min_entries=0)
+    fileonly = BooleanField("File Only", validators=[DataRequired()])
+    password = StringField("Password", validators=[Optional()])
+    delete = SubmitField("Delete")
+    report = SubmitField("Report")
+"""
+
+
 @board_bp.route("/<board>/", methods=["GET", "POST"])
 def board_page(board):
     if board in boards:
 
         threadlist = get_threads(board)
+
         banner = get_banner(board)
         boardname = get_config()[board]["name"]
         boardsubtitle = get_config()[board]["subtitle"]
         randompassword = get_password()
 
+        # TODO FIGURE OUT HOW TO MAKE THIS SHIT ACTUALLY WORK
+        # the issue rn is that i cant have the indexes line up with the post ids
+        """
+        postlist = []
+        for thread in threadlist:
+            for post in thread:
+                postlist.append(post)
+        deleteform = DeleteForm(checkboxes=postlist)
+        if deleteform.validate_on_submit():
+            pass
+        """
         form = PostForm()
         if form.validate_on_submit():
             if form.file.data and form.post.data:
@@ -358,6 +382,7 @@ def board_page(board):
             boardname=boardname,
             boardsubtitle=boardsubtitle,
             form=form,
+            # deleteform=deleteform,
             threads=threadlist,
             banner=banner,
             password=randompassword,

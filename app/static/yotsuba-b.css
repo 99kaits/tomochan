@@ -187,6 +187,10 @@ a:hover, .post span.id a:hover {
     max-width: 1000px;
 }
 
+.footad {
+    text-align: center;
+}
+
 .footer {
     text-align: center;
     font-size: 75%;
