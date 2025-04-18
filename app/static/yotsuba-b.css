@@ -169,8 +169,22 @@ a:hover, .post span.id a:hover {
     font-size: 75%;
 }
 
+.catalog_entry img {
+    max-width: 150px;
+    max-height: 150px;
+    margin: auto;
+}
+
 .catalog_entry {
+    text-align: center;
     display: inline-block;
+    margin: auto 5px 5px;
+    min-width: 150px
+}
+
+.catalog_container {
+    margin: auto;
+    max-width: 1000px;
 }
 
 .footer {
