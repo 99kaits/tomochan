@@ -7,7 +7,7 @@
 <div class="post reply" id="post_{{ post['post_id'] }}">
 {% endif %}
 
-    {% if post['file_actual'] and post['op'] == 1%}
+    {% if post['file_actual'] and post['op'] == 1 %}
     <span class="file_header">File: <a href="/uploads/{{ post['file_actual'] }}">{{ post['file_actual'] }}</a>-({{ post['filesize'] / 1000 }} KB, {{ post['file_width'] }}x{{ post['file_height'] }}, {{ post['filename'].rsplit('.')[0]|truncate(30, True, "(...)", 0) }}.{{ post['filename'].rsplit('.')[1] }})</span>
     <div class="file">
         <a href="/uploads/{{ post['file_actual'] }}"><img src=
@@ -44,7 +44,7 @@
         <span>[<a href="/{{ post['board_id']}}/{{ post['thread_id'] }}#{{ post['post_id'] }}">Reply</a>]</span>
         {% endif %}
     </div>
-    {% if post['file_actual'] and post['op'] == 0 %}
+    {% if post['file_actual'] and post['op'] != 1 %}
     <span class="file_header">File: <a href="/uploads/{{ post['file_actual'] }}">{{ post['file_actual'] }}</a>-({{ post['filesize'] / 1000 }} KB, {{ post['file_width'] }}x{{ post['file_height'] }}, {{ post['filename'].rsplit('.')[0]|truncate(30, True, "(...)", 0) }}.{{ post['filename'].rsplit('.')[1] }})</span>
     <div class="file">
         <a href="/uploads/{{ post['file_actual'] }}"><img src=

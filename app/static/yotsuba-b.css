@@ -135,6 +135,10 @@ span.side_arrows {
     font-weight: bold;
 }
 
+.post span.id {
+    display: inline-block;
+}
+
 .post span.id a {
     text-decoration: none;
     color: #000000;
@@ -200,4 +204,10 @@ a:hover, .post span.id a:hover {
 .footer {
     text-align: center;
     font-size: 75%;
+}
+
+@media screen and (max-width: 680px) {
+    .replyContainer {
+        clear: both;
+    }
 }
