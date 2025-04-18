@@ -25,12 +25,14 @@ from werkzeug.utils import secure_filename
 from wtforms import StringField, TextAreaField, BooleanField, SubmitField
 from wtforms.validators import Optional, DataRequired
 from itertools import groupby
+from app.config import create_config
 
 board_bp = Blueprint("board", __name__, template_folder="../../templates")
 
 
 @lru_cache(maxsize=1)
 def get_config():
+    create_config()
     config = configparser.ConfigParser()
     config.read("tomochan.ini")
     return config

@@ -1,39 +1,13 @@
 import configparser
 import math
-import os
-import random
-import string
 from datetime import timezone, timedelta, datetime
 
 from flask import Flask
+
 from app.routes import blueprints
 
 config = configparser.ConfigParser()
-if not os.path.exists("tomochan.ini"):
-    new_key = "".join(random.choices(string.ascii_letters + string.digits, k=72))
-    new_pass = "".join(random.choices(string.ascii_letters + string.digits, k=32))
-    print("admin password is " + new_pass + " probably change it idk")
-    boards = ["b", "tomo", "nottomo"]
-    config["GLOBAL"] = {
-        "secret_key": new_key,
-        "upload_folder": "uploads",
-        "admin_pass": new_pass,
-        "boards": " ".join(boards),
-        "captcha": "off"
-    }
-    for board in boards:
-        config[board] = {
-            "name": "Placeholder",
-            "subtitle": "wow you should change me in the ini",
-            "bump_limit": 300,
-            "size": 150,
-            "hidden": False,
-            "r9k": False,
-        }
-    with open("../tomochan.ini", "w") as configfile:
-        config.write(configfile)
-else:
-    config.read("tomochan.ini")
+config.read("tomochan.ini")
 
 
 def get_swatch(timestamp):
