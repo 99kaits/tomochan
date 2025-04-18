@@ -4,7 +4,7 @@
 some type of imageboard using python/flask, and sqlite
 VERY WIP DO NOT USE
 
-https://github.com/users/stophman1/projects/1
+[todo list](https://github.com/users/stophman1/projects/1)
 
 markdown things:
 - discord style newlines, its just better esp for this kinda thing
