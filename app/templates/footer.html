@@ -1,5 +1,17 @@
+<hr>
+<div class="boardlist">
+    <span>
+        [
+        {% for boardlink in boardlist %}
+        <a href="/{{ boardlink }}/">{{ boardlink }}</a> 
+        {% if not loop.last %}
+        /
+        {% endif %}
+        {% endfor %}
+        ]
+    </span>
+</div>
 <div class="footer" id="footer">
-    <hr>
     - tomochan -<br>
     heavily inspired by 4chan and probably more secure than it, all posted content is the posters own responsibility
 </div>
