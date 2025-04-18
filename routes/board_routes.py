@@ -1,16 +1,13 @@
-import base64
 import configparser
 import os
+import magic
 import sqlite3
 import string
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from functools import lru_cache
-from io import BytesIO
 import random
 
-from captcha.audio import AudioCaptcha
-from captcha.image import ImageCaptcha
 from flask import (
     Blueprint,
     redirect,
@@ -18,11 +15,10 @@ from flask import (
     request,
     send_file,
     url_for,
-    current_app
+    current_app,
 )
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed, FileField
-from magic import magic
 from markupsafe import escape
 from wand.image import Image
 from werkzeug.utils import secure_filename
@@ -30,7 +26,8 @@ from wtforms import StringField, TextAreaField, BooleanField, SubmitField
 from wtforms.validators import Optional, DataRequired
 from itertools import groupby
 
-board_bp = Blueprint('board', __name__, template_folder='../templates')
+board_bp = Blueprint("board", __name__, template_folder="../templates")
+
 
 @lru_cache(maxsize=1)
 def get_config():
@@ -38,13 +35,6 @@ def get_config():
     config.read("tomochan.ini")
     return config
 
-
-if get_config()['GLOBAL']['captcha'] == "simple":
-    imagecaptcha = ImageCaptcha()
-    audiocaptcha = AudioCaptcha()
-else:
-    imagecaptcha = None
-    audiocaptcha = None
 
 boards = get_config()["GLOBAL"]["boards"].split(" ")
 boardlist = [board for board in boards if not get_config()[board].getboolean("hidden")]
@@ -138,18 +128,29 @@ def post(form, board, thread_id):
 
         if form.file.data and allowed_mime_type(form.file.data):
             filename = secure_filename(form.file.data.filename)
-            with Image(file=form.file.data.stream, format=filename.rsplit(".", 1)[1].lower()) as original:
+            with Image(
+                file=form.file.data.stream, format=filename.rsplit(".", 1)[1].lower()
+            ) as original:
                 file_width = original.width
                 file_height = original.height
                 with original.clone() as thumbnail:
                     thumbnail.transform(resize="250x250>")
                     file_thumbnail = str(post_id) + "_thumbnail.webp"
-                    thumbnail.save(filename=os.path.join(current_app.config["UPLOAD_FOLDER"], file_thumbnail))
-
+                    thumbnail.save(
+                        filename=os.path.join(
+                            current_app.config["UPLOAD_FOLDER"], file_thumbnail
+                        )
+                    )
 
                 file_actual = str(post_id) + "." + filename.rsplit(".", 1)[1].lower()
-                original.save(filename=os.path.join(current_app.config["UPLOAD_FOLDER"], file_actual))
-                filesize = os.stat(os.path.join(current_app.config["UPLOAD_FOLDER"], file_actual)).st_size
+                original.save(
+                    filename=os.path.join(
+                        current_app.config["UPLOAD_FOLDER"], file_actual
+                    )
+                )
+                filesize = os.stat(
+                    os.path.join(current_app.config["UPLOAD_FOLDER"], file_actual)
+                ).st_size
 
         else:
             filename = None
@@ -202,6 +203,7 @@ def get_password():
         random.choices(string.ascii_letters + string.digits + string.punctuation, k=12)
     )
 
+
 @lru_cache(maxsize=1)  # Cache banner list.
 def get_banner_list():
     bantree = ET.parse("static/banners/banners.xml")
@@ -213,23 +215,35 @@ def get_banner_list():
 
 def get_banner(board):
     current_mtime = os.path.getmtime("static/banners/banners.xml")
-    if not hasattr(get_banner, "_last_mtime") or get_banner._last_mtime != current_mtime:
+    if (
+        not hasattr(get_banner, "_last_mtime")
+        or get_banner._last_mtime != current_mtime
+    ):
         get_banner_list.cache_clear()
         get_banner._last_mtime = current_mtime
     banners = get_banner_list()
-    filtered_banners = [banner for banner in banners if ((banner[1] == board) or (banner[1] =="all"))]
+    filtered_banners = [
+        banner for banner in banners if ((banner[1] == board) or (banner[1] == "all"))
+    ]
     if not filtered_banners:
         return
     banner = random.choice(filtered_banners)
     return "/static/banners/" + banner[0]
 
 
-@lru_cache(maxsize=1)  # Cache ad list. Should only refresh when the .xml file is updated.
+@lru_cache(
+    maxsize=1
+)  # Cache ad list. Should only refresh when the .xml file is updated.
 def get_ads_list():
     adtree = ET.parse("static/ads/ads.xml")  # TODO: move to a better spot
     root = adtree.getroot()
     return [
-        [x.find("image").text, x.find("text").text, x.find("url").text, x.find("size").text]
+        [
+            x.find("image").text,
+            x.find("text").text,
+            x.find("url").text,
+            x.find("size").text,
+        ]
         for x in root.findall("ad")
     ]
 
@@ -238,9 +252,11 @@ def get_ad(size):
     current_mtime = os.path.getmtime("static/ads/ads.xml")
     if not hasattr(get_ad, "_last_mtime") or get_ad._last_mtime != current_mtime:
         get_ads_list.cache_clear()  # Invalidate cache if the file has been updated.
-        get_ad._last_mtime = current_mtime # Update mtime
+        get_ad._last_mtime = current_mtime  # Update mtime
     ads = get_ads_list()  # Get cached ads
-    filtered_ads = [ad for ad in ads if ad[3] == size] if size in ["small", "big"] else []
+    filtered_ads = (
+        [ad for ad in ads if ad[3] == size] if size in ["small", "big"] else []
+    )
     if not filtered_ads:
         return
     ad = random.choice(filtered_ads)
@@ -262,16 +278,16 @@ def get_threads(board):
 
     oplist = cur.execute(
         "SELECT * FROM posts WHERE op = 1 AND board_id = ? ORDER BY sticky DESC, last_bump DESC",
-        (board,)
-    ).fetchall() # Get all threads (posts where op = 1)
+        (board,),
+    ).fetchall()  # Get all threads (posts where op = 1)
 
     thread_ids = [op["post_id"] for op in oplist]
     replies = cur.execute(
         "SELECT * FROM posts WHERE thread_id IN ({}) AND op = 0 ORDER BY post_id DESC".format(
             ",".join("?" for _ in thread_ids)
         ),
-        thread_ids
-    ).fetchall() # Get all replies for the threads
+        thread_ids,
+    ).fetchall()  # Get all replies for the threads
 
     # Group replies by thread_id
     replies.sort(key=lambda reply: reply["thread_id"])
@@ -294,8 +310,6 @@ class PostForm(FlaskForm):
     email = StringField("Email", validators=[Optional()])
     subject = StringField("Subject", validators=[Optional()])
     post = TextAreaField("Content", validators=[DataRequired()])
-    if imagecaptcha:
-        captcha = StringField("Verification", validators=[DataRequired()])
     # TODO: FILE SIZE LIMIT, THE VALIDATOR DOESNT WORK FOR SOME REASON
     file = FileField(
         "File", validators=[FileAllowed(ALLOWED_EXTENSIONS, "the fuck is this shit?")]
@@ -303,6 +317,7 @@ class PostForm(FlaskForm):
     spoiler = BooleanField("Spoiler?", validators=[Optional()])
     password = StringField("Password", validators=[Optional()])
     submit = SubmitField("Post")
+
 
 @board_bp.route("/<board>/", methods=["GET", "POST"])
 def board_page(board):
@@ -313,22 +328,9 @@ def board_page(board):
         boardname = get_config()[board]["name"]
         boardsubtitle = get_config()[board]["subtitle"]
         randompassword = get_password()
-        if imagecaptcha:
-            captcha_code = "JOE BIDEN"
-            captcha_data = imagecaptcha.generate(captcha_code)
-            captcha = base64.b64encode(captcha_data.read()).decode()
-            audio_code = "42069"
-            audio_data = audiocaptcha.generate(audio_code)
-            audio = base64.b64encode(audio_data)
-        else:
-            captcha = None
-            audio = None
 
         form = PostForm()
         if form.validate_on_submit():
-            if captcha:
-                if form.captcha.data != captcha_code or form.captcha.data != audio_code:
-                    return redirect("/static/posterror.html")
             if form.file.data and form.post.data:
                 thread_id = None
                 new_post = post(form, board, thread_id)
@@ -356,8 +358,6 @@ def board_page(board):
             boardname=boardname,
             boardsubtitle=boardsubtitle,
             form=form,
-            captcha=captcha,
-            audio=audio,
             threads=threadlist,
             banner=banner,
             password=randompassword,
@@ -369,7 +369,7 @@ def board_page(board):
             headadurl=headad[2],
             formad=formad[0],
             formadtext=formad[1],
-            formadurl=formad[2]
+            formadurl=formad[2],
         )
     else:
         return send_file("static/404.html"), 404
@@ -391,21 +391,9 @@ def catalog_page(board):
         boardname = get_config()[board]["name"]
         boardsubtitle = get_config()[board]["subtitle"]
         randompassword = get_password()
-        if imagecaptcha:
-            captcha_code = "JOE BIDEN"
-            captcha_data = imagecaptcha.generate(captcha_code)
-            captcha = base64.b64encode(captcha_data.read()).decode()
-            audio_code = "42069"
-            audio_data = audiocaptcha.generate(audio_code)
-            audio = base64.b64encode(BytesIO(audio_data).read())
-        else:
-            captcha = None
-            audio = None
 
         form = PostForm()
         if form.validate_on_submit():
-            if captcha and form.captcha.data != captcha_code:
-                return redirect("/static/posterror.html")
             if form.file.data and form.post.data:
                 thread_id = None
                 new_post = post(form, board, thread_id)
@@ -433,8 +421,6 @@ def catalog_page(board):
             boardname=boardname,
             boardsubtitle=boardsubtitle,
             form=form,
-            captcha=captcha,
-            audio=audio,
             threads=threads,
             banner=banner,
             password=randompassword,
@@ -446,7 +432,7 @@ def catalog_page(board):
             headadurl=headad[2],
             formad=formad[0],
             formadtext=formad[1],
-            formadurl=formad[2]
+            formadurl=formad[2],
         )
 
 
@@ -468,24 +454,14 @@ def thread_page(board, thread):
             boardname = get_config()[board]["name"]
             boardsubtitle = get_config()[board]["subtitle"]
             randompassword = get_password()
-            if imagecaptcha:
-                captcha_code = "JOE BIDEN"
-                captcha_data = imagecaptcha.generate(captcha_code)
-                captcha = base64.b64encode(captcha_data.read()).decode()
-                audio_code = "42069"
-                audio_data = audiocaptcha.generate(audio_code)
-                audio = base64.b64encode(BytesIO(audio_data).read())
-            else:
-                captcha = None
-                audio = None
 
             form = PostForm()
             if form.validate_on_submit():
-                if captcha and form.captcha.data != captcha_code:
-                    return redirect("/static/posterror.html")
                 new_post = post(form, board, thread)
                 if new_post > 0:
-                    return redirect(url_for("board.thread_page", board=board, thread=thread))
+                    return redirect(
+                        url_for("board.thread_page", board=board, thread=thread)
+                    )
                 else:
                     return redirect("/static/posterror.html")
 
@@ -500,8 +476,6 @@ def thread_page(board, thread):
                 boardname=boardname,
                 boardsubtitle=boardsubtitle,
                 form=form,
-                captcha=captcha,
-                audio=audio,
                 posts=posts,
                 banner=banner,
                 password=randompassword,
@@ -513,7 +487,7 @@ def thread_page(board, thread):
                 headadurl=headad[2],
                 formad=formad[0],
                 formadtext=formad[1],
-                formadurl=formad[2]
+                formadurl=formad[2],
             )
     else:
         return send_file("static/404.html"), 404

@@ -7,4 +7,8 @@
         <image>luigibanner.png</image>
         <board>all</board>
     </banner>
+    <banner>
+        <image>othermariobanner.png</image>
+        <board>b</board>
+    </banner>
 </banners>

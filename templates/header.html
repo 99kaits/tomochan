@@ -18,7 +18,7 @@
     </a>
 </header>
 
-<hr class="above_post_form">
+<hr>
 
 <div class="post_form">
 {% if posts %}
@@ -46,12 +46,6 @@
                 <th>{{ form.post.label }}</th>
                 <td>{{ form.post(cols="35", rows="10", tabindex=4) }}</td>
             </tr>
-            {% if captcha %}
-                <tr>
-                    <th>{{ form.captcha.label }}</th>
-                    <td><img class="captcha" src="data:image/png;base64, {{ captcha }}"> <audio controls src="data:audio/wav;base64. {{ audio }}"></audio><br>{{ form.captcha(placeholder="you can do image or audio") }}</td>
-                </tr>
-            {% endif %}
             <tr>
                 <th>{{ form.file.label }}</th>
                 <td>{{ form.file(accept="image/*", tabindex=5) }} [{{ form.spoiler(tabindex=6) }}{{ form.spoiler.label }}] </td>
@@ -62,7 +56,7 @@
             </tr>
         </table>
     </form>
-    <hr class="above_post_form">
+    <hr>
     <div style="display: block;text-align: center;">
         <a href="{{ formadurl }}" title="{{ formadtext }}">
             <img src="{{ formad }}" alt="{{ formadtext }}" title="{{ formadtext }}">

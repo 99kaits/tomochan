@@ -6,7 +6,7 @@ import string
 from datetime import timezone, timedelta, datetime
 
 from flask import Flask
-from routes import blueprints
+from .routes import blueprints
 
 config = configparser.ConfigParser()
 if not os.path.exists("tomochan.ini"):
