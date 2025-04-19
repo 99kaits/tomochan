@@ -66,10 +66,16 @@
         <url>https://www.w3.org/</url>
         <size>big</size>
     </ad>
-        <ad>
+    <ad>
         <text>Subway</text>
         <image>subway.png</image>
         <url>https://www.reddit.com/r/subway/comments/zs670z/how_is_subway_profitable/</url>
+        <size>big</size>
+    </ad>
+    <ad>
+        <text>Spagheti</text>
+        <image>spaget.png</image>
+        <url>https://www.favfamilyrecipes.com/nicks-authentic-italian-spaghetti/</url>
         <size>big</size>
     </ad>
 </ads>
