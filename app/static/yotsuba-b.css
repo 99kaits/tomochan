@@ -210,4 +210,8 @@ a:hover, .post span.id a:hover {
     .replyContainer {
         clear: both;
     }
+    div.summary {
+        margin-left: 5px;
+        clear: both;
+    }
 }
