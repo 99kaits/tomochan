@@ -78,4 +78,10 @@
         <url>https://www.favfamilyrecipes.com/nicks-authentic-italian-spaghetti/</url>
         <size>big</size>
     </ad>
+    <ad>
+        <text>Kotlin</text>
+        <image>kotlin.png</image>
+        <url>https://kotlinlang.org/docs/kotlin-brand-assets.html</url>
+        <size>big</size>
+    </ad>
 </ads>
