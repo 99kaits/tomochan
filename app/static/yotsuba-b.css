@@ -35,6 +35,9 @@ body {
 
 .header_links {
     text-align: right;
+    font-size: 9pt;
+    text-decoration: none;
+    color: #89A;
 }
 
 header {
