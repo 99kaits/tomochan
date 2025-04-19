@@ -1,0 +1,6 @@
+ktor:
+  application:
+    modules:
+      - fraudulent.link.ApplicationKt.module
+  deployment:
+    port: 5000

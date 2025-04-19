@@ -1,1 +1,1 @@
-rootProject.name = "tomochat"
+rootProject.name = "tomochan"
