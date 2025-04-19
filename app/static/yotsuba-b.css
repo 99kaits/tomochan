@@ -66,6 +66,7 @@ hr.above_post_form {
 }
 .post_form .form_banner {
     text-align: center;
+    margin-bottom: 5px;
 }
 
 .post_form table {
