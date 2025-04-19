@@ -27,7 +27,7 @@ from wtforms import StringField, TextAreaField, BooleanField, SubmitField, Field
 from wtforms.validators import Optional, DataRequired
 from app.config import create_config
 
-board_bp = Blueprint("board", __name__, template_folder="../../templates")
+board_bp = Blueprint("board", __name__)
 
 
 @lru_cache(maxsize=1)

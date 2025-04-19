@@ -1,6 +1,6 @@
 from flask import Blueprint, send_from_directory, current_app
 
-upload_bp = Blueprint("uploads", __name__, template_folder="../../templates")
+upload_bp = Blueprint("uploads", __name__)
 
 
 @upload_bp.route("/uploads/<path:name>")
