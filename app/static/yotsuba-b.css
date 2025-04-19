@@ -13,6 +13,15 @@ body {
 	padding-right: 5px;
 }
 
+.top-bar {
+    display: block
+}
+
+.boardlist {
+    max-width: fit-content;
+    float: left;
+}
+
 .boardlist span {
     font-size: 9pt;
     color: #89A;
@@ -24,9 +33,14 @@ body {
     color: #34345C;
 }
 
+.header_links {
+    text-align: right;
+}
+
 header {
     text-align: center;
     color: #AF0A0F;
+    clear: both;
 }
 
 header img {
@@ -51,6 +65,10 @@ hr.above_post_form {
 .post_form table {
     margin: auto;
     border-spacing: 1px;
+}
+
+.post_form #file {
+    max-width: 200px;
 }
 
 header h1 {
@@ -213,5 +231,8 @@ a:hover, .post span.id a:hover {
     div.summary {
         margin-left: 5px;
         clear: both;
+    }
+    .op div.file img {
+        max-width: 200px
     }
 }
