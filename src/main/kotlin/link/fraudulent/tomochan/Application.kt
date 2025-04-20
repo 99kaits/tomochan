@@ -7,5 +7,5 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
- //do functions here
+    configureDatabases()
 }
