@@ -5,7 +5,7 @@ import java.sql.Connection
 import java.sql.DriverManager
 
 fun Application.configureDatabases() {
-    val dbConnection: Connection = connectToDB(environment.config.property("postgres.url").getString().toBoolean())
+    val dbConnection: Connection = connectToDB(environment.config.property("postgres.embedded").getString().toBoolean())
     val closed = dbConnection.isClosed
     print("Is Db closed?: $closed")
 }
