@@ -1,8 +1,7 @@
 package link.fraudulent.tomochan
 
 import kotlinx.coroutines.*
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.Serializable
+import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
@@ -125,5 +124,27 @@ class BoardService(private val connection: Connection) {
 
     suspend fun test(): String = withContext(Dispatchers.IO) {
             return@withContext "test"
+    }
+
+    suspend fun read(board: String, id: Int): Board = withContext(Dispatchers.IO) {
+        val statement = connection.prepareStatement(selectPostSql(board))
+        statement.setInt(1, id)
+        val resultSet = statement.executeQuery()
+        if (resultSet.next()) {
+            val threadId = resultSet.getLong("threadID")
+            val laspBump = LocalDateTime.parse(resultSet.getString("lastBump"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+            val sticky = resultSet.getBoolean("sticky")
+            val time = LocalDateTime.parse(resultSet.getString("time"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+            val poster = resultSet.getString("poster")
+            val email = resultSet.getString("email")
+            val subject = resultSet.getString("subject")
+            val content = resultSet.getString("content")
+            val filename = resultSet.getString("filename")
+            val password= resultSet.getString("password")
+            val spoiler = resultSet.getBoolean("spoiler")
+            val ip = resultSet.getString("ip")
+            return@withContext Board(threadId,laspBump, sticky, time, poster, email, subject, content, filename, password, spoiler, ip)
+        }
+        throw Exception("Yo wtf can't read that, stop making stuff up bro like wtf.")
     }
 }
