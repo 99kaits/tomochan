@@ -33,6 +33,7 @@ dependencies {
     implementation(libs.ktor.server.csrf)
     implementation(libs.ktor.server.jetty.jakarta)
     implementation(libs.ktor.server.config.yaml)
+    implementation(libs.ktor.server.request.validation)
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test.junit)
 }
