@@ -1,15 +1,16 @@
 package link.fraudulent.tomochan
 
-import kotlinx.coroutines.*
-import kotlinx.serialization.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import java.sql.Connection
-import java.sql.ResultSet
-import java.sql.Statement
+import java.sql.Timestamp
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -33,7 +34,7 @@ data class Board(
     val threadId: Long? = null, // Maps the foreign key reference
     @Serializable(with = LocalDateTimeSerializer::class)
     val lastBump: LocalDateTime? = null,
-    val sticky: Boolean? = null,
+    val sticky: Boolean,
     @Serializable(with = LocalDateTimeSerializer::class)
     val time: LocalDateTime,
     val poster: String,
@@ -53,7 +54,7 @@ class BoardService(private val connection: Connection) {
                 id BIGINT DEFAULT nextval('shared_id_seq') PRIMARY KEY,
                 thread_id BIGINT REFERENCES parent_board(id),
                 last_bump TIMESTAMP,
-                sticky BOOLEAN,
+                sticky BOOLEAN NOT NULL,
                 time TIMESTAMP NOT NULL,
                 poster TEXT NOT NULL,
                 email VARCHAR(255),
@@ -126,15 +127,15 @@ class BoardService(private val connection: Connection) {
             return@withContext "test"
     }
 
-    suspend fun read(board: String, id: Int): Board = withContext(Dispatchers.IO) {
-        val statement = connection.prepareStatement(selectPostSql(board))
+    suspend fun read(table: String, id: Int): Board = withContext(Dispatchers.IO) {
+        val statement = connection.prepareStatement(selectPostSql(table))
         statement.setInt(1, id)
         val resultSet = statement.executeQuery()
         if (resultSet.next()) {
             val threadId = resultSet.getLong("threadID")
-            val laspBump = LocalDateTime.parse(resultSet.getString("lastBump"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+            val laspBump = LocalDateTime.parse(resultSet.getTimestamp("lastBump").toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
             val sticky = resultSet.getBoolean("sticky")
-            val time = LocalDateTime.parse(resultSet.getString("time"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+            val time = LocalDateTime.parse(resultSet.getTimestamp("time").toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
             val poster = resultSet.getString("poster")
             val email = resultSet.getString("email")
             val subject = resultSet.getString("subject")
@@ -146,5 +147,34 @@ class BoardService(private val connection: Connection) {
             return@withContext Board(threadId,laspBump, sticky, time, poster, email, subject, content, filename, password, spoiler, ip)
         }
         throw Exception("Yo wtf can't read that, stop making stuff up bro like wtf.")
+    }
+
+    suspend fun create(table: String, board: Board): Int = withContext(Dispatchers.IO) {
+        val statement = connection.prepareStatement(insertPostSql(table))
+        board.threadId?.let {
+            statement.setLong(1, it)
+        } ?: statement.setNull(1, java.sql.Types.BIGINT)
+        board.lastBump?.let {
+            statement.setTimestamp(2, Timestamp.valueOf(it))
+        } ?: statement.setNull(2, java.sql.Types.TIMESTAMP)
+        statement.setBoolean(3,board.sticky)
+        board.time?.let {
+            statement.setTimestamp(4, Timestamp.valueOf(it))
+        } ?: statement.setNull(4, java.sql.Types.TIMESTAMP)
+        statement.setString(5,board.poster)
+        statement.setString(6,board.email)
+        statement.setString(7,board.subject)
+        statement.setString(8,board.content)
+        statement.setString(9,board.filename)
+        statement.setString(10,board.password)
+        statement.setBoolean(11,board.spoiler)
+        statement.setString(12,board.ip)
+        statement.executeUpdate()
+    }
+
+    suspend fun delete(table: String, id: Int): Int = withContext(Dispatchers.IO) {
+        val statement = connection.prepareStatement(deletePostSql(table))
+        statement.setInt(1, id)
+        statement.executeUpdate()
     }
 }

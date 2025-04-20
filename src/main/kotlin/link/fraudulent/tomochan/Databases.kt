@@ -1,18 +1,15 @@
 package link.fraudulent.tomochan
 
-import io.ktor.http.HttpStatusCode
+import io.ktor.http.*
 import io.ktor.server.application.*
-import io.ktor.server.response.respond
-import io.ktor.server.routing.get
-import io.ktor.server.routing.post
-import io.ktor.server.routing.routing
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
 import java.sql.Connection
 import java.sql.DriverManager
 
 fun Application.configureDatabases() {
     val dbConnection: Connection = connectToDB()
     val boardService = BoardService(dbConnection)
-
 
 
     val closed = dbConnection.isClosed
