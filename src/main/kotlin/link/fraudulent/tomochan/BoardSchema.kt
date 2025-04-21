@@ -15,7 +15,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 object LocalDateTimeSerializer : KSerializer<LocalDateTime> {
-    private val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+    private val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss[.S]")
 
     override val descriptor: SerialDescriptor =
         PrimitiveSerialDescriptor("LocalDateTime", PrimitiveKind.STRING)
@@ -104,7 +104,23 @@ class BoardService(private val connection: Connection) {
 
         fun selectPostSql(tableName: String): String {
             validateTableName(tableName)
-            return "SELECT FROM $tableName WHERE id = ?;"
+            return """
+        SELECT
+            thread_id,
+            last_bump,
+            sticky,
+            time,
+            poster,
+            email,
+            subject,
+            content,
+            filename,
+            password,
+            spoiler,
+            ip
+        FROM $tableName
+        WHERE id = ?;
+        """.trimIndent()
         }
 
         // Validate table name
@@ -132,10 +148,10 @@ class BoardService(private val connection: Connection) {
         statement.setInt(1, id)
         val resultSet = statement.executeQuery()
         if (resultSet.next()) {
-            val threadId = resultSet.getLong("threadID")
-            val laspBump = LocalDateTime.parse(resultSet.getTimestamp("lastBump").toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+            val threadId = resultSet.getLong("thread_id")
+            val lastBump = resultSet.getTimestamp("last_bump")?.toLocalDateTime()
             val sticky = resultSet.getBoolean("sticky")
-            val time = LocalDateTime.parse(resultSet.getTimestamp("time").toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+            val time = resultSet.getTimestamp("time").toLocalDateTime()
             val poster = resultSet.getString("poster")
             val email = resultSet.getString("email")
             val subject = resultSet.getString("subject")
@@ -144,7 +160,7 @@ class BoardService(private val connection: Connection) {
             val password= resultSet.getString("password")
             val spoiler = resultSet.getBoolean("spoiler")
             val ip = resultSet.getString("ip")
-            return@withContext Board(threadId,laspBump, sticky, time, poster, email, subject, content, filename, password, spoiler, ip)
+            return@withContext Board(threadId,lastBump, sticky, time, poster, email, subject, content, filename, password, spoiler, ip)
         }
         throw Exception("Yo wtf can't read that, stop making stuff up bro like wtf.")
     }
