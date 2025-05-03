@@ -67,15 +67,16 @@ class BoardService(private val connection: Connection) {
                 ip VARCHAR(45)  NOT NULL
             );
             """
+        private const val GET_THREAD_IDS = "SELECT id FROM parent_board WHERE thread_id = ?"
 
         // CREATE_BOARD with dynamic table name (constructed at runtime)
-        fun createBoardSql(tableName: String): String {
+        private fun createBoardSql(tableName: String): String {
             validateTableName(tableName)
             return "CREATE TABLE IF NOT EXISTS $tableName () INHERITS (parent_board);"
         }
 
         // INSERT_POST with dynamic table name (constructed at runtime)
-        fun insertPostSql(tableName: String): String {
+        private fun insertPostSql(tableName: String): String {
             validateTableName(tableName)
             return """
             INSERT INTO $tableName (
@@ -98,12 +99,12 @@ class BoardService(private val connection: Connection) {
         }
 
         // DELETE_POST with dynamic table name (constructed at runtime)
-        fun deletePostSql(tableName: String): String {
+        private fun deletePostSql(tableName: String): String {
             validateTableName(tableName)
             return "DELETE FROM $tableName WHERE id = ?;"
         }
 
-        fun selectPostSql(tableName: String): String {
+        private fun selectPostSql(tableName: String): String {
             validateTableName(tableName)
             return """
         SELECT
@@ -145,9 +146,9 @@ class BoardService(private val connection: Connection) {
         }
     }
 
-    suspend fun read(table: String, id: Int): Board = withContext(Dispatchers.IO) {
+    suspend fun read(table: String, id: Long): Board = withContext(Dispatchers.IO) {
         val statement = connection.prepareStatement(selectPostSql(table))
-        statement.setInt(1, id)
+        statement.setLong(1, id)
         val resultSet = statement.executeQuery()
         if (resultSet.next()) {
             val threadId = resultSet.getLong("thread_id")
@@ -207,6 +208,22 @@ class BoardService(private val connection: Connection) {
             }
         } catch (e: SQLException) {
             // Log the error and rethrow or return an empty list
+            emptyList<Long>()
+        }
+    }
+
+    suspend fun threadIds(id: Long): List<Long> = withContext(Dispatchers.IO) {
+        try {
+            connection.prepareStatement(GET_THREAD_IDS).use { statement ->
+                statement.setLong(1,id)
+                    statement.executeQuery().use { resultSet ->
+                        return@withContext generateSequence {
+                            if (resultSet.next()) resultSet.getLong("id") else null
+                        }.toList()
+                    }
+                }
+        } catch (e: SQLException) {
+            // Log the error and rethrow or return an empty list (Depends on how we end up using this function)
             emptyList<Long>()
         }
     }

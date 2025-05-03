@@ -15,22 +15,21 @@ fun Application.configureDatabases() {
     routing {
         get("/{board}/{id}") {
             val board = call.parameters["board"] ?: throw IllegalArgumentException("Invalid board")
-            val id = call.parameters["id"]?.toInt() ?: throw IllegalArgumentException("Invalid ID")
+            val id = call.parameters["id"]?.toLong() ?: throw IllegalArgumentException("Invalid ID")
             try {
                 val post = boardService.read(board,id)
-                call.respond(HttpStatusCode.OK, post.toString())
+                val thread = boardService.threadIds(id)
+                call.respond(HttpStatusCode.OK, post.toString() + thread.toString())
             } catch (e: Exception) {
                 call.respond(HttpStatusCode.NotFound, message = e.toString())
             }
         }
-    }
-
-    routing {
         get("/{board}") {
             val board = call.parameters["board"] ?: throw IllegalArgumentException("Invalid board")
             try {
                 val ids = boardService.ids(board)
-                call.respond(HttpStatusCode.OK, ids.toString())
+                val postList = ids.map { id -> boardService.read(board, id) }
+                call.respond(HttpStatusCode.OK, postList.toString())
             } catch (e: Exception) {
                 call.respond(HttpStatusCode.NotFound, message = e.toString())
             }
