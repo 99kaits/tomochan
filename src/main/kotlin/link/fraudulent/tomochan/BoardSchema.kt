@@ -10,6 +10,7 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import java.sql.Connection
+import java.sql.SQLException
 import java.sql.Timestamp
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -123,6 +124,11 @@ class BoardService(private val connection: Connection) {
         """.trimIndent()
         }
 
+        fun getId(tablename: String): String {
+            validateTableName(tablename)
+            return "SELECT id FROM $tablename"
+        }
+
         // Validate table name
         private fun validateTableName(tableName: String) {
             val regex = Regex("^[a-zA-Z_][a-zA-Z0-9_]*$")
@@ -137,10 +143,6 @@ class BoardService(private val connection: Connection) {
             it.executeUpdate(CREATE_PARENT)
             it.executeUpdate(createBoardSql("b"))
         }
-    }
-
-    suspend fun test(): String = withContext(Dispatchers.IO) {
-            return@withContext "test"
     }
 
     suspend fun read(table: String, id: Int): Board = withContext(Dispatchers.IO) {
@@ -192,5 +194,20 @@ class BoardService(private val connection: Connection) {
         val statement = connection.prepareStatement(deletePostSql(table))
         statement.setInt(1, id)
         statement.executeUpdate()
+    }
+
+    suspend fun ids(table: String): List<Long> = withContext(Dispatchers.IO) {
+        return@withContext try {
+            connection.prepareStatement(getId(table)).use { statement ->
+                statement.executeQuery().use { resultSet ->
+                    generateSequence {
+                        if (resultSet.next()) resultSet.getLong("id") else null
+                    }.toList()
+                }
+            }
+        } catch (e: SQLException) {
+            // Log the error and rethrow or return an empty list
+            emptyList<Long>()
+        }
     }
 }

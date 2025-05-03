@@ -12,9 +12,6 @@ fun Application.configureDatabases() {
     val boardService = BoardService(dbConnection)
 
 
-    val closed = dbConnection.isClosed
-    print("Is Db closed?: $closed")
-
     routing {
         get("/{board}/{id}") {
             val board = call.parameters["board"] ?: throw IllegalArgumentException("Invalid board")
@@ -22,6 +19,18 @@ fun Application.configureDatabases() {
             try {
                 val post = boardService.read(board,id)
                 call.respond(HttpStatusCode.OK, post.toString())
+            } catch (e: Exception) {
+                call.respond(HttpStatusCode.NotFound, message = e.toString())
+            }
+        }
+    }
+
+    routing {
+        get("/{board}") {
+            val board = call.parameters["board"] ?: throw IllegalArgumentException("Invalid board")
+            try {
+                val ids = boardService.ids(board)
+                call.respond(HttpStatusCode.OK, ids.toString())
             } catch (e: Exception) {
                 call.respond(HttpStatusCode.NotFound, message = e.toString())
             }
